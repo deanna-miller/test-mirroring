@@ -1,5 +1,5 @@
 - view: summary_template_claim
-  extends: [producer, product, report, coverage]
+  extends: [producer, product, report, coverage, organization]
 
   fields:
     ###########################################

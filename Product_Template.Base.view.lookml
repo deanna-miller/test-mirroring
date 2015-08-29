@@ -6,14 +6,6 @@
      label: "Annual Statement Line"
      sql: ${TABLE}.annualstatementlinecd
 
-   - dimension: product.carriercd
-     label: "Carrier"
-     sql: ${TABLE}.carriercd
-
-   - dimension: product.carriergroupcd
-     label: "Carrier Group"
-     sql: ${TABLE}.carriergroupcd
-
    - dimension: product.coveragecd
      label: "Coverage"  
      sql: ${TABLE}.coveragecd

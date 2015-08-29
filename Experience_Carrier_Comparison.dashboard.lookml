@@ -17,7 +17,7 @@
     filters:
       date.report_month: '12'
       date.report_year: '2014'
-      product.carriercd: '"AVNGICO"'
+      organization.carriercd: '"AVNGICO"'
       experience.incurred_loss_ratio_ytd: NOT NULL
     sorts: [policy.earned_premium_ytd desc 1]
     limit: 500
@@ -54,7 +54,7 @@
     filters:
       date.report_month: '12'
       date.report_year: '2014'
-      product.carriercd: '"AVNGSG"'
+      organization.carriercd: '"AVNGSG"'
       experience.incurred_loss_ratio_ytd: NOT NULL
     sorts: [policy.earned_premium_ytd desc 1]
     limit: 500
