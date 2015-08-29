@@ -2,6 +2,10 @@
   extends: [producer, product, report, coverage,organization]
   fields:
   
+    ###########################################
+    # Dimensions for Measures should be hidden#
+    ###########################################
+    
   - dimension: mtdearnedpremiumamt
     type: number
     hidden: true
@@ -77,6 +81,10 @@
     hidden: true
     sql: ${TABLE}.ytdearnedpremiumamt
     
+    #########################################################################
+    #Dimensions which are attributes/no measures, should all contain a label#
+    #########################################################################
+    
   - dimension: policy.newrenewalcd
     label: "New Renewal Code"
     sql: ${TABLE}.newrenewalcd
@@ -101,6 +109,10 @@
     timeframes: [time, date, week, month]
     sql: ${TABLE}.expirationdt
     
+    
+  ######################################
+  #Measures, should all contain a label#
+  ######################################
   - measure: policy.earned_premium_mtd
     label: "Earned Premium MTD"
     type: sum
