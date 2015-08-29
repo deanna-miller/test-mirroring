@@ -6,14 +6,6 @@
      label: "Annual Statement Line"
      sql: ${TABLE}.annualstatementlinecd
 
-   - dimension: product.coveragecd
-     label: "Coverage"  
-     sql: ${TABLE}.coveragecd
-
-   - dimension: product.coverageitemcd
-     label: "Coverage Item"
-     sql: ${TABLE}.coverageitemcd
-
    - dimension: product.linecd
      label: "Line"
      sql: ${TABLE}.linecd

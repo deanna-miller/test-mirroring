@@ -6,3 +6,11 @@
    - dimension: coverage.riskcd
      label: "Risk Code"
      sql: ${TABLE}.riskcd
+     
+   - dimension: coverage.coveragecd
+     label: "Coverage"  
+     sql: ${TABLE}.coveragecd
+
+   - dimension: coverage.coverageitemcd
+     label: "Coverage Item"
+     sql: ${TABLE}.coverageitemcd
