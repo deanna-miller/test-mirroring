@@ -60,6 +60,51 @@
     hidden: true
     sql: ${TABLE}.ytdpostedrecoveryamt
     
+  - dimension: mtdreservechangeamt
+    type: number
+    hidden: true
+    sql: ${TABLE}.mtdreservechangeamt
+    
+  - dimension: ytdreservechangeamt
+    type: number
+    hidden: true
+    sql: ${TABLE}.ytdreservechangeamt
+    
+  - dimension: mtdincurrednetrecoveryamt
+    type: number
+    hidden: true
+    sql: ${TABLE}.mtdincurrednetrecoveryamt
+    
+  - dimension: ytdincurrednetrecoveryamt
+    type: number
+    hidden: true
+    sql: ${TABLE}.ytdincurrednetrecoveryamt
+
+  - dimension: itdincurrednetrecoveryamt
+    type: number
+    hidden: true
+    sql: ${TABLE}.itdincurrednetrecoveryamt
+    
+  - dimension: mtdexpectedrecoverychangeamt
+    type: number
+    hidden: true
+    sql: ${TABLE}.mtdexpectedrecoverychangeamt
+
+  - dimension: ytdexpectedrecoverychangeamt
+    type: number
+    hidden: true
+    sql: ${TABLE}.ytdexpectedrecoverychangeamt
+    
+  - dimension: openingreserve
+    type: number
+    hidden: true
+    sql: ${TABLE}.openingreserve
+
+  - dimension: originalreserve
+    type: number
+    hidden: true
+    sql: ${TABLE}.originalreserve
+    
     #########################################################################
     #Dimensions which are attributes/no measures, should all contain a label#
     #########################################################################
@@ -68,15 +113,107 @@
     label: "Claim Number"
     sql: ${TABLE}.claimnumber
     
-  - dimension_group: lossdt
+  - dimension: claim.claimantcd
+    label: "Claimant"
+    sql: ${TABLE}.claimantcd
+    
+  - dimension_group: claim.lossdt
     label: "Loss"
     type: time
     timeframes: [time, date, week, month]
     sql: ${TABLE}.lossdt
     
-  - dimension: losscausecd
+  - dimension_group: claim.openeddt
+    label: "Open"
+    type: time
+    timeframes: [time, date, week, month]
+    sql: ${TABLE}.openeddt
+    
+  - dimension_group: claim.closeddt
+    label: "Closed"
+    type: time
+    timeframes: [time, date, week, month]
+    sql: ${TABLE}.closeddt
+    
+  - dimension_group: claim.denialdt
+    label: "Denial"
+    type: time
+    timeframes: [time, date, week, month]
+    sql: ${TABLE}.denialdt
+    
+  - dimension_group: claim.firstindemnitypaymentdt
+    label: "First Indemnity Payment"
+    type: time
+    timeframes: [time, date, week, month]
+    sql: ${TABLE}.firstindemnitypaymentdt
+    
+  - dimension_group: claim.firstcloseddt
+    label: "Claim First Closed"
+    type: time
+    timeframes: [time, date, week, month]
+    sql: ${TABLE}.firstcloseddt
+    
+  - dimension_group: claim.claimlastclosedt
+    label: "Claim Last Closed"
+    type: time
+    timeframes: [time, date, week, month]
+    sql: ${TABLE}.claimlastclosedt
+    
+  - dimension_group: claim.claimantlastclosedt
+    label: "Claimant Last Closed"
+    type: time
+    timeframes: [time, date, week, month]
+    sql: ${TABLE}.claimantlastclosedt
+    
+  - dimension_group: claim.reservelastclosedt
+    label: "Reserve Last Closed"
+    type: time
+    timeframes: [time, date, week, month]
+    sql: ${TABLE}.reservelastclosedt
+    
+  - dimension: claim.losscausecd
     label: "Loss Cause"
     sql: ${TABLE}.losscausecd
+    
+  - dimension: claim.reservetypecd
+    label: "Reserve Type"
+    sql: ${TABLE}.reservetypecd
+    
+  - dimension: claim.reservecd
+    label: "Reserve"
+    sql: ${TABLE}.reservecd
+    
+  - dimension: claim.subreservecd
+    label: "Sub Reserve"
+    sql: ${TABLE}.subreservecd
+    
+  - dimension: claim.lossyear
+    label: "Loss Year"
+    sql: ${TABLE}.lossyear
+    
+  - dimension: claim.sublosscausecd
+    label: "Sub Loss Cause"
+    sql: ${TABLE}.sublosscausecd
+    
+  - dimension: claim.featurecd
+    label: "Feature"
+    sql: ${TABLE}.featurecd
+    
+  - dimension: claim.featuresubcd
+    label: "Sub Feature"
+    sql: ${TABLE}.featuresubcd
+
+  - dimension: claim.featuretypecd
+    label: "Feature Type"
+    sql: ${TABLE}.featuretypecd
+    
+  - dimension: claim.aggregatelimit
+    label: "Aggregate Limit"
+    sql: ${TABLE}.
+    
+  - dimension: claim.aggregatelimitdescription
+    label: "Aggregate Limit Description"
+    sql: ${TABLE}.aggregatelimitdescription
 
   ######################################
   #Measures, should all contain a label#
@@ -136,3 +273,50 @@
     label: "Paid ITD"
     type: sum
     sql: ${itdpaidamt}
+    
+  - measure: claim.reserve_change_amt_mtd
+    label: "Reserve Change MTD"
+    type: sum
+    sql: ${mtdreservechangeamt} 
+    
+  - measure: claim.reserve_change_amt_ytd
+    label: "Reserve Change YTD"
+    type: sum
+    sql: ${ytdreservechangeamt} 
+    
+  - measure: claim.incurred_net_recovery_amt_mtd
+    label: "Incurred New Recovery MTD"
+    type: sum
+    sql: ${mtdincurrednetrecoveryamt} 
+    
+  - measure: claim.incurred_net_recovery_amt_ytd
+    label: "Incurred New Recovery YTD"
+    type: sum
+    sql: ${ytdincurrednetrecoveryamt} 
+  
+  - measure: claim.incurred_net_recovery_amt_itd
+    label: "Incurred New Recovery ITD"
+    type: sum
+    sql: ${itdincurrednetrecoveryamt} 
+    
+  - measure: claim.expected_recovery_change_amt_mtd
+    label: "Expected Recovery Change MTD"
+    type: sum
+    sql: ${mtdexpectedrecoverychangeamt} 
+    
+  - measure: claim.expected_recovery_change_amt_ytd
+    label: "Expected Recovery Change YTD"
+    type: sum
+    sql: ${ytdexpectedrecoverychangeamt} 
+    
+  - measure: claim.opening_reserve
+    label: "Opening Reserve"
+    type: sum
+    sql: ${openingreserve} 
+    
+  - measure: claim.original_reserve
+    label: "Original Reserve"
+    type: sum
+    sql: ${originalreserve} 
+    
+    

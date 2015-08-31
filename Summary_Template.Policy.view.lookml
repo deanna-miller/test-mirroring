@@ -30,6 +30,11 @@
     type: number
     hidden: true
     sql: ${TABLE}.mtdwrittenpremiumfeeamt
+    
+  - dimension: monthunearnedamt
+    type: number
+    hidden: true
+    sql: ${TABLE}.monthunearnedamt
 
   - dimension: ytdwrittencommissionamt
     type: number
@@ -81,6 +86,21 @@
     hidden: true
     sql: ${TABLE}.ytdearnedpremiumamt
     
+  - dimension: inforceamt
+    type: number
+    hidden: true
+    sql: ${TABLE}.inforceamt
+    
+  - dimension: lastinforceamt
+    type: number
+    hidden: true
+    sql: ${TABLE}.lastinforceamt
+    
+  - dimension: unearnedamt
+    type: number
+    hidden: true
+    sql: ${TABLE}.unearnedamt
+    
     #########################################################################
     #Dimensions which are attributes/no measures, should all contain a label#
     #########################################################################
@@ -109,10 +129,69 @@
     timeframes: [time, date, week, month]
     sql: ${TABLE}.expirationdt
     
+  - dimension: policy.limit1
+    label: "Limit 1"
+    sql: ${TABLE}.limit1
+    
+  - dimension: policy.limit2
+    label: "Limit 2"
+    sql: ${TABLE}.limit2
+    
+  - dimension: policy.limit3
+    label: "Limit 3"
+    sql: ${TABLE}.limit3
+    
+  - dimension: policy.limit4
+    label: "Limit 4"
+    sql: ${TABLE}.limit4
+    
+  - dimension: policy.limit5
+    label: "Limit 5"
+    sql: ${TABLE}.limit5
+    
+  - dimension: policy.limit6
+    label: "Limit 6"
+    sql: ${TABLE}.limit6
+    
+  - dimension: policy.limit7
+    label: "Limit 7"
+    sql: ${TABLE}.limit7
+    
+  - dimension: policy.limit8
+    label: "Limit 8"
+    sql: ${TABLE}.limit8
+    
+  - dimension: policy.limit9
+    label: "Limit 9"
+    sql: ${TABLE}.limit9
+    
+  - dimension: policy.deductible1
+    label: "Deductible 1"
+    sql: ${TABLE}.deductible1
+
+  - dimension: policy.deductible2
+    label: "Deductible 2"
+    sql: ${TABLE}.deductible2
     
   ######################################
   #Measures, should all contain a label#
   ######################################
+ 
+  - measure: policy.inforce_amt
+    label: "Inforce Premium"
+    type: sum
+    sql: ${inforceamt}
+    
+  - measure: policy.unearned_amt
+    label: "Unearned Premium"
+    type: sum
+    sql: ${unearnedamt}
+    
+  - measure: policy.last_inforce_amt
+    label: "Last Inforce Premium"
+    type: sum
+    sql: ${lastinforceamt}
+ 
   - measure: policy.earned_premium_mtd
     label: "Earned Premium MTD"
     type: sum
@@ -137,6 +216,11 @@
     label: "Written Premium Fee MTD"
     type: sum
     sql: ${mtdwrittenpremiumfeeamt}
+    
+  - measure: policy.month_unearned_amt
+    label: "Month Unearned Premium"
+    type: sum
+    sql: ${monthunearnedamt} 
 
   - measure: policy.earned_premium_ytd
     label: "Earned Premium YTD"
