@@ -6,11 +6,12 @@
     sql: ${TABLE}.reportperiod
     hidden: true
     
-#   - dimension_group: date.report_period
-#     type: time
-#     convert_tz: false
-#     timeframes: [month, year, month_num]
-#     sql: ${TABLE}.reportperiod
+  - dimension_group: date.report_period
+    label: "Report Period (Test)"
+    type: time
+    convert_tz: false
+    timeframes: [month, year, month_num]
+    sql: ${TABLE}.reportperiod
     
   - dimension: date.report_year
     label: "Report Period Year"
@@ -21,5 +22,11 @@
     label: "Report Period Month"
     type: int
     sql: ${TABLE}.reportperiod_month  
+    
+  - dimension_group: date.accountingdt
+    label: "Accounting"
+    type: time
+    timeframes: [date,month, year]
+    sql: ${TABLE}.accountingdt
 
 

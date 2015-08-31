@@ -117,58 +117,62 @@
     label: "Claimant"
     sql: ${TABLE}.claimantcd
     
+  - dimension: claim.claimstatuscd
+    label: "Claim Status"
+    sql: ${TABLE}.claimstatuscd
+    
   - dimension_group: claim.lossdt
     label: "Loss"
     type: time
-    timeframes: [time, date, week, month]
+    timeframes: [date, week, month]
     sql: ${TABLE}.lossdt
     
   - dimension_group: claim.openeddt
     label: "Open"
     type: time
-    timeframes: [time, date, week, month]
+    timeframes: [date, week, month]
     sql: ${TABLE}.openeddt
     
   - dimension_group: claim.closeddt
     label: "Closed"
     type: time
-    timeframes: [time, date, week, month]
+    timeframes: [date, week, month]
     sql: ${TABLE}.closeddt
     
   - dimension_group: claim.denialdt
     label: "Denial"
     type: time
-    timeframes: [time, date, week, month]
+    timeframes: [date, week, month]
     sql: ${TABLE}.denialdt
     
   - dimension_group: claim.firstindemnitypaymentdt
     label: "First Indemnity Payment"
     type: time
-    timeframes: [time, date, week, month]
+    timeframes: [date, week, month]
     sql: ${TABLE}.firstindemnitypaymentdt
     
   - dimension_group: claim.firstcloseddt
     label: "Claim First Closed"
     type: time
-    timeframes: [time, date, week, month]
+    timeframes: [date, week, month]
     sql: ${TABLE}.firstcloseddt
     
   - dimension_group: claim.claimlastclosedt
     label: "Claim Last Closed"
     type: time
-    timeframes: [time, date, week, month]
+    timeframes: [date, week, month]
     sql: ${TABLE}.claimlastclosedt
     
   - dimension_group: claim.claimantlastclosedt
     label: "Claimant Last Closed"
     type: time
-    timeframes: [time, date, week, month]
+    timeframes: [date, week, month]
     sql: ${TABLE}.claimantlastclosedt
     
   - dimension_group: claim.reservelastclosedt
     label: "Reserve Last Closed"
     type: time
-    timeframes: [time, date, week, month]
+    timeframes: [date, week, month]
     sql: ${TABLE}.reservelastclosedt
     
   - dimension: claim.losscausecd

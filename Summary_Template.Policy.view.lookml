@@ -113,20 +113,53 @@
     label: "Policy Number"
     sql: ${TABLE}.policynumber
     
+  - dimension: policy.policyversion
+    label: "Policy Version"
+    sql: ${TABLE}.policyversion
+    
   - dimension: policy.statecd
     label: "Policy State"
     sql: ${TABLE}.statecd
     
+  - dimension: policy.feecd
+    label: "Fee"
+    sql: ${TABLE}.feecd
+    
+  - dimension: policy.policystatuscd
+    label: "Policy Status"
+    sql: ${TABLE}.policystatuscd
+    
+  - dimension: policy.policyyear
+    label: "Policy Year"
+    sql: ${TABLE}.policyyear
+    
+  - dimension: policy.insurancetypecd
+    label: "Insurance Type"
+    sql: ${TABLE}.insurancetypecd
+    
+  - dimension: policy.coveredperilscd
+    label: "Covered Perils"
+    sql: ${TABLE}.coveredperilscd
+    
+  - dimension: policy.commissionareacd
+    label: "Commission Area"
+    sql: ${TABLE}.commissionareacd
+    
+  - dimension: policy.coinsurancepct
+    label: "Co-Insurance %"
+    type: number
+    sql: ${TABLE}.coinsurancepct
+    
   - dimension_group: policy.effectivedt
     label: "Effective"
     type: time
-    timeframes: [time, date, week, month]
+    timeframes: [date, week, month]
     sql: ${TABLE}.effectivedt
     
   - dimension_group: policy.expirationdt
     label: "Expiration"
     type: time
-    timeframes: [time, date, week, month]
+    timeframes: [date, week, month]
     sql: ${TABLE}.expirationdt
     
   - dimension: policy.limit1
