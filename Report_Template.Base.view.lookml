@@ -7,7 +7,7 @@
     hidden: true
     
   - dimension_group: date.report_period
-    label: "Report Period (Test)"
+    label: "Report Period"
     type: time
     convert_tz: false
     timeframes: [month, year, month_num]

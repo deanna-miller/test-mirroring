@@ -1,4 +1,4 @@
-- connection: iicstagecluster
+- connection: warehouse
 
 - scoping: true           # for backward compatibility
 - include: "*.Claim.view.lookml"       # include claim views in this project

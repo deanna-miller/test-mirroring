@@ -1,4 +1,4 @@
-- connection: iicstagecluster
+- connection: warehouse
 
 - include: "*.Claim.view.lookml"       # include claim views in this project
 - include: "*.Base.view.lookml"       # include base views in this project
