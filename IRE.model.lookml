@@ -30,4 +30,5 @@
   always_filter:
     execution_date: 'last 30 days'
     query_model: '"Experience","Policy","Claim"'
-  #hidden: true
+    derived_rank: <=10
+  hidden: true
