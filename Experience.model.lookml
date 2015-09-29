@@ -6,4 +6,4 @@
 - include: "*.Experience.view.lookml"       # include Experience views in this project
 #- include: "Explore_Experience.view.lookml"       # include base views in this project
 
-- include: "*.dashboard.lookml"  # include all dashboards in this project
+- include: "*.Experience.dashboard.lookml"  # include all dashboards in this project
