@@ -121,6 +121,8 @@
     sql: ${TABLE}.commissionkey
 
   - dimension: commissiontakenamt
+    hidden: true
+    label: "Commission Taken"
     type: number
     sql: ${TABLE}.commissiontakenamt
 
@@ -332,6 +334,7 @@
     sql: ${TABLE}.transactiontypecd
     
   - measure: balanceamount
+    label: "Balance Amount"
     type: sum
     sql: ${balanceamt}
     
