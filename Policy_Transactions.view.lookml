@@ -42,7 +42,8 @@
     label: "Body Type"
     sql: ${TABLE}.bodytype
 
-  - dimension_group: bookdt
+  - dimension_group: bookdt  # Book date should not be used.  Use Accounting Date instead
+    hidden: true
     label: "Book"
     type: time
     timeframes: [time, date, week, month]
@@ -722,13 +723,11 @@
     label: "Written Premium"
     type: sum
     sql: ${writtenpremiumamt}
-    value_format: '$0.00'
 
   - measure: writtenpremiumfee
     label: "Written Premium Fee"
     type: sum
     sql: ${writtenpremiumfeeamt}
-    value_format: '$0.00'
     
   - measure: writtentotal
     label: "Written Total"
