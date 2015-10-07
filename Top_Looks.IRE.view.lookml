@@ -74,7 +74,7 @@
     label: "Link"
     sql: ${look_id}
     html: |
-      <a href="/x/{{ top_looks.look_link._value }}"><img src="/images/layers-2x-324b4fca.png" height=20 width=20></a>
+      <a href="/looks/{{ value }}"><img src="/images/layers-2x-324b4fca.png" height=20 width=20></a>
      
    
    
