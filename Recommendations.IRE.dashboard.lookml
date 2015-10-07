@@ -1,4 +1,4 @@
-- dashboard: top_looks
+- dashboard: recommendations
   title: Data Exploration Recommendations
   layout: grid
   rows:
