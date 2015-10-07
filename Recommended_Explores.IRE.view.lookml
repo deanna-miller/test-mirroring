@@ -10,6 +10,7 @@
           query.model as query_model,
           query.view as query_view,
           query.fields as fields,
+          query.filters as filters,
           query.slug as query_slug
       FROM 
           looker_repo_data.history AS history
@@ -19,7 +20,7 @@
       WHERE 
           history.source = 'explore'
           and history.source_schema = 'looker_insights'
-          and history.created_at > (sysdate - 7)
+          and history.created_at > (sysdate - 30)
       order by
           history.created_at desc
       limit 500
@@ -31,7 +32,7 @@
           and {% condition user_filter %} user_id {% endcondition %}
         ),
       other_queries AS (
-          SELECT distinct user_id, source_schema, query_id, query_model, query_view, query_slug, JSON_EXTRACT_ARRAY_ELEMENT_TEXT(fields, seq.i) AS field, fields
+          SELECT distinct user_id, source_schema, query_id, query_model, query_view, query_slug, JSON_EXTRACT_ARRAY_ELEMENT_TEXT(fields, seq.i) AS field, fields, filters
           FROM recent_queries, reference_data.number_sequence AS seq
           WHERE 
             seq.i < JSON_ARRAY_LENGTH(fields) 
@@ -39,7 +40,14 @@
             and query_id not in (select query_id from user_queries)
         )
       SELECT 
-        f1.source_schema, f1.query_id, f1.query_model, f1.query_view, f1.query_slug, f1.fields, count(distinct f1.field) as field_count
+        f1.source_schema, 
+        f1.query_id, 
+        f1.query_model, 
+        f1.query_view, 
+        f1.query_slug,
+        json_array_to_html_list(f1.fields) as query_fields,
+        json_to_html_list(f1.filters) as query_filters,
+        count(distinct f1.field) as field_count
       from
           other_queries f1
           join user_queries f2 on (
@@ -48,23 +56,39 @@
             and f1.field = f2.field 
             --and f1.query_id != f2.query_id
           )
-      group by 1,2,3,4,5,6
+      group by 1,2,3,4,5,6,7
       order by field_count desc
       limit 25
 
   fields:
   - dimension: source_schema
+  
   - dimension: query_model
+  
   - dimension: query_view
+    sql: initcap(${TABLE}.query_view)
+    
   - dimension: query_id
+  
   - dimension: field_count
     type: int
+  
   - dimension: query_slug
-    label: "Query Link"
+    hidden: true
+    
+  - dimension: query_link
+    label: "Link"
+    sql: ${query_slug}
     html: |
-      <a href="/x/{{ value }}"><img src="/images/layers-2x-324b4fca.png" height=20 width=20>{{ recommended_explores.query_id._value }}</a>
+      <a href="/x/{{ recommended_explores.query_slug._value }}"><img src="/images/layers-2x-324b4fca.png" height=20 width=20></a>
       
-  - dimension: fields
+  - dimension: query_fields
+    html: |
+      <div>{{recommended_explores.query_fields._value}}</div>
+      
+  - dimension: query_filters
+    html: |
+      <div>{{recommended_explores.query_filters._value}}</div>
   
   - filter: user_filter
     hidden: true

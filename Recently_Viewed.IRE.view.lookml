@@ -8,9 +8,11 @@
           query.id as query_id,
           query.model as query_model,
           query.view as query_view,
-          query.fields as fields,
+          json_array_to_html_list(query.fields) as query_fields,
+          json_to_html_list(query.filters) as query_filters,
           query.slug as query_slug,
           JSON_ARRAY_LENGTH(fields) as field_count,
+          history.created_at as execution_ts,
           history.completed_at as execution_completeion_ts
       FROM 
           looker_repo_data.history AS history
@@ -20,7 +22,7 @@
       WHERE 
           history.source = 'explore'
           and query.model != 'IRE'
-          and history.created_at > (sysdate - 7)
+          -- and history.created_at > (sysdate - 7)
           and history.source_schema = 'looker_insights'
           and {% condition user_filter %} "user".email {% endcondition %}
 
@@ -39,7 +41,21 @@
     html: |
       <a href="/x/{{ value }}"><img src="/images/layers-2x-324b4fca.png" height=20 width=20>{{ recently_viewed.query_id._value }}</a>
       
-  - dimension: fields
+  - dimension: query_fields
+    html: |
+      <div>{{recently_viewed.query_fields._value}}</div>
+
+  - dimension: query_filters
+    html: |
+      <div>{{recently_viewed.query_filters._value}}</div>
+      
+
+  
+  
+  - dimension_group: execution
+    type: time
+    timeframes: [time, time_of_day, date, week, month]
+    sql: ${TABLE}.execution_ts    
   
   - dimension_group: execution_completion
     type: time
