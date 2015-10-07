@@ -8,7 +8,7 @@
 - include: "Claim_Transactions.view.lookml"        
 - include: "Producer_Info.view.lookml"       
 - include: "Adjuster_Info.view.lookml"        
-- include: "*.dashboard.lookml"  # include all the dashboards
+# - include: "*.dashboard.lookml"  # include all the dashboards
 
 - explore: account_transactions
 
