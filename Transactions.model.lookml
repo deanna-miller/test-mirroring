@@ -11,7 +11,7 @@
 - include: "Adjuster.view.lookml"  
 - include: "Producers_By_Premium.view.lookml"
 - include: "*.Premium.view.lookml"
-- include: "*.dashboard.lookml"  # include all the dashboards
+# - include: "*.dashboard.lookml"  # include all the dashboards
 
   
 
