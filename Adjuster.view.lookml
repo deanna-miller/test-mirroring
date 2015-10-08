@@ -1,7 +1,6 @@
-- view: adjuster_info
+- view: adjuster
   derived_table:
     sql: |
-
       Select 
         sourcecd as adjustercd,
         commercialname as adjustername,

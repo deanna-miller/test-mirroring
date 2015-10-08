@@ -1,8 +1,9 @@
-- view: policy_reinsurance_transactions
-  sql_table_name: source_data.policyreinsurancestats
+- view: transaction_template_premium
+  sql_table_name: source_data.accountingstats
   fields:
 
   - dimension: id
+    hidden: true
     primary_key: true
     sql: ${TABLE}.id
 
@@ -19,34 +20,91 @@
     sql: ${TABLE}.adddt
 
   - dimension: annualstatementlinecd
-    label: "Annual Statement Line"
+    label: "Annual Statement Line Code"
     sql: ${TABLE}.annualstatementlinecd
 
   - dimension_group: bookdt
-    label: "Book"
+    hidden: true
     type: time
     timeframes: [time, date, week, month]
     sql: ${TABLE}.bookdt
+
+  - dimension: businesssourcecd
+    label: "Business Source Code"
+    sql: ${TABLE}.businesssourcecd
 
   - dimension: carriercd
     label: "Carrier Code"
     sql: ${TABLE}.carriercd
 
   - dimension: carriergroupcd
-    label: "Carrier Group Code"
+    label: "Carrier Code" 
     sql: ${TABLE}.carriergroupcd
+
+  - dimension: coinsurancepct
+    label: "Coinsurance %"
+    type: number
+    sql: ${TABLE}.coinsurancepct
 
   - dimension: combinedkey
     hidden: true
     sql: ${TABLE}.combinedkey
+
+  - dimension: commissionareacd
+    label: "Commission Area Code"
+    sql: ${TABLE}.commissionareacd
+
+  - dimension: commissionkey
+    label: "Commission Key"
+    sql: ${TABLE}.commissionkey
+
+  - dimension: companycd
+    label: "Company Code"
+    sql: ${TABLE}.companycd
+
+  - dimension: conversionfilename
+    hidden: true
+    sql: ${TABLE}.conversionfilename
+
+  - dimension: conversiongroup
+    hidden: true
+    sql: ${TABLE}.conversiongroup
+
+  - dimension: conversionjobref
+    hidden: true
+    sql: ${TABLE}.conversionjobref
+
+  - dimension: conversiontemplateidref
+    hidden: true
+    sql: ${TABLE}.conversiontemplateidref
+
+  - dimension: coveragecd
+    label: "Coverage Code"
+    sql: ${TABLE}.coveragecd
+
+  - dimension: coverageitemcd
+    label: "Coverage Item Code"
+    sql: ${TABLE}.coverageitemcd
+
+  - dimension: coveredperilscd
+    label: "Coverage Perils Code"
+    sql: ${TABLE}.coveredperilscd
 
   - dimension: customerref
     label: "Customer Ref"
     type: int
     sql: ${TABLE}.customerref
 
+  - dimension: deductible1
+    label: "Deductible 1"
+    sql: ${TABLE}.deductible1
+
+  - dimension: deductible2
+    label: "Deductible 1"
+    sql: ${TABLE}.deductible2
+
   - dimension: earndays
-    label: "Earn Days"
+    label: "Earn Days"  
     type: int
     sql: ${TABLE}.earndays
 
@@ -68,8 +126,12 @@
     timeframes: [time, date, week, month]
     sql: ${TABLE}.expirationdt
 
+  - dimension: feecd
+    label: "Fee Code"
+    sql: ${TABLE}.feecd
+
   - dimension: inforcechangeamt
-    hidden: true
+    label: "Inforce Change Amount"
     type: number
     sql: ${TABLE}.inforcechangeamt
 
@@ -77,20 +139,28 @@
     label: "Insurance Type Code"
     sql: ${TABLE}.insurancetypecd
 
-  - dimension: mastersubind
-    hidden: true
-    sql: ${TABLE}.mastersubind
+  - dimension: limit1
+    label: "Limit 1"
+    sql: ${TABLE}.limit1
+
+  - dimension: limit2
+    label: "Limit 1"
+    sql: ${TABLE}.limit2
+
+  - dimension: linecd
+    label: "Line Code"
+    sql: ${TABLE}.linecd
 
   - dimension: newrenewalcd
     label: "New or Renewal"
     sql: ${TABLE}.newrenewalcd
 
-  - dimension: policyformcd
-    label: "Policy Form"
-    sql: ${TABLE}.policyformcd
+  - dimension: payplancd
+    label: "Pay Plan Code"
+    sql: ${TABLE}.payplancd
 
   - dimension: policygroupcd
-    label: "Policy Group"
+    label: "Policy Group Code"
     sql: ${TABLE}.policygroupcd
 
   - dimension: policynumber
@@ -103,11 +173,11 @@
     sql: ${TABLE}.policyref
 
   - dimension: policystatuscd
-    label: "Policy Status"
+    label: "Policy Status Code"
     sql: ${TABLE}.policystatuscd
 
   - dimension: policytypecd
-    label: "Policy Type"
+    label: "Policy Type Code"
     sql: ${TABLE}.policytypecd
 
   - dimension: policyversion
@@ -118,39 +188,52 @@
     label: "Policy Year"
     sql: ${TABLE}.policyyear
 
+  - dimension: producercd
+    label: "Producer Code"
+    sql: ${TABLE}.producercd
+
   - dimension: productname
     label: "Product Name"
     sql: ${TABLE}.productname
 
   - dimension: productversionidref
-    hidden: true
+    label: "Product Version Id Ref"
     sql: ${TABLE}.productversionidref
 
-  - dimension: providercd
-    label: "Provider Code"
-    sql: ${TABLE}.providercd
+  - dimension: rateareaname
+    label: "Rate Area Name"
+    sql: ${TABLE}.rateareaname
 
-  - dimension: reinsurancegroupid
-    label: "Reinsurance GroupId"
-    sql: ${TABLE}.reinsurancegroupid
+  - dimension: riskcd
+    label: "Risk Code"
+    sql: ${TABLE}.riskcd
 
-  - dimension: reinsuranceitemname
-    label: "Reinsurance Item Name"
-    sql: ${TABLE}.reinsuranceitemname
-
-  - dimension: reinsurancename
-    label: "Reinsurance Name"
-    sql: ${TABLE}.reinsurancename
+  - dimension: shortratestatind
+    hidden: true
+    sql: ${TABLE}.shortratestatind
 
   - dimension_group: startdt
-    hidden: true
+    label: "Start"
     type: time
     timeframes: [time, date, week, month]
     sql: ${TABLE}.startdt
 
+  - dimension: statdata
+    hidden: true
+    sql: ${TABLE}.statdata
+
   - dimension: statecd
     label: "State Code"
     sql: ${TABLE}.statecd
+
+  - dimension: statementaccountnumber
+    label: "Statement Account #"
+    sql: ${TABLE}.statementaccountnumber
+
+  - dimension: statementaccountref
+    hidden: true
+    type: int
+    sql: ${TABLE}.statementaccountref
 
   - dimension: statsequence
     hidden: true
@@ -166,13 +249,16 @@
     label: "Status Code"
     sql: ${TABLE}.statuscd
 
+  - dimension: sublinecd
+    label: "Subline Code"
+    sql: ${TABLE}.sublinecd
+
   - dimension: systemid
     hidden: true
     type: int
     sql: ${TABLE}.systemid
 
   - dimension: termdays
-    label: "# of Days in Term"
     type: int
     sql: ${TABLE}.termdays
 
@@ -196,28 +282,48 @@
     type: number
     sql: ${TABLE}.writtencommissionamt
 
+  - dimension: writtencommissionfeeamt
+    hidden: true
+    type: number
+    sql: ${TABLE}.writtencommissionfeeamt
+
   - dimension: writtenpremiumamt
     hidden: true
     type: number
     sql: ${TABLE}.writtenpremiumamt
+
+  - dimension: writtenpremiumfeeamt
+    hidden: true
+    type: number
+    sql: ${TABLE}.writtenpremiumfeeamt
+
+  - measure: count
+    type: count
+    drill_fields: [id, rateareaname, productname, conversionfilename]
     
-  - measure: inforcechange
-    label: "Inforce Change"
-    type: sum
-    sql: ${TABLE}.inforcechangeamt  
-    
-  
   - measure: writtencommission
     label: "Written Commission"
     type: sum
-    sql: ${writtencommissionamt}  
+    sql: ${writtencommissionamt} 
+
+  - measure: writtencommissionfee
+    label: "Written Commission Fee"
+    type: sum
+    sql: ${writtencommissionfeeamt}
 
   - measure: writtenpremium
     label: "Written Premium"
     type: sum
-    sql: ${writtenpremiumamt}
+    sql: ${writtenpremiumamt} 
 
-  - measure: count
-    type: count
-    drill_fields: [id, reinsurancename, reinsuranceitemname, productname]
+  - measure: writtenpremiumfee
+    label: "Written Premium Fee"
+    type: sum
+    sql: ${writtenpremiumfeeamt}
+    
+  - measure: writtenpremiumtotal
+    label: "Written Premium + Fee"
+    type: sum
+    sql: ${writtenpremiumfeeamt}
+  
 

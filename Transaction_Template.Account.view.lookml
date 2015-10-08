@@ -1,4 +1,4 @@
-- view: account_transactions
+- view: transaction_template_account
   sql_table_name: source_data.accountstats
   fields:
 

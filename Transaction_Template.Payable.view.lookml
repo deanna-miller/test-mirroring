@@ -1,4 +1,4 @@
-- view: payable_transactions
+- view: transaction_template_payable
   sql_table_name: source_data.payablestats
   fields:
 
@@ -209,5 +209,6 @@
   - measure: count
     type: count
     drill_fields: [id, paytoname]
+
 
 

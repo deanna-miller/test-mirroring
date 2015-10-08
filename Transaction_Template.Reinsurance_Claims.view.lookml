@@ -1,4 +1,4 @@
-- view: claim_reinsurance_transactions
+- view: transaction_template_reinsurance_claims
   sql_table_name: source_data.claimreinsurancestats
   fields:
 

@@ -1,4 +1,4 @@
-- view: policy_transactions
+- view: transaction_template_policy_details
   sql_table_name: source_data.policystats
   fields:
 
@@ -730,11 +730,10 @@
     sql: ${writtenpremiumfeeamt}
     
   - measure: writtentotal
-    label: "Written Total"
+    label: "Written Premium & Fees"
     type: number
     sql: (${writtenpremium} + ${writtenpremiumfee})    
 
   - measure: count
     type: count
     drill_fields: [id, rateareaname, conversionfilename, rateareaname, conversionfilename]
-

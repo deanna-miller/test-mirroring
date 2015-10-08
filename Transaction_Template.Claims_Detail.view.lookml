@@ -1,4 +1,4 @@
-- view: claim_transactions
+- view: transaction_template_claims_detail
   sql_table_name: source_data.claimstats
   fields:
 
