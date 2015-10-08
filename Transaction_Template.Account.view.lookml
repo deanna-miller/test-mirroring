@@ -3,6 +3,7 @@
   fields:
 
   - dimension: id
+    hidden: true
     primary_key: true
     sql: ${TABLE}.id
 
@@ -117,6 +118,7 @@
     sql: ${TABLE}.commissionchargeamt
 
   - dimension: commissionkey
+    hidden: true
     label: "Commission Key"
     sql: ${TABLE}.commissionkey
 
@@ -268,7 +270,7 @@
     sql: ${TABLE}.reversalstopind
 
   - dimension_group: settlementdt
-    label: "Statement"
+    label: "Settlement"
     type: time
     timeframes: [time, date, week, month]
     sql: ${TABLE}.settlementdt
@@ -318,6 +320,7 @@
     sql: ${TABLE}.systemchecknumber
 
   - dimension: systemid
+    hidden: true
     type: int
     sql: ${TABLE}.systemid
 
@@ -431,6 +434,7 @@
       
 
   - measure: count
+    hidden: true
     type: count
     drill_fields: [id, insuredname, paidbyname, conversionfilename]
 

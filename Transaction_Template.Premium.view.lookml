@@ -51,10 +51,12 @@
     sql: ${TABLE}.combinedkey
 
   - dimension: commissionareacd
+    hidden: true
     label: "Commission Area Code"
     sql: ${TABLE}.commissionareacd
 
   - dimension: commissionkey
+    hidden: true
     label: "Commission Key"
     sql: ${TABLE}.commissionkey
 
@@ -298,6 +300,7 @@
     sql: ${TABLE}.writtenpremiumfeeamt
 
   - measure: count
+    hidden: true
     type: count
     drill_fields: [id, rateareaname, productname, conversionfilename]
     

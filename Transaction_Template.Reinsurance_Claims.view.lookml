@@ -229,6 +229,7 @@
     sql: ${TABLE}.summarykey
 
   - dimension: systemid
+    hidden: true
     label: Primary Key
     type: int
     sql: ${TABLE}.systemid
@@ -324,6 +325,7 @@
       
 
   - measure: count
+    hidden: true
     type: count
     drill_fields: [id, reinsurancename, reinsuranceitemname, productname, policyproductname]
 

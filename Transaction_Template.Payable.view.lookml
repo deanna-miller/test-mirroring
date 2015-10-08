@@ -3,6 +3,7 @@
   fields:
 
   - dimension: id
+    hidden: true
     primary_key: true
     sql: ${TABLE}.id
 
@@ -170,6 +171,7 @@
     sql: ${TABLE}.statuscd
 
   - dimension: systemid
+    hidden: true
     label: "Primary key"
     type: int
     sql: ${TABLE}.systemid
@@ -207,6 +209,7 @@
     sql: ${TABLE}.typecd
 
   - measure: count
+    hidden: true
     type: count
     drill_fields: [id, paytoname]
 

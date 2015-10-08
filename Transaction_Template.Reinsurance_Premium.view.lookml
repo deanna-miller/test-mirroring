@@ -218,6 +218,7 @@
     sql: ${writtenpremiumamt}
 
   - measure: count
+    hidden: true
     type: count
     drill_fields: [id, reinsurancename, reinsuranceitemname, productname]
 

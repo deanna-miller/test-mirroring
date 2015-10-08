@@ -412,6 +412,7 @@
     sql: ${TABLE}.startdt
 
   - dimension: statdata
+    hidden: true
     label: "Stat Data"
     sql: ${TABLE}.statdata
 
@@ -450,6 +451,7 @@
     sql: ${TABLE}.systemcheckreference
 
   - dimension: systemid
+    hidden: true
     label: "Primary Key"
     type: int
     sql: ${TABLE}.systemid
@@ -572,6 +574,7 @@
       reservecd: "Subrogation"    
     
   - measure: count
+    hidden: true
     type: count
     drill_fields: detail*   
     

@@ -92,27 +92,33 @@
     sql: ${TABLE}.combinedkey
 
   - dimension: commissionareacd
+    hidden: true
     label: "Commission Area Code"
     sql: ${TABLE}.commissionareacd
 
   - dimension: commissionkey
+    hidden: true
     label: "Commission Key"
     sql: ${TABLE}.commissionkey
 
   - dimension: companycd
+    hidden: true
     label: "Company Code"
     sql: ${TABLE}.companycd
 
 
   - dimension: compositeadjustment
+    hidden: true
     label: "Composite Adjustment"
     sql: ${TABLE}.compositeadjustment
 
   - dimension: constructioncd
+    hidden: true
     label: "Construction Code"
     sql: ${TABLE}.constructioncd
 
   - dimension: contentslimit
+    hidden: true
     label: "Contents Limit"
     sql: ${TABLE}.contentslimit
 
@@ -164,10 +170,12 @@
     sql: ${TABLE}.deductible2
 
   - dimension: defensivedriverind
+    hidden: true
     label: "Defensive Driver"
     sql: ${TABLE}.defensivedriverind
 
   - dimension: distbrusharea
+    hidden: true
     label: "Brush Area"
     sql: ${TABLE}.distbrusharea
 
@@ -583,10 +591,12 @@
     sql: ${TABLE}.termdays
 
   - dimension: territorycd
+    hidden: true
     label: "Territory Code"
     sql: ${TABLE}.territorycd
 
   - dimension: timeelement
+    hidden: true
     label: "Time Element"
     sql: ${TABLE}.timeelement
 
@@ -735,5 +745,6 @@
     sql: (${writtenpremium} + ${writtenpremiumfee})    
 
   - measure: count
+    hidden: true
     type: count
     drill_fields: [id, rateareaname, conversionfilename, rateareaname, conversionfilename]
