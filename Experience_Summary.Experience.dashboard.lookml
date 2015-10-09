@@ -20,7 +20,7 @@
     measures: [experience.incurred_loss_ratio_ytd, experience.paid_loss_ratio_ytd]
     filters:
       date.report_month: '[1, 12]'
-      date.report_year: '2015'
+      date.report_year: '2014'
     sorts: [date.report_month]
     limit: 500
     column_limit: ''
@@ -87,7 +87,7 @@
       policy.earned_premium_mtd, policy.written_premium_mtd]
     filters:
       date.report_month: '[1, 12]'
-      date.report_year: '2015'
+      date.report_year: '2014'
     sorts: [date.report_month]
     limit: 500
     column_limit: ''
@@ -122,7 +122,7 @@
       policy.written_premium_ytd]
     filters:
       date.report_month: '8'
-      date.report_year: '2015'
+      date.report_year: '2014'
     sorts: [experience.incurred_loss_ratio_ytd desc]
     limit: 500
     column_limit: ''
@@ -137,7 +137,7 @@
       policy.written_premium_ytd]
     filters:
       date.report_month: '8'
-      date.report_year: '2015'
+      date.report_year: '2014'
       policy.earned_premium_ytd: '>=100000'
     sorts: [policy.earned_premium_ytd desc]
     limit: 5000
