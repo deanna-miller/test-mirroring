@@ -38,7 +38,7 @@
     sql: ${TABLE}.carriercd
 
   - dimension: carriergroupcd
-    label: "Carrier Code" 
+    label: "Carrier Group Code" 
     sql: ${TABLE}.carriergroupcd
 
   - dimension: coinsurancepct
