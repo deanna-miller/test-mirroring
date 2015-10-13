@@ -327,6 +327,6 @@
   - measure: writtenpremiumtotal
     label: "Written Premium + Fee"
     type: sum
-    sql: ${writtenpremiumfeeamt}
+    sql: ${writtenpremiumfeeamt} + ${writtenpremiumamt} 
   
 
