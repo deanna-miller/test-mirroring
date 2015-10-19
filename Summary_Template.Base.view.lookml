@@ -1,5 +1,5 @@
 - view: summary_template
-  sql_table_name: public.experience_summary
+  sql_table_name: insight.experience_summary
   fields:
 
   - dimension: id
