@@ -1,5 +1,5 @@
 - view: transaction_template_claims_detail
-  sql_table_name: source_data.claimstats
+  sql_table_name: masked_data.claimstats
   fields:
 
   - dimension: id

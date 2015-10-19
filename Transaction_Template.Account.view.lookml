@@ -1,5 +1,5 @@
 - view: transaction_template_account
-  sql_table_name: source_data.accountstats
+  sql_table_name: masked_data.accountstats
   fields:
 
   - dimension: id

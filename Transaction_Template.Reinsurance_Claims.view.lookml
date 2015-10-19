@@ -1,5 +1,5 @@
 - view: transaction_template_reinsurance_claims
-  sql_table_name: source_data.claimreinsurancestats
+  sql_table_name: masked_data.claimreinsurancestats
   fields:
 
   - dimension: id
