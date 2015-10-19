@@ -43,7 +43,7 @@
     y_axis_combined: true
     interpolation: linear
     x_axis_label: Report Period Month
-    y_axis_min: ['.45']
+    y_axis_min: ['.20']
     legend_position: center
 
   - name: WrittenPremiumByState
@@ -128,7 +128,7 @@
     column_limit: ''
 
   - name: ProducerExperienceSummary
-    title: Producer Experience Summary - Earned Premium > 100K - YTD
+    title: Producer Experience Summary - Earned Premium > 1 Million - YTD
     type: looker_scatter
     model: Experience
     explore: experience
@@ -138,7 +138,7 @@
     filters:
       date.report_month: '8'
       date.report_year: '2014'
-      policy.earned_premium_ytd: '>=100000'
+      policy.earned_premium_ytd: '>=1000000'
     sorts: [policy.earned_premium_ytd desc]
     limit: 5000
     column_limit: ''

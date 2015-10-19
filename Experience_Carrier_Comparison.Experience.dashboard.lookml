@@ -8,7 +8,7 @@
   elements:
 
   - name: add_a_unique_name_308
-    title: AVNGICO Experience By Line and Annual Statement Line - YTD
+    title: ABC Experience By Line and Annual Statement Line - YTD
     type: looker_column
     model: Experience
     explore: experience
@@ -17,7 +17,7 @@
     filters:
       date.report_month: '12'
       date.report_year: '2014'
-      organization.carriercd: '"AVNGICO"'
+      organization.carriercd: '"ABC"'
       experience.incurred_loss_ratio_ytd: NOT NULL
     sorts: [policy.earned_premium_ytd desc 1]
     limit: 500
@@ -45,7 +45,7 @@
     ordering: none
     
   - name: add_a_unique_name_165
-    title: AVNGSG Experience By Line and Annual Statement Line - YTD
+    title: XYZ Experience By Line and Annual Statement Line - YTD
     type: looker_column
     model: Experience
     explore: experience
@@ -54,7 +54,7 @@
     filters:
       date.report_month: '12'
       date.report_year: '2014'
-      organization.carriercd: '"AVNGSG"'
+      organization.carriercd: '"XYZ"'
       experience.incurred_loss_ratio_ytd: NOT NULL
     sorts: [policy.earned_premium_ytd desc 1]
     limit: 500
