@@ -29,4 +29,8 @@
     timeframes: [date,month, year]
     sql: ${TABLE}.accountingdt
 
+  - dimension: report.record_type
+    label: "Report Type"
+    sql: ${TABLE}.record_type
+
 
