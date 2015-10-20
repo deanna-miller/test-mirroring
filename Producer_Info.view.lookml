@@ -10,7 +10,7 @@
         bestcity as city,
         bestpostalcode as postalcode,
         beststateprovcd as state
-      From source_data.allcontacts
+      From masked_data.allcontacts
       Where  sourcetypecd  = 'Producer' and cmmcontainer = 'Provider'
 
   fields:
