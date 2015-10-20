@@ -9,7 +9,7 @@
         bestcity as city,
         bestpostalcode as postalcode,
         beststateprovcd as state
-      From source_data.allcontacts
+      From masked_data.allcontacts
       Where  sourcetypecd  IN ('Examiner','Outside Adjuster') and contacttypecd = 'Provider'
 
   fields:
