@@ -41,7 +41,7 @@
     point_style: circle_outline
     y_axis_combined: true
     interpolation: linear
-    x_axis_label: Rep2ort Period Month
+    x_axis_label: Report Period Month
     y_axis_min: ['0']
     legend_position: center
 
