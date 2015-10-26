@@ -15,8 +15,7 @@
     dimensions: [product.linecd, product.annualstatementlinecd]
     measures: [experience.incurred_loss_ratio_ytd, claim.incurred_loss_ytd, policy.earned_premium_ytd]
     filters:
-      date.report_month: '12'
-      date.report_year: '2014'
+      date.report_period_month: '2014-12'
       organization.carriercd: '"ABC"'
       experience.incurred_loss_ratio_ytd: NOT NULL
     sorts: [policy.earned_premium_ytd desc 1]
@@ -52,8 +51,7 @@
     dimensions: [product.linecd, product.annualstatementlinecd]
     measures: [experience.incurred_loss_ratio_ytd, claim.incurred_loss_ytd, policy.earned_premium_ytd]
     filters:
-      date.report_month: '12'
-      date.report_year: '2014'
+      date.report_period_month: '2014-12'
       organization.carriercd: '"XYZ"'
       experience.incurred_loss_ratio_ytd: NOT NULL
     sorts: [policy.earned_premium_ytd desc 1]

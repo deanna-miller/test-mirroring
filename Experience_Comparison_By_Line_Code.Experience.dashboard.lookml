@@ -24,10 +24,10 @@
     type: table
     model: Experience
     explore: experience
-    dimensions: [date.report_year,product.linecd]
+    dimensions: [date.report_period_year,product.linecd]
     pivots: [product.linecd]
     measures: [policy.written_premium_mtd]
-    sorts: [product.linecd, date.report_year]
+    sorts: [product.linecd, date.report_period__year]
     limit: 500
     column_limit: 50
     total: true
@@ -39,10 +39,10 @@
     type: table
     model: Experience
     explore: experience
-    dimensions: [date.report_year,product.linecd]
+    dimensions: [date.report_period_year,product.linecd]
     pivots: [product.linecd]
     measures: [policy.earned_premium_mtd]
-    sorts: [product.linecd, date.report_year]
+    sorts: [product.linecd, date.report_period_year]
     limit: 500
     column_limit: 50
     total: true
@@ -54,10 +54,10 @@
     type: table
     model: Experience
     explore: experience
-    dimensions: [date.report_year,product.linecd]
+    dimensions: [date.report_period_year,product.linecd]
     pivots: [product.linecd]
     measures: [claim.incurred_loss_mtd]
-    sorts: [product.productname, date.report_year]
+    sorts: [product.productname, date.report_period_year]
     limit: 500
     column_limit: 50
     total: true
