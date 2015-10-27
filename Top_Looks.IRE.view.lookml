@@ -21,13 +21,12 @@
           row_number() over (partition by query.model order by count(distinct "user".email) desc ) as user_count_rank,
           row_number() over (partition by query.model order by ( (count(distinct history.id) * .35) + (count(distinct "user".email) * .65) )  desc) as derived_rank
       FROM 
-          looker_repo_data.history AS history
-          LEFT JOIN looker_repo_data.look AS look ON history.LOOK_ID = look.ID and history.source_schema = look.source_schema
-          LEFT JOIN looker_repo_data.query AS query ON history.QUERY_ID = query.ID and history.source_schema = query.source_schema
-          LEFT JOIN looker_repo_data.user AS "user" ON history.USER_ID = ("user".ID) and ("user".source_schema) = history.source_schema
+          history AS history
+          LEFT JOIN look AS look ON history.LOOK_ID = look.ID and history.source_schema = look.source_schema
+          LEFT JOIN query AS query ON history.QUERY_ID = query.ID and history.source_schema = query.source_schema
+          LEFT JOIN "user" AS "user" ON history.USER_ID = ("user".ID) and ("user".source_schema) = history.source_schema
       WHERE 
           history.source = 'look'         
-          and history.source_schema = 'looker_insights'
           and query.model in ('Experience','Policy','Claims')
           and look.id is not null
           and history.created_at > (sysdate - 30)

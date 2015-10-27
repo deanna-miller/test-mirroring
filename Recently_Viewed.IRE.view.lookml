@@ -15,15 +15,13 @@
           history.created_at as execution_ts,
           history.completed_at as execution_completeion_ts
       FROM 
-          looker_repo_data.history AS history
-          LEFT JOIN looker_repo_data.look AS look ON history.LOOK_ID = look.ID and history.source_schema = look.source_schema
-          LEFT JOIN looker_repo_data.query AS query ON history.QUERY_ID = query.ID and history.source_schema = query.source_schema
-          LEFT JOIN looker_repo_data.user AS "user" ON history.USER_ID = ("user".ID) and ("user".source_schema) = history.source_schema
+          history AS history
+          LEFT JOIN look AS look ON history.LOOK_ID = look.ID and history.source_schema = look.source_schema
+          LEFT JOIN query AS query ON history.QUERY_ID = query.ID and history.source_schema = query.source_schema
+          LEFT JOIN "user" AS "user" ON history.USER_ID = ("user".ID) and ("user".source_schema) = history.source_schema
       WHERE 
           history.source = 'explore'
           and query.model != 'IRE'
-          -- and history.created_at > (sysdate - 7)
-          and history.source_schema = 'looker_insights'
           and {% condition user_filter %} "user".email {% endcondition %}
 
 
