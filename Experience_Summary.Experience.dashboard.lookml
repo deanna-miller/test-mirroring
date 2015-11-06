@@ -53,7 +53,7 @@
     dimensions: [policy.statecd]
     measures: [experience.incurred_loss_ratio_ytd]
     filters:
-      date.report_period_month: 2 months ago
+      date.report_period_month: 14 months ago
     sorts: [experience.incurred_loss_ratio_ytd desc]
     limit: 500
     column_limit: ''
@@ -125,7 +125,7 @@
     measures: [experience.incurred_loss_ratio_ytd, claim.incurred_loss_ytd, policy.earned_premium_ytd,
       policy.written_premium_ytd]
     filters:
-      date.report_period_month: 2 months ago
+      date.report_period_month: 14 months ago
     sorts: [experience.incurred_loss_ratio_ytd desc]
     limit: 500
     column_limit: ''
@@ -139,7 +139,7 @@
     measures: [experience.incurred_loss_ratio_ytd, claim.incurred_loss_ytd, policy.earned_premium_ytd,
       policy.written_premium_ytd]
     filters:
-      date.report_period_month: 2 months ago
+      date.report_period_month: 14 months ago
       policy.earned_premium_ytd: '>=1000000'
     sorts: [policy.earned_premium_ytd desc]
     limit: 5000
