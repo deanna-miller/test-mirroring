@@ -45,11 +45,11 @@
   
   - dimension: query_fields
     html: |
-      <div>{{top_explores.query_fields._value}}</div>
+      <div>{{ value | replace: '&lt;', '<' | replace: '&gt;', '>' }}</div>
   
   - dimension: query_filters
     html: |
-      <div>{{top_explores.query_filters._value}}</div>
+       <div>{{ value | replace: '&lt;', '<' | replace: '&gt;', '>' }}</div>
   
   - dimension: derived_rank
     label: "Rank"

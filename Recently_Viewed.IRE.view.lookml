@@ -41,11 +41,11 @@
       
   - dimension: query_fields
     html: |
-      <div>{{recently_viewed.query_fields._value}}</div>
+      <div>{{ value | replace: '&lt;', '<' | replace: '&gt;', '>' }}</div>
 
   - dimension: query_filters
     html: |
-      <div>{{recently_viewed.query_filters._value}}</div>
+      <div>{{ value | replace: '&lt;', '<' | replace: '&gt;', '>' }}</div>
       
 
   
