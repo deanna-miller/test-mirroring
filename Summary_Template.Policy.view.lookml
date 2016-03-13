@@ -126,6 +126,7 @@
     sql: ${TABLE}.feecd
     
   - dimension: policy.policystatuscd
+    hidden: true
     label: "Policy Status"
     sql: ${TABLE}.policystatuscd
     
