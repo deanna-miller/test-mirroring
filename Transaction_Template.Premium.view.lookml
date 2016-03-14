@@ -175,6 +175,7 @@
     sql: ${TABLE}.policyref
 
   - dimension: policystatuscd
+    hidden: true
     label: "Policy Status Code"
     sql: ${TABLE}.policystatuscd
 

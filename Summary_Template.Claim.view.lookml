@@ -118,6 +118,7 @@
     sql: ${TABLE}.claimantcd
     
   - dimension: claim.claimstatuscd
+    hidden: true
     label: "Claim Status"
     sql: ${TABLE}.claimstatuscd
     
