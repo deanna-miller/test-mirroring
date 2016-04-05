@@ -10,7 +10,7 @@
   - dimension_group: adddt
     label: "Add"
     type: time
-    timeframes: [time, date, week, month]
+    timeframes: [date, week, month]
     sql: ${TABLE}.adddt
 
   - dimension: annualstatementlinecd
@@ -20,7 +20,7 @@
   - dimension_group: bookdt
     label: "Book Date"
     type: time
-    timeframes: [time, date, week, month]
+    timeframes: [date, week, month]
     sql: ${TABLE}.bookdt
 
   - dimension: carriercd
@@ -45,7 +45,7 @@
 
   - dimension: claimref
     hidden: true
-    type: int
+    type: number
     sql: ${TABLE}.claimref
 
   - dimension: claimstatuscd
@@ -58,19 +58,19 @@
 
   - dimension: customerref
     label: "Customer Ref"
-    type: int
+    type: number
     sql: ${TABLE}.customerref
 
   - dimension_group: effectivedt
     label: "Effective"
     type: time
-    timeframes: [time, date, week, month]
+    timeframes: [date, week, month]
     sql: ${TABLE}.effectivedt
 
   - dimension_group: enddt
     hidden: true
     type: time
-    timeframes: [time, date, week, month]
+    timeframes: [date, week, month]
     sql: ${TABLE}.enddt
 
   - dimension: expectedrecoverychangeamt
@@ -81,7 +81,7 @@
   - dimension_group: expirationdt
     label: "Expiration"
     type: time
-    timeframes: [time, date, week, month]
+    timeframes: [date, week, month]
     sql: ${TABLE}.expirationdt
 
   - dimension: losscausecd
@@ -91,7 +91,7 @@
   - dimension_group: lossdt
     label: "Loss"
     type: time
-    timeframes: [time, date, week, month]
+    timeframes: [date, week, month]
     sql: ${TABLE}.lossdt
 
   - dimension: lossyear
@@ -128,7 +128,7 @@
 
   - dimension: policyref
     hidden: true
-    type: int
+    type: number
     sql: ${TABLE}.policyref
 
   - dimension: policytypecd
@@ -162,7 +162,7 @@
 
   - dimension: recoverytransactionnumber
     label: "Recovery Transaction #"
-    type: int
+    type: number
     sql: ${TABLE}.recoverytransactionnumber
 
   - dimension: reinsuranceitemname
@@ -176,7 +176,7 @@
   - dimension_group: reportdt
     label: "Report"
     type: time
-    timeframes: [time, date, week, month]
+    timeframes: [date, week, month]
     sql: ${TABLE}.reportdt
 
   - dimension: reservecd
@@ -199,7 +199,7 @@
   - dimension_group: startdt
     hidden: true
     type: time
-    timeframes: [time, date, week, month]
+    timeframes: [date, week, month]
     sql: ${TABLE}.startdt
 
   - dimension: statecd
@@ -208,12 +208,12 @@
 
   - dimension: statsequence
     hidden: true
-    type: int
+    type: number
     sql: ${TABLE}.statsequence
 
   - dimension: statsequencereplace
     hidden: true
-    type: int
+    type: number
     sql: ${TABLE}.statsequencereplace
 
   - dimension: statuscd
@@ -231,7 +231,7 @@
   - dimension: systemid
     hidden: true
     label: Primary Key
-    type: int
+    type: number
     sql: ${TABLE}.systemid
 
   - dimension: transactioncd
@@ -240,7 +240,7 @@
 
   - dimension: transactionnumber
     label: "Transaction #"
-    type: int
+    type: number
     sql: ${TABLE}.transactionnumber
   
     
@@ -328,4 +328,3 @@
     hidden: true
     type: count
     drill_fields: [id, reinsurancename, reinsuranceitemname, productname, policyproductname]
-

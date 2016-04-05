@@ -9,13 +9,13 @@
   - dimension_group: accountingdt
     label: "Accounting"
     type: time
-    timeframes: [time, date, week, month]
+    timeframes: [date, week, month]
     sql: ${TABLE}.accountingdt
 
   - dimension_group: adddt
     label: "Add"
     type: time
-    timeframes: [time, date, week, month]
+    timeframes: [date, week, month]
     sql: ${TABLE}.adddt
 
   - dimension: annualstatementlinecd
@@ -25,7 +25,7 @@
   - dimension_group: bookdt
     label: "Book"
     type: time
-    timeframes: [time, date, week, month]
+    timeframes: [date, week, month]
     sql: ${TABLE}.bookdt
 
   - dimension: carriercd
@@ -42,30 +42,30 @@
 
   - dimension: customerref
     label: "Customer Ref"
-    type: int
+    type: number
     sql: ${TABLE}.customerref
 
   - dimension: earndays
     label: "Earn Days"
-    type: int
+    type: number
     sql: ${TABLE}.earndays
 
   - dimension_group: effectivedt
     label: "Effective"
     type: time
-    timeframes: [time, date, week, month]
+    timeframes: [date, week, month]
     sql: ${TABLE}.effectivedt
 
   - dimension_group: enddt
     hidden: true
     type: time
-    timeframes: [time, date, week, month]
+    timeframes: [date, week, month]
     sql: ${TABLE}.enddt
 
   - dimension_group: expirationdt
     label: "Expiration"
     type: time
-    timeframes: [time, date, week, month]
+    timeframes: [date, week, month]
     sql: ${TABLE}.expirationdt
 
   - dimension: inforcechangeamt
@@ -99,7 +99,7 @@
 
   - dimension: policyref
     hidden: true
-    type: int
+    type: number
     sql: ${TABLE}.policyref
 
   - dimension: policystatuscd
@@ -146,7 +146,7 @@
   - dimension_group: startdt
     hidden: true
     type: time
-    timeframes: [time, date, week, month]
+    timeframes: [date, week, month]
     sql: ${TABLE}.startdt
 
   - dimension: statecd
@@ -155,12 +155,12 @@
 
   - dimension: statsequence
     hidden: true
-    type: int
+    type: number
     sql: ${TABLE}.statsequence
 
   - dimension: statsequencereplace
     hidden: true
-    type: int
+    type: number
     sql: ${TABLE}.statsequencereplace
 
   - dimension: statuscd
@@ -169,12 +169,12 @@
 
   - dimension: systemid
     hidden: true
-    type: int
+    type: number
     sql: ${TABLE}.systemid
 
   - dimension: termdays
     label: "# of Days in Term"
-    type: int
+    type: number
     sql: ${TABLE}.termdays
 
   - dimension: transactioncd
@@ -184,12 +184,12 @@
   - dimension_group: transactioneffectivedt
     label: "Transaction Effective"
     type: time
-    timeframes: [time, date, week, month]
+    timeframes: [date, week, month]
     sql: ${TABLE}.transactioneffectivedt
 
   - dimension: transactionnumber
     label: "Transaction #"
-    type: int
+    type: number
     sql: ${TABLE}.transactionnumber
 
   - dimension: writtencommissionamt
@@ -222,4 +222,3 @@
     hidden: true
     type: count
     drill_fields: [id, reinsurancename, reinsuranceitemname, productname]
-

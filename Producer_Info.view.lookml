@@ -11,7 +11,7 @@
         bestpostalcode as postalcode,
         beststateprovcd as state
       From masked_data.allcontacts
-      Where  sourcetypecd  = 'Producer' and cmmcontainer = 'Provider'
+      Where  sourcetypecd  = 'Producer'
 
   fields:
   - dimension: producercd

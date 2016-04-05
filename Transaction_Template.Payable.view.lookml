@@ -22,7 +22,7 @@
   - dimension_group: adddt
     label: "Add"
     type: time
-    timeframes: [time, date, week, month]
+    timeframes: [date, week, month]
     sql: ${TABLE}.adddt
 
   - dimension: allocationamt
@@ -33,12 +33,12 @@
   - dimension_group: bookdt
     label: "Book"
     type: time
-    timeframes: [time, date, week, month]
+    timeframes: [date, week, month]
     sql: ${TABLE}.bookdt
 
   - dimension: claimantnumber
     label: "Claimant #"
-    type: int
+    type: number
     sql: ${TABLE}.claimantnumber
 
   - dimension: claimanttransactionidref
@@ -69,7 +69,7 @@
   - dimension_group: itemdt
     label: "Check"
     type: time
-    timeframes: [time, date, week, month]
+    timeframes: [date, week, month]
     sql: ${TABLE}.itemdt
 
   - dimension: itemnumber
@@ -79,7 +79,7 @@
   - dimension_group: lossdt
     label: "Loss"
     type: time
-    timeframes: [time, date, week, month]
+    timeframes: [date, week, month]
     sql: ${TABLE}.lossdt
 
   - dimension: paymentaccountcd
@@ -92,7 +92,7 @@
 
   - dimension: paymentsystemid
     label: "Payment System ID"
-    type: int
+    type: number
     sql: ${TABLE}.paymentsystemid
 
   - dimension: paytoname
@@ -105,7 +105,7 @@
 
   - dimension: policyproviderref
     label: "Policy Provider Ref"
-    type: int
+    type: number
     sql: ${TABLE}.policyproviderref
 
   - dimension: printertemplateidref
@@ -118,30 +118,30 @@
 
   - dimension: providerref
     label: "Provider Ref"
-    type: int
+    type: number
     sql: ${TABLE}.providerref
 
   - dimension_group: requestdt
     label: "Request"
     type: time
-    timeframes: [time, date, week, month]
+    timeframes: [date, week, month]
     sql: ${TABLE}.requestdt
 
   - dimension: sequencenumber
     label: "Sequence #"
-    type: int
+    type: number
     sql: ${TABLE}.sequencenumber
 
   - dimension_group: serviceperiodenddt
     hidden: true
     type: time
-    timeframes: [time, date, week, month]
+    timeframes: [date, week, month]
     sql: ${TABLE}.serviceperiodenddt
 
   - dimension_group: serviceperiodstartdt
     hidden: true
     type: time
-    timeframes: [time, date, week, month]
+    timeframes: [date, week, month]
     sql: ${TABLE}.serviceperiodstartdt
 
   - dimension: sourcecd
@@ -158,12 +158,12 @@
 
   - dimension: statsequence
     hidden: true
-    type: int
+    type: number
     sql: ${TABLE}.statsequence
 
   - dimension: statsequencereplace
     hidden: true
-    type: int
+    type: number
     sql: ${TABLE}.statsequencereplace
 
   - dimension: statuscd
@@ -173,7 +173,7 @@
   - dimension: systemid
     hidden: true
     label: "Primary key"
-    type: int
+    type: number
     sql: ${TABLE}.systemid
 
   - dimension: transactionamt
@@ -184,12 +184,12 @@
   - dimension_group: transactiondt
     label: "Transaction"
     type: time
-    timeframes: [time, date, week, month]
+    timeframes: [date, week, month]
     sql: ${TABLE}.transactiondt
 
   - dimension: transactionnumber
     label: "Transaction #"
-    type: int
+    type: number
     sql: ${TABLE}.transactionnumber
 
   - dimension: transactiontm
@@ -212,6 +212,3 @@
     hidden: true
     type: count
     drill_fields: [id, paytoname]
-
-
-

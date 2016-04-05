@@ -15,12 +15,12 @@
     
 # - dimension: date.report_year
 #    label: "Report Period Year"
-#    type: int
+#    type: number
 #    sql: ${TABLE}.reportperiod_year
     
 #  - dimension: date.report_month
 #    label: "Report Period Month"
-#    type: int
+#    type: number
 #    sql: ${TABLE}.reportperiod_month  
     
   - dimension_group: date.accountingdt
@@ -32,5 +32,3 @@
   - dimension: report.record_type
     label: "Report Type"
     sql: ${TABLE}.record_type
-
-

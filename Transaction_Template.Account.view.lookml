@@ -10,7 +10,7 @@
   - dimension_group: accountingdt
     label: "Accounting"
     type: time
-    timeframes: [time, date, week, month]
+    timeframes: [date, week, month]
     sql: ${TABLE}.accountingdt
 
   - dimension: accountnumber
@@ -36,7 +36,7 @@
   - dimension_group: adddt
     label: "Add"
     type: time
-    timeframes: [time, date, week, month]
+    timeframes: [date, week, month]
     sql: ${TABLE}.adddt
 
   - dimension: adjustmentamt
@@ -68,7 +68,7 @@
   - dimension_group: bookdt
     label: "Book"
     type: time
-    timeframes: [time, date, week, month]
+    timeframes: [date, week, month]
     sql: ${TABLE}.bookdt
 
   - dimension: carriercd
@@ -96,7 +96,7 @@
   - dimension_group: checkdt
     label: "Check"
     type: time
-    timeframes: [time, date, week, month]
+    timeframes: [date, week, month]
     sql: ${TABLE}.checkdt
 
   - dimension: checknumber
@@ -154,7 +154,7 @@
 
   - dimension: customerref
     label: "Customer Ref"
-    type: int
+    type: number
     sql: ${TABLE}.customerref
 
   - dimension: depositorylocationcd
@@ -164,19 +164,19 @@
   - dimension_group: effectivedt
     label: "Effective"
     type: time
-    timeframes: [time, date, week, month]
+    timeframes: [date, week, month]
     sql: ${TABLE}.effectivedt
 
   - dimension_group: enddt
     hidden: true
     type: time
-    timeframes: [time, date, week, month]
+    timeframes: [date, week, month]
     sql: ${TABLE}.enddt
 
   - dimension_group: entrydt
     label: "Entry"
     type: time
-    timeframes: [time, date, week, month]
+    timeframes: [date, week, month]
     sql: ${TABLE}.entrydt
 
   - dimension: grossnetind
@@ -210,7 +210,7 @@
   - dimension_group: nextduedt
     label: "Next Due"
     type: time
-    timeframes: [time, date, week, month]
+    timeframes: [date, week, month]
     sql: ${TABLE}.nextduedt
 
   - dimension: paidamt
@@ -250,7 +250,7 @@
   - dimension_group: policytransactioneffectivedt
     label: "Policy Transaction Effective"
     type: time
-    timeframes: [time, date, week, month]
+    timeframes: [date, week, month]
     sql: ${TABLE}.policytransactioneffectivedt
 
   - dimension: policytransactionnumber
@@ -272,7 +272,7 @@
   - dimension_group: settlementdt
     label: "Settlement"
     type: time
-    timeframes: [time, date, week, month]
+    timeframes: [date, week, month]
     sql: ${TABLE}.settlementdt
 
   - dimension: sourcecd
@@ -282,7 +282,7 @@
   - dimension_group: startdt
     hidden: true
     type: time
-    timeframes: [time, date, week, month]
+    timeframes: [date, week, month]
     sql: ${TABLE}.startdt
 
   - dimension: statecd
@@ -295,7 +295,7 @@
 
   - dimension: statementaccountref
     hidden: true
-    type: int
+    type: number
     sql: ${TABLE}.statementaccountref
 
   - dimension: statementtypecd
@@ -304,12 +304,12 @@
 
   - dimension: statsequence
     hidden: true
-    type: int
+    type: number
     sql: ${TABLE}.statsequence
 
   - dimension: statsequencereplace
     hidden: true
-    type: int
+    type: number
     sql: ${TABLE}.statsequencereplace
 
   - dimension: statuscd
@@ -321,7 +321,7 @@
 
   - dimension: systemid
     hidden: true
-    type: int
+    type: number
     sql: ${TABLE}.systemid
 
   - dimension: transactiondesc
@@ -437,4 +437,3 @@
     hidden: true
     type: count
     drill_fields: [id, insuredname, paidbyname, conversionfilename]
-
