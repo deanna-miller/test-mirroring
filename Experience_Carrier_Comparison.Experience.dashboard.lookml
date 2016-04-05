@@ -28,7 +28,7 @@
     measures: [experience.incurred_loss_ratio_ytd, claim.incurred_loss_ytd, policy.earned_premium_ytd,
       policy.written_premium_ytd]
     filters:
-      date.report_period_month: 8 months ago
+      date.report_period_month: this month
     sorts: [policy.earned_premium_ytd desc 1, organization.carriercd]
     limit: 500
     column_limit: 50
@@ -44,7 +44,7 @@
     measures: [experience.incurred_loss_ratio_ytd, claim.incurred_loss_ytd, policy.earned_premium_ytd,
       policy.written_premium_ytd]
     filters:
-      date.report_period_month: 8 months ago
+      date.report_period_month: this month
     sorts: [policy.earned_premium_ytd desc 1, organization.carriercd]
     limit: 500
     column_limit: 50
