@@ -10,7 +10,7 @@
         bestpostalcode as postalcode,
         beststateprovcd as state
       From masked_data.allcontacts
-      Where  sourcetypecd  IN ('Examiner','Outside Adjuster') and contacttypecd = 'Provider'
+      Where  sourcetypecd  IN ('Examiner','Outside Adjuster', 'Adjuster','Apraiser') and contacttypecd = 'Provider'
 
   fields:
   - dimension: adjustercd

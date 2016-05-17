@@ -83,11 +83,11 @@
       
   - dimension: query_fields
     html: |
-      <div>{{recommended_explores.query_fields._value}}</div>
+      <div>{{ value | replace: '&lt;', '<' | replace: '&gt;', '>' }}</div>
       
   - dimension: query_filters
     html: |
-      <div>{{recommended_explores.query_filters._value}}</div>
+      <div>{{ value | replace: '&lt;', '<' | replace: '&gt;', '>' }}</div>
   
   - filter: user_filter
     hidden: true
