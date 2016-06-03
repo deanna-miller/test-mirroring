@@ -19,7 +19,7 @@
     type: date_filter 
     explore: experience
     field: date.report_period_month
-    default_value: '2015-08'
+    default_value: 'this month'
     
     
   - name: lob

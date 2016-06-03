@@ -10,7 +10,7 @@
   - dimension_group: adddt
     label: "Add"
     type: time
-    timeframes: [time, date, week, month]
+    timeframes: [date, week, month]
     sql: ${TABLE}.adddt
 
   - dimension: adjusterprovidercd
@@ -19,7 +19,7 @@
 
   - dimension: adjusterproviderref  
     hidden: true
-    type: int
+    type: number
     sql: ${TABLE}.adjusterproviderref
 
   - dimension: aggregatelimit
@@ -37,7 +37,7 @@
   - dimension_group: bookdt
     label: "Book"
     type: time
-    timeframes: [time, date, week, month]
+    timeframes: [date, week, month]
     sql: ${TABLE}.bookdt
 
   - dimension: branchcd
@@ -68,7 +68,7 @@
   - dimension_group: checkdt
     label: "Check"
     type: time
-    timeframes: [time, date, week, month]
+    timeframes: [date, week, month]
     sql: ${TABLE}.checkdt
 
   - dimension: checknumber
@@ -101,7 +101,7 @@
 
   - dimension: claimanttransactionnumber
     hidden: true
-    type: int
+    type: number
     sql: ${TABLE}.claimanttransactionnumber
 
   - dimension: claimlimit
@@ -114,7 +114,7 @@
 
   - dimension: claimref
     hidden: true
-    type: int
+    type: number
     sql: ${TABLE}.claimref
 
   - dimension: claimstatuscd
@@ -160,7 +160,7 @@
 
   - dimension: customerref
     label: "Customer Ref"
-    type: int
+    type: number
     sql: ${TABLE}.customerref
 
   - dimension: deductible
@@ -174,13 +174,13 @@
   - dimension_group: effectivedt
     label: "Effective"
     type: time
-    timeframes: [time, date, week, month]
+    timeframes: [date, week, month]
     sql: ${TABLE}.effectivedt
 
   - dimension_group: enddt
     hidden: true
     type: time
-    timeframes: [time, date, week, month]
+    timeframes: [date, week, month]
     sql: ${TABLE}.enddt
 
   - dimension: examinerprovidercd
@@ -189,7 +189,7 @@
 
   - dimension: examinerproviderref
     hidden: true
-    type: int
+    type: number
     sql: ${TABLE}.examinerproviderref
 
   - dimension: expectedrecoverychangeamt
@@ -200,7 +200,7 @@
   - dimension_group: expirationdt
     label: "Expiration"
     type: time
-    timeframes: [time, date, week, month]
+    timeframes: [date, week, month]
     sql: ${TABLE}.expirationdt
 
   - dimension: featurecd
@@ -229,7 +229,7 @@
 
   - dimension: itemnumber
     label: "Item Number"
-    type: int
+    type: number
     sql: ${TABLE}.itemnumber
 
   - dimension: limitdescription
@@ -247,7 +247,7 @@
   - dimension_group: lossdt
     label: "loss"
     type: time
-    timeframes: [time, date, week, month]
+    timeframes: [date, week, month]
     sql: ${TABLE}.lossdt
 
   - dimension: lossyear
@@ -297,7 +297,7 @@
 
   - dimension: policyref
     hidden: true
-    type: int
+    type: number
     sql: ${TABLE}.policyref
 
   - dimension: policytypecd
@@ -323,7 +323,7 @@
 
   - dimension: producerproviderref
     hidden: true
-    type: int
+    type: number
     sql: ${TABLE}.producerproviderref
 
   - dimension: productname
@@ -361,7 +361,7 @@
   - dimension_group: reportdt
     label: "Report"
     type: time
-    timeframes: [time, date, week, month]
+    timeframes: [date, week, month]
     sql: ${TABLE}.reportdt
 
   - dimension: reservecd
@@ -396,19 +396,19 @@
   - dimension_group: serviceperiodenddt
     hidden: true
     type: time
-    timeframes: [time, date, week, month]
+    timeframes: [date, week, month]
     sql: ${TABLE}.serviceperiodenddt
 
   - dimension_group: serviceperiodstartdt
     hidden: true
     type: time
-    timeframes: [time, date, week, month]
+    timeframes: [date, week, month]
     sql: ${TABLE}.serviceperiodstartdt
 
   - dimension_group: startdt
     hidden: true
     type: time
-    timeframes: [time, date, week, month]
+    timeframes: [date, week, month]
     sql: ${TABLE}.startdt
 
   - dimension: statdata
@@ -422,12 +422,12 @@
 
   - dimension: statsequence
     hidden: true
-    type: int
+    type: number
     sql: ${TABLE}.statsequence
 
   - dimension: statsequencereplace
     hidden: true
-    type: int
+    type: number
     sql: ${TABLE}.statsequencereplace
 
   - dimension: statuscd
@@ -453,7 +453,7 @@
   - dimension: systemid
     hidden: true
     label: "Primary Key"
-    type: int
+    type: number
     sql: ${TABLE}.systemid
 
   - dimension: transactioncd
@@ -462,7 +462,7 @@
 
   - dimension: transactionnumber
     label: "Transaction #"
-    type: int
+    type: number
     sql: ${TABLE}.transactionnumber
 
  # ----------Measures ----------------------
@@ -588,4 +588,3 @@
     - productname
     - policyproductname
     - conversionfilename
-
