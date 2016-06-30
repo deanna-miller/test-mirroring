@@ -214,7 +214,7 @@
     
   - dimension: claim.aggregatelimit
     label: "Aggregate Limit"
-    sql: ${TABLE}.
+    sql: ${TABLE}.aggregatelimit
     
   - dimension: claim.aggregatelimitdescription
     label: "Aggregate Limit Description"
