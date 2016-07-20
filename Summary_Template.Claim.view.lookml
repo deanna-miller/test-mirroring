@@ -214,7 +214,7 @@
     
   - dimension: claim.aggregatelimit
     label: "Aggregate Limit"
-    sql: ${TABLE}.
+    sql: ${TABLE}.aggregatelimit
     
   - dimension: claim.aggregatelimitdescription
     label: "Aggregate Limit Description"
@@ -281,14 +281,14 @@
     type: sum
     sql: ${mtdpostedrecoveryamt}
     filters:
-      claim.reservecd: salvage
+      claim.reservecd: "Salvage"
       
   - measure: claim.posted_subrogation_mtd
     label: "Subrogation Posted MTD"
     type: sum
     sql: ${mtdpostedrecoveryamt}
     filters:
-      claim.reservecd: subrogation
+      claim.reservecd: "Subrogation"
     
   - measure: claim.posted_recovery_ytd
     label: "Recovery Posted YTD"
@@ -300,14 +300,14 @@
     type: sum
     sql: ${ytdpostedrecoveryamt}
     filters:
-      claim.reservecd: salvage
+      claim.reservecd: "Salvage"
       
   - measure: claim.posted_subrogation_ytd
     label: "Subrogation Posted YTD"
     type: sum
     sql: ${ytdpostedrecoveryamt}
     filters:
-      claim.reservecd: subrogation 
+      claim.reservecd: "Subrogation" 
     
   - measure: claim.posted_recovery_itd
     label: "Recovery Posted ITD"
@@ -319,14 +319,14 @@
     type: sum
     sql: ${itdpostedrecoveryamt}
     filters:
-      claim.reservecd: salvage
+      claim.reservecd: "Salvage"
       
   - measure: claim.posted_subrogation_itd
     label: "Subrogation Posted ITD"
     type: sum
     sql: ${itdpostedrecoveryamt}
     filters:
-      claim.reservecd: subrogation
+      claim.reservecd: "Subrogation"
      
   - measure: claim.incurred_loss_mtd
     label: "Incurred Loss MTD"
