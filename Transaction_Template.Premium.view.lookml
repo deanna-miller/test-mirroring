@@ -307,26 +307,31 @@
     
   - measure: writtencommission
     label: "Written Commission"
+    value_format: "#,##0.00"
     type: sum
     sql: ${writtencommissionamt} 
 
   - measure: writtencommissionfee
     label: "Written Commission Fee"
+    value_format: "#,##0.00"
     type: sum
     sql: ${writtencommissionfeeamt}
 
   - measure: writtenpremium
     label: "Written Premium"
+    value_format: "#,##0.00"
     type: sum
     sql: ${writtenpremiumamt} 
 
   - measure: writtenpremiumfee
     label: "Written Premium Fee"
+    value_format: "#,##0.00"
     type: sum
     sql: ${writtenpremiumfeeamt}
     
   - measure: writtenpremiumtotal
     label: "Written Premium + Fee"
+    value_format: "#,##0.00"
     type: sum
     sql: ${writtenpremiumfeeamt} + ${writtenpremiumamt} 
   
