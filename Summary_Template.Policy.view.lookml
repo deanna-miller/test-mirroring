@@ -213,95 +213,114 @@
  
   - measure: policy.inforce_amt
     label: "Inforce Premium"
+    value_format: "#,##0.00"
     type: sum
     sql: ${inforceamt}
     
   - measure: policy.unearned_amt
     label: "Unearned Premium"
+    value_format: "#,##0.00"
     type: sum
     sql: ${unearnedamt}
     
   - measure: policy.last_inforce_amt
     label: "Last Inforce Premium"
+    value_format: "#,##0.00"
     type: sum
     sql: ${lastinforceamt}
  
   - measure: policy.earned_premium_mtd
     label: "Earned Premium MTD"
+    value_format: "#,##0.00"
     type: sum
     sql: ${mtdearnedpremiumamt}
     
   - measure: policy.written_commission_mtd
     label: "Written Commission MTD"
+    value_format: "#,##0.00"
     type: sum
     sql: ${mtdwrittencommissionamt}
 
   - measure: policy.written_commission_fee_mtd
     label: "Written Commission Fee MTD"
+    value_format: "#,##0.00"
     type: sum
     sql: ${mtdwrittencommissionfeeamt}
 
   - measure: policy.written_premium_mtd
     label: "Written Premium MTD"
+    value_format: "#,##0.00"
     type: sum
     sql: ${mtdwrittenpremiumamt}
 
   - measure: policy.written_premium_fee_mtd
     label: "Written Premium Fee MTD"
+    value_format: "#,##0.00"
     type: sum
     sql: ${mtdwrittenpremiumfeeamt}
     
   - measure: policy.month_unearned_amt
     label: "Month Unearned Premium"
+    value_format: "#,##0.00"
     type: sum
     sql: ${monthunearnedamt} 
 
   - measure: policy.earned_premium_ytd
     label: "Earned Premium YTD"
+    value_format: "#,##0.00"
     type: sum
     sql: ${ytdearnedpremiumamt}
 
   - measure: policy.written_commission_ytd
     label: "Written Commission YTD"
+    value_format: "#,##0.00"
     type: sum
     sql: ${ytdwrittencommissionamt}
 
   - measure: policy.written_commission_fee_ytd
     label: "Written Commission Fee YTD"
+    value_format: "#,##0.00"
     type: sum
     sql: ${ytdwrittencommissionfeeamt}
 
   - measure: policy.written_premium_ytd
     label: "Written Premium YTD"
+    value_format: "#,##0.00"
     type: sum
     sql: ${ytdwrittenpremiumamt}
 
   - measure: policy.written_premium_fee_ytd
     label: "Written Premium Fee YTD"
+    value_format: "#,##0.00"
     type: sum
     sql: ${ytdwrittenpremiumfeeamt}
 
   - measure: policy.earned_premium_ttd
     label: "Earned Premium TTD"
+    value_format: "#,##0.00"
     type: sum
     sql: ${ttdearnedpremiumamt}
 
   - measure: policy.written_commission_ttd
     label: "Written Commission TTD"
+    value_format: "#,##0.00"
     type: sum
     sql: ${ttdwrittencommissionamt}
 
   - measure: policy.written_commission_fee_ttd
     label: "Written Commission Fee TTD"
+    value_format: "#,##0.00"
     type: sum
     sql: ${ttdwrittencommissionfeeamt}
 
   - measure: policy.written_premium_ttd
     label: "Written Premium TTD"
+    value_format: "#,##0.00"
     type: sum
     sql: ${ttdwrittenpremiumamt}
 
   - measure: policy.written_premium_fee_ttd
     label: "Written Premium Fee TTD"
+    value_format: "#,##0.00"
     type: sum
     sql: ${ttdwrittenpremiumfeeamt}

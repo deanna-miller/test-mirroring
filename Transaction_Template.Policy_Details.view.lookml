@@ -702,11 +702,13 @@
  
   - measure: inforcechange
     label: "In force Change"
+    value_format: "#,##0.00"
     type: sum
     sql: ${inforcechangeamt}
     
   - measure: inforcepremchange
     label: "In Force Premium Change"
+    value_format: "#,##0.00"
     type: sum
     sql: ${inforcechangeamt} 
     filters: 
@@ -714,34 +716,39 @@
     
   - measure: inforcechangefee
     label: "In Force Fee Change"
+    value_format: "#,##0.00"
     type: sum
     sql: ${inforcechangeamt} 
     filters: 
      feecd:  "-Null"
 
-
   - measure: writtencommission
     label: "Written Commision"
+    value_format: "#,##0.00"
     type: sum
     sql: ${writtencommissionamt}
 
   - measure: writtencommissionfee
     label: "Written Commision Fee"
+    value_format: "#,##0.00"
     type: sum
     sql: ${writtencommissionfeeamt}
 
   - measure: writtenpremium
     label: "Written Premium"
+    value_format: "#,##0.00"
     type: sum
     sql: ${writtenpremiumamt}
 
   - measure: writtenpremiumfee
     label: "Written Premium Fee"
+    value_format: "#,##0.00"
     type: sum
     sql: ${writtenpremiumfeeamt}
     
   - measure: writtentotal
     label: "Written Premium & Fees"
+    value_format: "#,##0.00"
     type: number
     sql: (${writtenpremium} + ${writtenpremiumfee})    
 

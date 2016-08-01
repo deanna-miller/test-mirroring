@@ -338,21 +338,25 @@
     
   - measure: balanceamount
     label: "Balance Amount"
+    value_format: "#,##0.00"
     type: sum
     sql: ${balanceamt}
     
   - measure: adjustmentamount
     label: "Adjustment Amount"
+    value_format: "#,##0.00"
     type: sum
     sql: ${adjustmentamt} 
     
   - measure: paidreceipts
     label:  "Paid Recepts"
+    value_format: "#,##0.00"
     type: sum
     sql: ${paidamt}
     
   - measure: paidpremium
     label: "Paid Premium"
+    value_format: "#,##0.00"
     type: sum
     sql: ${paidamt}
     filters:
@@ -360,6 +364,7 @@
       
   - measure: paidinstallfee
     label: "Paid Install Fee"
+    value_format: "#,##0.00"
     type: sum
     sql: ${paidamt}
     filters:
@@ -367,6 +372,7 @@
    
   - measure: paidtax
     label: "Paid Tax"
+    value_format: "#,##0.00"
     type: sum
     sql: ${paidamt}
     filters:
@@ -374,6 +380,7 @@
       
   - measure: paidundfee
     label: "Paid Underwritting Fees"
+    value_format: "#,##0.00"
     type: sum
     sql: ${paidamt}
     filters:
@@ -381,6 +388,7 @@
           
   - measure: paidbillingfee
     label: "Paid Billing Fees"
+    value_format: "#,##0.00"
     type: sum
     sql: ${paidamt}
     filters:
@@ -388,16 +396,19 @@
       
   - measure: payoffamount
     label: "Pay Off Amount"
+    value_format: "#,##0.00"
     type: sum
     sql: ${payoffamt}  
       
   - measure: chargeamttotal
     label: "Charge Amount"
+    value_format: "#,##0.00"
     type: sum
     sql: ${chargeamt}
     
   - measure: chargeamtpremium
     label: "Premium Charge"
+    value_format: "#,##0.00"
     type: sum
     sql: ${chargeamt}
     filters:
@@ -405,6 +416,7 @@
       
   - measure: chargeamtinstall
     label: "Installment Fee Charge"
+    value_format: "#,##0.00"
     type: sum
     sql: ${chargeamt}    
     filters:
@@ -412,6 +424,7 @@
       
   - measure: chargeamttax
     label: "Tax Charge"
+    value_format: "#,##0.00"
     type: sum
     sql: ${chargeamt} 
     filters:
@@ -419,6 +432,7 @@
       
   - measure: chargeamttotalundfee
     label: "Underwriting Fee Charge"
+    value_format: "#,##0.00"
     type: sum
     sql: ${chargeamt} 
     filters:
@@ -426,13 +440,12 @@
       
   - measure: chargeamtbillfee
     label: "Billing Fee Charge"
+    value_format: "#,##0.00"
     type: sum
     sql: ${chargeamt}
     filters:
         categorycd: "LateFee, NSFFee, ReinstatementFee"  
         
-      
-
   - measure: count
     hidden: true
     type: count

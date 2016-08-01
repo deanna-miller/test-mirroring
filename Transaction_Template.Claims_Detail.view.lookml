@@ -467,15 +467,15 @@
 
  # ----------Measures ----------------------
 
-    
   - measure: paidloss
     label: "Paid Loss"
+    value_format: "#,##0.00"
     type: sum
     sql: ${paidamt}
     
-      
   - measure: indemnitypaid
     label: "Indemnity Paid"
+    value_format: "#,##0.00"
     type: sum
     sql: ${paidamt}
     filters:
@@ -483,6 +483,7 @@
       
   - measure: adjustmentpaid
     label: "Adjustment Paid"
+    value_format: "#,##0.00"
     type: sum
     sql: ${paidamt}
     filters:
@@ -490,6 +491,7 @@
       
   - measure: defensepaid
     label: "Defense Paid"
+    value_format: "#,##0.00"
     type: sum
     sql: ${paidamt}
     filters:
@@ -497,6 +499,7 @@
       
   - measure: lossexpensepaid
     label: "Loss Expense Paid"
+    value_format: "#,##0.00"
     type: sum
     sql: ${paidamt}
     filters:
@@ -504,11 +507,13 @@
     
   - measure: reservechange
     label: "Reserve Change"
+    value_format: "#,##0.00"
     type: sum
     sql: ${reservechangeamt}
     
   - measure: indemnityreservechange
     label: "Indemnity Reserve Change"
+    value_format: "#,##0.00"
     type: sum
     sql: ${reservechange}
     filters:
@@ -516,6 +521,7 @@
       
   - measure: adjustmentreservechange
     label: "Adjustment Reserve Change"
+    value_format: "#,##0.00"
     type: sum
     sql: ${reservechange}
     filters:
@@ -523,6 +529,7 @@
       
   - measure: defensereservechange
     label: "Defense Reserve Change"
+    value_format: "#,##0.00"
     type: sum
     sql: ${reservechange}
     filters:
@@ -530,6 +537,7 @@
       
   - measure: lossexpensereservechange
     label: "Loss Expense Reserve Change"
+    value_format: "#,##0.00"
     type: sum
     sql: ${reservechange}
     filters:
@@ -537,11 +545,13 @@
     
   - measure: postedreecoveryamt
     label: "Posted Recovery"
+    value_format: "#,##0.00"
     type: sum
     sql: ${postedrecoveryamt}
     
   - measure: postedsalvage
     label: "Posted Salvage"
+    value_format: "#,##0.00"
     type: sum
     sql: ${postedrecoveryamt}
     filters:
@@ -549,6 +559,7 @@
     
   - measure: postedsubrogation
     label: "Posted Subrogation "
+    value_format: "#,##0.00"
     type: sum
     sql: ${postedrecoveryamt}  
     filters:
@@ -556,11 +567,13 @@
       
   - measure: expectedrecoverychange
     label: "Expected Recovery Change"
+    value_format: "#,##0.00"
     type: sum
     sql: ${expectedrecoverychangeamt}   
     
   - measure: expectedsalvagechange
     label: "Expected Salvage Change"
+    value_format: "#,##0.00"
     type: sum
     sql: ${expectedrecoverychange}
     filters:
@@ -568,6 +581,7 @@
     
   - measure: expectedsubrogationchange
     label: "Expected Subrogation Change"
+    value_format: "#,##0.00"
     type: sum
     sql: ${expectedrecoverychange}  
     filters:
