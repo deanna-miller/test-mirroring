@@ -246,12 +246,14 @@
     
   - measure: paidloss
     label: "Paid Loss"
+    value_format: "#,##0.00"
     type: sum
     sql: ${paidamt}
     
       
   - measure: indemnitypaid
     label: "Indemnity Paid"
+    value_format: "#,##0.00"
     type: sum
     sql: ${paidamt}
     filters:
@@ -259,6 +261,7 @@
       
   - measure: adjustmentpaid
     label: "Adjustment Paid"
+    value_format: "#,##0.00"
     type: sum
     sql: ${paidamt}
     filters:
@@ -266,6 +269,7 @@
       
   - measure: defensepaid
     label: "Defense Paid"
+    value_format: "#,##0.00"
     type: sum
     sql: ${paidamt}
     filters:
@@ -273,6 +277,7 @@
       
   - measure: lossexpensepaid
     label: "Loss Expense Paid"
+    value_format: "#,##0.00"
     type: sum
     sql: ${paidamt}
     filters:
@@ -280,11 +285,13 @@
     
   - measure: reservechange
     label: "Reserve Change"
+    value_format: "#,##0.00"
     type: sum
     sql: ${reservechangeamt}
     
   - measure: indemnityreservechange
     label: "Indemnity Reserve Change"
+    value_format: "#,##0.00"
     type: sum
     sql: ${reservechange}
     filters:
@@ -292,6 +299,7 @@
       
   - measure: adjustmentreservechange
     label: "Adjustment Reserve Change"
+    value_format: "#,##0.00"
     type: sum
     sql: ${reservechange}
     filters:
@@ -299,6 +307,7 @@
       
   - measure: defensereservechange
     label: "Defense Reserve Change"
+    value_format: "#,##0.00"
     type: sum
     sql: ${reservechange}
     filters:
@@ -306,6 +315,7 @@
       
   - measure: lossexpensereservechange
     label: "Loss Expense Reserve Change"
+    value_format: "#,##0.00"
     type: sum
     sql: ${reservechange}
     filters:
@@ -313,11 +323,13 @@
     
   - measure: postedreecoveryamt
     label: "Posted Reinsurance Recovery"
+    value_format: "#,##0.00"
     type: sum
     sql: ${postedrecoveryamt}
       
   - measure: expectedrecoverychange
     label: "Expected Reinsurance Recovery"
+    value_format: "#,##0.00"
     type: sum
     sql: ${expectedrecoverychangeamt}   
     

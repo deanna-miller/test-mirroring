@@ -46,7 +46,7 @@
     label: "Description"
   
   - dimension: query_id
-    type: int
+    type: number
     
   - dimension: query_model
   
@@ -58,7 +58,7 @@
   
   - dimension: derived_rank
     label: "Rank"
-    type: int
+    type: number
 
   - dimension: look_title_link
     label: "Title"
