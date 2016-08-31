@@ -35,7 +35,7 @@
 # Fields
   fields:
   - dimension: query_id
-    type: int
+    type: number
     
   - dimension: query_slug  
     
@@ -53,7 +53,7 @@
   
   - dimension: derived_rank
     label: "Rank"
-    type: int
+    type: number
 
   - dimension: query_link
     label: "Link"

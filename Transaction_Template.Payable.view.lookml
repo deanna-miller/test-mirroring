@@ -63,6 +63,7 @@
 
   - dimension: itemamt
     label: "Check Amount"
+    value_format: "#,##0.00"
     type: number
     sql: ${TABLE}.itemamt
 

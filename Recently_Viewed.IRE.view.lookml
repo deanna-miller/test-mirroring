@@ -33,7 +33,7 @@
   - dimension: query_view
   - dimension: query_id
   - dimension: field_count
-    type: int
+    type: number
   - dimension: query_slug
     label: "Query Link"
     html: |
