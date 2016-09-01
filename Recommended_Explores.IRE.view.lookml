@@ -4,7 +4,6 @@
       WITH 
       recent_queries as (
       SELECT 
-          history.source_schema,
           "user".email as user_id,
           query.id as query_id,
           query.model as query_model,
@@ -14,9 +13,9 @@
           query.slug as query_slug
       FROM 
           history AS history
-          LEFT JOIN look AS look ON history.LOOK_ID = look.ID and history.source_schema = look.source_schema
-          LEFT JOIN query AS query ON history.QUERY_ID = query.ID and history.source_schema = query.source_schema
-          LEFT JOIN "user" AS "user" ON history.USER_ID = ("user".ID) and ("user".source_schema) = history.source_schema
+          LEFT JOIN look AS look ON history.LOOK_ID = look.ID
+          LEFT JOIN query AS query ON history.QUERY_ID = query.ID
+          LEFT JOIN "user" AS "user" ON history.USER_ID = ("user".ID)
       WHERE 
           history.source = 'explore'
           and history.created_at > (sysdate - 30)
@@ -25,13 +24,13 @@
       limit 500
       ),
       user_queries AS (
-          SELECT distinct user_id, source_schema, query_id, JSON_EXTRACT_ARRAY_ELEMENT_TEXT(fields, seq.i) AS field, fields
+          SELECT distinct user_id, query_id, JSON_EXTRACT_ARRAY_ELEMENT_TEXT(fields, seq.i) AS field, fields
           FROM recent_queries, reference_data.number_sequence AS seq
           WHERE seq.i < JSON_ARRAY_LENGTH(fields) 
           and {% condition user_filter %} user_id {% endcondition %}
         ),
       other_queries AS (
-          SELECT distinct user_id, source_schema, query_id, query_model, query_view, query_slug, JSON_EXTRACT_ARRAY_ELEMENT_TEXT(fields, seq.i) AS field, fields, filters
+          SELECT distinct user_id, query_id, query_model, query_view, query_slug, JSON_EXTRACT_ARRAY_ELEMENT_TEXT(fields, seq.i) AS field, fields, filters
           FROM recent_queries, reference_data.number_sequence AS seq
           WHERE 
             seq.i < JSON_ARRAY_LENGTH(fields) 
@@ -39,7 +38,6 @@
             and query_id not in (select query_id from user_queries)
         )
       SELECT 
-        f1.source_schema, 
         f1.query_id, 
         f1.query_model, 
         f1.query_view, 
@@ -50,17 +48,16 @@
       from
           other_queries f1
           join user_queries f2 on (
-            f1.source_schema = f2.source_schema
-            and f1.user_id != f2.user_id
+            f1.user_id != f2.user_id
             and f1.field = f2.field 
             --and f1.query_id != f2.query_id
           )
-      group by 1,2,3,4,5,6,7
+      group by 1,2,3,4,5,6
       order by field_count desc
       limit 25
 
   fields:
-  - dimension: source_schema
+#   - dimension: source_schema
   
   - dimension: query_model
   

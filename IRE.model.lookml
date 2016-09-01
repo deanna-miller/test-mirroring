@@ -31,13 +31,13 @@
 - explore: top_looks
   always_filter:
     execution_date: 'last 30 days'
-    query_model: '"Experience","Policy","Claim"'
+    query_model: '"Experience","Policy","Claim","Transactions"'
     derived_rank: <=10
   hidden: true
   
 - explore: top_explores
   always_filter:
     execution_date: 'last 30 days'
-    query_model: '"Experience","Policy","Claim"'
+    query_model: '"Experience","Policy","Claim","Transactions"'
     derived_rank: <=10
   hidden: true

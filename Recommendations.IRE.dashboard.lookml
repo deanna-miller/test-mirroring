@@ -23,7 +23,7 @@
     dimensions: [top_looks.look_link, top_looks.query_model, top_looks.look_title, top_looks.look_description]
     filters:
       top_looks.derived_rank: <=10
-      top_looks.query_model: '"Experience","Policy","Claim"'
+      top_looks.query_model: '"Experience","Policy","Claim","Transactions"'
       top_looks.execution_date: 30 days
     sorts: [top_looks.query_model, top_looks.derived_rank]
     limit: 10
@@ -41,7 +41,7 @@
       top_explores.query_filters]
     filters:
       top_explores.derived_rank: <=10
-      top_explores.query_model: '"Experience","Policy","Claim"'
+      top_explores.query_model: '"Experience","Policy","Claim","Transactions"'
       top_explores.execution_date: 30 days
     sorts: [top_explores.query_model, top_explores.derived_rank]
     limit: 5

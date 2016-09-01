@@ -20,14 +20,12 @@
           row_number() over (partition by query.model order by ( (count(distinct history.id) * .35) + (count(distinct "user".email) * .65) )  desc) as derived_rank
       FROM 
           history AS history
-          LEFT JOIN look AS look ON history.LOOK_ID = look.ID and history.source_schema = look.source_schema
-          LEFT JOIN query AS query ON history.QUERY_ID = query.ID and history.source_schema = query.source_schema
-          LEFT JOIN "user" AS "user" ON history.USER_ID = ("user".ID) and ("user".source_schema) = history.source_schema
+          LEFT JOIN look AS look ON history.LOOK_ID = look.ID
+          LEFT JOIN query AS query ON history.QUERY_ID = query.ID
+          LEFT JOIN "user" AS "user" ON history.USER_ID = ("user".ID)
       WHERE 
           history.source = 'explore'         
-          and query.model in ('Experience','Policy','Claims')
           and look.id is null
-          and history.created_at > (sysdate - 30)
           and {% condition execution_date %} history.created_at {% endcondition %}
       GROUP BY 1,2,3,4,5,6
 
@@ -49,7 +47,7 @@
   
   - dimension: query_filters
     html: |
-       <div>{{ value | replace: '&lt;', '<' | replace: '&gt;', '>' }}</div>
+      <div>{{ value | replace: '&lt;', '<' | replace: '&gt;', '>' }}</div>
   
   - dimension: derived_rank
     label: "Rank"
