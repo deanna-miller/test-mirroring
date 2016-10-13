@@ -530,20 +530,6 @@
 
  # ----------Measures ----------------------
 
-  - measure: paidloss
-    label: "Paid Loss"
-    value_format: "#,##0.00"
-    type: sum
-    sql: ${paidamt}
-    
-  - measure: indemnitypaid
-    label: "Indemnity Paid"
-    value_format: "#,##0.00"
-    type: sum
-    sql: ${paidamt}
-    filters:
-      reservecd: "Indemnity"
-      
   - measure: adjustmentpaid
     label: "Adjustment Paid"
     value_format: "#,##0.00"
@@ -581,6 +567,7 @@
     sql: ${reservechangeamt}
     filters:
       reservecd: "Indemnity"
+  
       
   - measure: adjustmentreservechange
     label: "Adjustment Reserve Change"
@@ -627,6 +614,7 @@
     sql: ${postedrecoveryamt}  
     filters:
       reservecd: "Subrogation"  
+
       
   - measure: expectedrecoverychange
     label: "Expected Recovery Change"
@@ -656,7 +644,91 @@
     type: sum
     sql: ${lossdt_date} - ${adddt_date}
     
+
+  - measure: defensepaid
+    label: "Defense Paid"
+    value_format: "#,##0.00"
+    type: sum
+    sql: ${paidamt}
+    filters:
+      reservecd: "Defense"
+      
+  - measure: defensereservechange
+    label: "Defense Reserve Change"
+    value_format: "#,##0.00"
+    type: sum
+    sql: ${reservechange}
+    filters:
+      reservecd: "Defense" 
+      
+  - measure: indemnitypaid
+    label: "Indemnity Paid"
+    value_format: "#,##0.00"
+    type: sum
+    sql: ${paidamt}
+    filters:
+      reservecd: "Indemnity"
+      
+  - measure: indemnityreservechange
+    label: "Indemnity Reserve Change"
+    value_format: "#,##0.00"
+    type: sum
+    sql: ${reservechange}
+    filters:
+      reservecd: "Indemnity"
+      
+  - measure: lossexpensepaid
+    label: "Loss Expense Paid"
+    value_format: "#,##0.00"
+    type: sum
+    sql: ${paidamt}
+    filters:
+      reservecd: "Defense, Adjustment"
+      
+  - measure: lossexpensereservechange
+    label: "Loss Expense Reserve Change"
+    value_format: "#,##0.00"
+    type: sum
+    sql: ${reservechange}
+    filters:
+      reservecd: "Defense, Adjustment"
+  
+  - measure: paidloss
+    label: "Paid Loss"
+    value_format: "#,##0.00"
+    type: sum
+    sql: ${paidamt}
     
+  - measure: postedreecoveryamt
+    label: "Posted Recovery"
+    value_format: "#,##0.00"
+    type: sum
+    sql: ${postedrecoveryamt}
+    
+  - measure: postedsalvage
+    label: "Posted Salvage"
+    value_format: "#,##0.00"
+    type: sum
+    sql: ${postedrecoveryamt}
+    filters:
+      reservecd: "Salvage"    
+    
+  - measure: postedsubrogation
+    label: "Posted Subrogation "
+    value_format: "#,##0.00"
+    type: sum
+    sql: ${postedrecoveryamt}  
+    filters:
+      reservecd: "Subrogation"
+    
+  - measure: reservechange
+    label: "Reserve Change"
+    value_format: "#,##0.00"
+    type: sum
+    sql: ${reservechangeamt}
+    
+
+  
   - measure: count
     hidden: true
     type: count
