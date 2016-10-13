@@ -15,6 +15,6 @@
      label: "Coverage Item"
      sql: ${TABLE}.coverageitemcd
     
-   - dimension: rateareaname
+   - dimension: coverage.rateareaname
      label: "Rate Area Name"
      sql: ${TABLE}.rateareaname

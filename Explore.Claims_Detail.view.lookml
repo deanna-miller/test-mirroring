@@ -6,4 +6,4 @@
    - join: adjuster
      sql_on: ${claims_detail.adjusterprovidercd} = ${adjuster.adjustercd}  
      relationship: many_to_one
-
+  

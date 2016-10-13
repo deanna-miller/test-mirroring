@@ -30,7 +30,7 @@
     hidden: true
     sql: ${TABLE}.ytdpaidamt
     
-  - dimension: itdpaidamt
+  - dimension: claim.itdpaidamt
     type: number
     hidden: true
     sql: ${TABLE}.itdpaidamt
@@ -104,6 +104,14 @@
     type: number
     hidden: true
     sql: ${TABLE}.originalreserve
+    
+  - dimension: reportperiod
+    sql: ${TABLE}.reportperiod
+    hidden: true
+    
+  - dimension: reportpd
+    sql: ${TABLE}.reportpd
+    hidden: true  
     
     #########################################################################
     #Dimensions which are attributes/no measures, should all contain a label#
@@ -219,6 +227,14 @@
   - dimension: claim.aggregatelimitdescription
     label: "Aggregate Limit Description"
     sql: ${TABLE}.aggregatelimitdescription
+    
+  - dimension: claim.productname
+    label: "Product Name"
+    sql: ${TABLE}.productname
+    
+  - dimension: claim.insuredname
+    label: "Insured Name"
+    sql: ${TABLE}.insuredname
     
   
   ######################################
@@ -498,13 +514,13 @@
     value_format: "#,##0.00"
     label: "Paid ITD"
     type: sum
-    sql: ${itdpaidamt}
+    sql: ${claim.itdpaidamt}
     
   - measure: claim.indemnity_paiditd
     label: "Indemnity Paid ITD"
     value_format: "#,##0.00"
     type: sum
-    sql: ${itdpaidamt}
+    sql: ${claim.itdpaidamt}
     filters:
       claim.reservecd: "Indemnity"
       
@@ -512,7 +528,7 @@
     label: "Adjustment Paid ITD"
     value_format: "#,##0.00"
     type: sum
-    sql: ${itdpaidamt}
+    sql: ${claim.itdpaidamt}
     filters:
       claim.reservecd: "Adjustment"  
       
@@ -520,7 +536,7 @@
     label: "Defense Paid ITD"
     value_format: "#,##0.00"
     type: sum
-    sql: ${itdpaidamt}
+    sql: ${claim.itdpaidamt}
     filters:
       claim.reservecd: "Defense"      
     

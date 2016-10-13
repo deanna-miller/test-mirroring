@@ -4,6 +4,7 @@
       Select 
         sourcecd as adjustercd,
         commercialname as adjustername,
+        primaryphonenumber,
         bestaddr1 as address1,
         bestaddr2 as address2,
         bestcity as city,
@@ -32,6 +33,10 @@
   - dimension: postalcode
     label: "Postal Code"
     sql: ${TABLE}.postalcode 
+  
+  - dimension: primaryphonenumber
+    label: "Primary Phone Number"
+    sql: ${TABLE}.primaryphonenumber
       
   - dimension: state
     label: "State"

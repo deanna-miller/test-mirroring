@@ -1,4 +1,4 @@
-- view: transaction_template_account
+- view: transaction_template_account_detail
   sql_table_name: masked_data.accountstats
   fields:
 
@@ -133,6 +133,7 @@
     sql: ${TABLE}.commissiontypecd
 
   - dimension: companycd
+    hidden: true
     label: "Company Code"
     sql: ${TABLE}.companycd
 
@@ -348,6 +349,18 @@
     type: sum
     sql: ${adjustmentamt} 
     
+  - measure: arbalanceclosing
+    label: "AR Balance Closing"
+    value_format: "#,##0.00"
+    type: number
+    sql: ${account_detail.chargeamtbillfee} +${account_detail.chargeamtinstall} + ${account_detail.chargeamtpremium} + ${account_detail.chargeamttax} + ${account_detail.chargeamttotalundfee} - ${account_detail.paidbillingfee} - ${account_detail.paidinstallfee} - ${account_detail.paidpremium} - ${account_detail.paidtax} - ${account_detail.paidundfee} + ${account_detail.adjustmentamount}
+  
+  - measure: openiningbalance
+    label: "Opening Balance"
+    value_format: "#,##0.00"
+    type: number
+    sql: (${payoffamount}-${balanceamount})      
+    
   - measure: paidreceipts
     label:  "Paid Recepts"
     value_format: "#,##0.00"
@@ -399,7 +412,19 @@
     value_format: "#,##0.00"
     type: sum
     sql: ${payoffamt}  
-      
+    
+  - measure: totalcharges
+    label: "Total Charges"
+    value_format: "#,##0.00"
+    type: number
+    sql: ${account_detail.chargeamtbillfee} +${account_detail.chargeamtinstall} +${account_detail.chargeamtpremium} + ${account_detail.chargeamttax} +${account_detail.chargeamttotalundfee}   
+  
+  - measure: totalpayments
+    label: "Total Payments"
+    value_format: "#,##0.00"
+    type: number
+    sql: ${account_detail.paidbillingfee} + ${account_detail.paidinstallfee} + ${account_detail.paidpremium} + ${account_detail.paidtax} + ${account_detail.paidundfee}
+  
   - measure: chargeamttotal
     label: "Charge Amount"
     value_format: "#,##0.00"

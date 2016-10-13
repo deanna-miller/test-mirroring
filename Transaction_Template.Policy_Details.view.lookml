@@ -12,6 +12,16 @@
     type: time
     timeframes: [date, week, month]
     sql: ${TABLE}.accountingdt
+    
+  - dimension: acvlosssettlementroof
+    hidden: true
+    label: "ACV Loss Settlment Roof"
+    sql: ${TABLE}.acvlosssettlmentroof
+    
+  - dimension: addnlinsamt
+    hidden: true
+    label: "Additional Amount of Insurance"
+    sql: ${TABLE}.additionalinsuranceamt
 
   - dimension_group: adddt
     label: "Add"
@@ -29,6 +39,7 @@
     sql: ${TABLE}.annualstatementlinecd
 
   - dimension: areasofcoverage
+    hidden: true
     label: "Areas of Coverage"
     sql: ${TABLE}.areasofcoverage
 
@@ -36,6 +47,16 @@
     hidden: true
     label: "Assigned Driver"
     sql: ${TABLE}.assigneddriver
+  
+  - dimension: beachcoastal
+    hidden: true
+    label: "Beach Costal"
+    sql: ${TABLE}.beachcoastal
+    
+  - dimension: bldngadditionalterationincrlimit
+    hidden: true
+    label: "Building Additions and Alterations Increase Limit"
+    sql: ${TABLE}.buildingaddalterationinclimit
 
   - dimension: bodytype
     hidden: true
@@ -50,10 +71,12 @@
     sql: ${TABLE}.bookdt
 
   - dimension: buildinglimit
+    hidden: true
     label: "Building Limit"
     sql: ${TABLE}.buildinglimit
 
   - dimension: businessclass
+    hidden: true
     label: "Business Class"
     sql: ${TABLE}.businessclass
 
@@ -73,7 +96,6 @@
     label: "Carrier Group Code"
     sql: ${TABLE}.carriergroupcd
 
- 
   - dimension: city
     label: "City"
     sql: ${TABLE}.city
@@ -106,7 +128,6 @@
     label: "Company Code"
     sql: ${TABLE}.companycd
 
-
   - dimension: compositeadjustment
     hidden: true
     label: "Composite Adjustment"
@@ -121,12 +142,10 @@
     hidden: true
     label: "Contents Limit"
     sql: ${TABLE}.contentslimit
-
-
+  
   - dimension: conversionfilename
     hidden: true
     sql: ${TABLE}.conversionfilename
-
 
   - dimension: conversiongroup
     hidden: true
@@ -151,6 +170,11 @@
   - dimension: coverageitemcd
     label: "Coverage Item Code"
     sql: ${TABLE}.coverageitemcd
+    
+  - dimension: coveragename
+    hidden: true
+    label: "Coverage Name"
+    sql: ${TABLE}.coveragename
 
   - dimension: coveredperilscd
     label: "Covered Perils"
@@ -368,7 +392,6 @@
     sql: ${TABLE}.locationcity
 
   - dimension: locationcounty
-    hidden: true
     sql: ${TABLE}.locationcounty
 
   - dimension: locationnumber
@@ -381,7 +404,22 @@
 
   - dimension: locationzip
     hidden: true
-    sql: ${TABLE}.locationzip
+    sql: ${TABLE}.
+    
+  - dimension: memberinsurer
+    hidden: true
+    label: "Member Insurer"
+    sql: ${TABLE}.memberinsurer
+    
+  - dimension: memberinsurerpolnum
+    hidden: true
+    label: "Member Insured Policy Number"
+    sql: ${TABLE}.memberinsuredpolicynumber
+    
+  - dimension: mitigationibhs
+    hidden: true
+    label: "Mitigation IBHS"
+    sql: ${TABLE}.mitigationibhs
 
   - dimension: modelyr
     hidden: true
@@ -394,6 +432,11 @@
   - dimension: occupancycd
     hidden: true
     sql: ${TABLE}.occupancycd
+    
+  - dimension: ordinanceorlaw
+    hidden: true
+    label: "Ordinance or Law"
+    sql: ${TABLE}.ordinanceorlaw
 
   - dimension: ordinanceorlawind
     hidden: true
@@ -410,6 +453,11 @@
   - dimension: performancecd
     hidden: true
     sql: ${TABLE}.performancecd
+    
+  - dimension: perspropreplcost
+    hidden: true
+    label: "Personal Property Replacement Cost"
+    sql: ${TABLE}.personalpropreplacementcost
 
   - dimension: pointschargeable
     hidden: true
@@ -422,12 +470,18 @@
     sql: ${TABLE}.pointscharged
 
   - dimension: policyformcode
+    hidden: true
     label: "Policy Form"
     sql: ${TABLE}.policyformcode
 
   - dimension: policygroupcd
     hidden: true
     sql: ${TABLE}.policygroupcd
+  
+  - dimension: policyinceptiondt
+    hidden: true
+    label: "Policy Inception Date"
+    sql: ${TABLE}.policyinceptiondt
 
   - dimension: policyinsuremailingzip
     hidden: true
@@ -468,6 +522,7 @@
     sql: ${TABLE}.policyyear
 
   - dimension: postalcode
+    hidden: true
     label: "Postal Code"
     sql: ${TABLE}.postalcode
 
@@ -478,7 +533,11 @@
   - dimension: producercd
     label: "Producer Code"
     sql: ${TABLE}.producercd
-
+  
+  - dimension: productname
+    hidden: true
+    label: "Product Name"
+    sql: ${TABLE}.productname
  
   - dimension: productversionidref
     hidden: true
@@ -503,6 +562,11 @@
   - dimension: riskcd
     label: "Risk Code"
     sql: ${TABLE}.riskcd
+  
+  - dimension: replaccostlosssettlementlimit
+    hidden: true
+    label: "Replacement Cost Loss Settlement Limit"
+    sql: ${TABLE}.replaccostlosssettlementlimit
 
   - dimension: rpc125pct
     hidden: true
@@ -519,6 +583,11 @@
   - dimension: shortratestatind
     hidden: true
     sql: ${TABLE}.shortratestatind
+    
+  - dimension: splcomputercoverage
+    hidden: true
+    label: "Special Computer Coverage"
+    sql: ${TABLE}.specialcomputercoverage
 
   - dimension: sprinkleredbuildings
     hidden: true
@@ -592,9 +661,13 @@
     sql: ${TABLE}.termdays
 
   - dimension: territorycd
-    hidden: true
     label: "Territory Code"
     sql: ${TABLE}.territorycd
+    
+  - dimension: theftcovincrease
+    hidden: true
+    label: "Theft Coverage Increase Limit"
+    sql: ${TABLE}.theftcoverageincreaselimit
 
   - dimension: timeelement
     hidden: true
@@ -604,12 +677,15 @@
   - dimension: tiv
     hidden: true
     sql: ${TABLE}.tiv
+    
+  - dimension: townhouserowhouseunits
+    hidden: true
+    label: "Townhouse/Row House"
+    sql: ${TABLE}.townhouserowhouseunits
 
   - dimension: transactioncd
     label: "Transaction Code"
     sql: ${TABLE}.transactioncd
-
-
 
   - dimension_group: transactioneffectivedt
     label: "Transaction Effective"
@@ -622,7 +698,6 @@
     type: number
     sql: ${TABLE}.transactionnumber
 
-
   - dimension: typeofstructure
     hidden: true
     sql: ${TABLE}.typeofstructure
@@ -630,6 +705,11 @@
   - dimension: underlyingtotalunmodifiedliabpremium
     hidden: true
     sql: ${TABLE}.underlyingtotalunmodifiedliabpremium
+    
+  - dimension: updateuser
+    hidden: true
+    label: "Update User"
+    sql: ${TABLE}.updateuser
 
   - dimension: units
     hidden: true
