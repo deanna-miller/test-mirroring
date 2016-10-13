@@ -1,4 +1,4 @@
-- view: transaction_template_account
+- view: transaction_template_account_detail
   sql_table_name: masked_data.accountstats
   fields:
 
@@ -25,9 +25,7 @@
     label: "Account Type Code"
     sql: ${TABLE}.accounttypecd
 
-  - dimension: achagent
-    hidden: true
-    sql: ${TABLE}.achagent
+
 
   - dimension: activitytypecd
     label: "Activity Type Code"
@@ -70,7 +68,7 @@
     type: time
     timeframes: [date, week, month]
     sql: ${TABLE}.bookdt
-
+    
   - dimension: carriercd
     label: "Carrier Code"
     sql: ${TABLE}.carriercd
@@ -82,12 +80,12 @@
   - dimension: categorycd
     label: "Category Code"
     sql: ${TABLE}.categorycd
-
+    
   - dimension: chargeamt
     hidden: true
     type: number
     sql: ${TABLE}.chargeamt
-
+    
   - dimension: checkamt
     label: "Check Amount"
     type: number
@@ -293,36 +291,14 @@
     label: "Statement Account #"
     sql: ${TABLE}.statementaccountnumber
 
-  - dimension: statementaccountref
-    hidden: true
-    type: number
-    sql: ${TABLE}.statementaccountref
+
 
   - dimension: statementtypecd
     label: "Statement Type Code"
     sql: ${TABLE}.statementtypecd
 
-  - dimension: statsequence
-    hidden: true
-    type: number
-    sql: ${TABLE}.statsequence
-
-  - dimension: statsequencereplace
-    hidden: true
-    type: number
-    sql: ${TABLE}.statsequencereplace
-
   - dimension: statuscd
     sql: ${TABLE}.statuscd
-
-  - dimension: systemchecknumber
-    hidden: true
-    sql: ${TABLE}.systemchecknumber
-
-  - dimension: systemid
-    hidden: true
-    type: number
-    sql: ${TABLE}.systemid
 
   - dimension: transactiondesc
     label: "Transaction Desc"
@@ -336,23 +312,103 @@
     label: "Transaction Type Code"
     sql: ${TABLE}.transactiontypecd
     
+  ####Dimensions that are hidden
+  
+  - dimension: achagent
+    hidden: true
+    sql: ${TABLE}.achagent
+    
+  - dimension: statementaccountref
+    hidden: true
+    type: number
+    sql: ${TABLE}.statementaccountref
+    
+  - dimension: statsequence
+    hidden: true
+    type: number
+    sql: ${TABLE}.statsequence
+
+  - dimension: statsequencereplace
+    hidden: true
+    type: number
+    sql: ${TABLE}.statsequencereplace
+    
+  - dimension: systemid
+    hidden: true
+    type: number
+    sql: ${TABLE}.systemid
+    
+  - dimension: systemchecknumber
+    hidden: true
+    sql: ${TABLE}.systemchecknumber
+    
+####Measures
+    
+  - measure: chargeamtbillfee
+    label: "Billing Fee Charge"
+    value_format: "#,##0.00"
+    type: sum
+    sql: ${chargeamt}
+    filters:
+        categorycd: "LateFee, NSFFee, ReinstatementFee"
+    
+  - measure: chargeamtinstall
+    label: "Installment Fee Charge"
+    value_format: "#,##0.00"
+    type: sum
+    sql: ${chargeamt}    
+    filters:
+      categorycd: "InstallmentFee" 
+      
+  - measure: chargeamtpremium
+    label: "Premium Charge"
+    value_format: "#,##0.00"
+    type: sum
+    sql: ${chargeamt}
+    filters:
+      categorycd: "Premium"
+      
+  - measure: chargeamttax
+    label: "Tax Charge"
+    value_format: "#,##0.00"
+    type: sum
+    sql: ${chargeamt} 
+    filters:
+      categorycd: "Tax"
+    
+  - measure: chargeamttotal
+    label: "Charge Amount"
+    value_format: "#,##0.00"
+    type: sum
+    sql: ${chargeamt}
+    
+  - measure: chargeamttotalundfee
+    label: "Underwriting Fee Charge"
+    value_format: "#,##0.00"
+    type: sum
+    sql: ${chargeamt} 
+    filters:
+      categorycd: "CAFraud, CIGA, ICS, InspectionFee, PolicyFee, SeismicSafetyCommission"    
+  
+  - measure: adjustmentamount
+    label: "Adjustment Amount"
+    value_format: "#,##0.00"
+    type: sum
+    sql: ${adjustmentamt} 
+  
   - measure: balanceamount
     label: "Balance Amount"
     value_format: "#,##0.00"
     type: sum
     sql: ${balanceamt}
     
-  - measure: adjustmentamount
-    label: "Adjustment Amount"
-    value_format: "#,##0.00"
-    type: sum
-    sql: ${adjustmentamt} 
-    
-  - measure: paidreceipts
-    label:  "Paid Recepts"
+  - measure: paidinstallfee
+    label: "Paid Install Fee"
     value_format: "#,##0.00"
     type: sum
     sql: ${paidamt}
+    filters:
+      categorycd: "InstallmentFee"
     
   - measure: paidpremium
     label: "Paid Premium"
@@ -362,13 +418,19 @@
     filters:
       categorycd: "Premium"
       
-  - measure: paidinstallfee
-    label: "Paid Install Fee"
+  - measure: paidreceipts
+    label:  "Paid Recepts"
+    value_format: "#,##0.00"
+    type: sum
+    sql: ${paidamt}
+      
+  - measure: paidbillingfee
+    label: "Paid Billing Fees"
     value_format: "#,##0.00"
     type: sum
     sql: ${paidamt}
     filters:
-      categorycd: "InstallmentFee" 
+      categorycd: "LateFee, NSFFee, ReinstatementFee" 
    
   - measure: paidtax
     label: "Paid Tax"
@@ -385,67 +447,13 @@
     sql: ${paidamt}
     filters:
       categorycd: "CAFraud, CIGA, ICS, InspectionFee, PolicyFee, SeismicSafetyCommission"     
-          
-  - measure: paidbillingfee
-    label: "Paid Billing Fees"
-    value_format: "#,##0.00"
-    type: sum
-    sql: ${paidamt}
-    filters:
-      categorycd: "LateFee, NSFFee, ReinstatementFee"  
-      
+        
   - measure: payoffamount
     label: "Pay Off Amount"
     value_format: "#,##0.00"
     type: sum
     sql: ${payoffamt}  
       
-  - measure: chargeamttotal
-    label: "Charge Amount"
-    value_format: "#,##0.00"
-    type: sum
-    sql: ${chargeamt}
-    
-  - measure: chargeamtpremium
-    label: "Premium Charge"
-    value_format: "#,##0.00"
-    type: sum
-    sql: ${chargeamt}
-    filters:
-      categorycd: "Premium"
-      
-  - measure: chargeamtinstall
-    label: "Installment Fee Charge"
-    value_format: "#,##0.00"
-    type: sum
-    sql: ${chargeamt}    
-    filters:
-      categorycd: "InstallmentFee" 
-      
-  - measure: chargeamttax
-    label: "Tax Charge"
-    value_format: "#,##0.00"
-    type: sum
-    sql: ${chargeamt} 
-    filters:
-      categorycd: "Tax" 
-      
-  - measure: chargeamttotalundfee
-    label: "Underwriting Fee Charge"
-    value_format: "#,##0.00"
-    type: sum
-    sql: ${chargeamt} 
-    filters:
-      categorycd: "CAFraud, CIGA, ICS, InspectionFee, PolicyFee, SeismicSafetyCommission"    
-      
-  - measure: chargeamtbillfee
-    label: "Billing Fee Charge"
-    value_format: "#,##0.00"
-    type: sum
-    sql: ${chargeamt}
-    filters:
-        categorycd: "LateFee, NSFFee, ReinstatementFee"  
-        
   - measure: count
     hidden: true
     type: count

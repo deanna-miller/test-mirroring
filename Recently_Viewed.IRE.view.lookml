@@ -61,13 +61,16 @@
     
     
 # Measures
+
+  - measure: execution_count
+    type: count_distinct
+    sql: ${history_id}
+    
   - measure: last_execution
     type: date
     sql: max(${execution_completion_time})
   
-  - measure: execution_count
-    type: count_distinct
-    sql: ${history_id}
+
     
 # Filters    
   - filter: user_filter

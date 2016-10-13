@@ -14,13 +14,6 @@
       Where  sourcetypecd  = 'Producer'
 
   fields:
-  - dimension: producercd
-    label: "Producer Code"
-    sql: ${TABLE}.producercd 
- 
-  - dimension: producername
-    label: "Producer Name"
-    sql: ${TABLE}.producername
       
   - dimension: address1
     label: "Address1"
@@ -33,6 +26,14 @@
   - dimension: postalcode
     label: "Postal Code"
     sql: ${TABLE}.postalcode 
+    
+  - dimension: producercd
+    label: "Producer Code"
+    sql: ${TABLE}.producercd 
+ 
+  - dimension: producername
+    label: "Producer Name"
+    sql: ${TABLE}.producername
       
   - dimension: state
     label: "State"

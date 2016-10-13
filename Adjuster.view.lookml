@@ -13,14 +13,7 @@
       Where  sourcetypecd  IN ('Examiner','Outside Adjuster', 'Adjuster','Apraiser') and contacttypecd = 'Provider'
 
   fields:
-  - dimension: adjustercd
-    label: "Adjuster Code"
-    sql: ${TABLE}.adjustercd 
- 
-  - dimension: adjustername
-    label: "Adjuster Name"
-    sql: ${TABLE}.adjustername
-      
+  
   - dimension: address1
     label: "Address1"
     sql: ${TABLE}.address1
@@ -28,6 +21,14 @@
   - dimension: address2
     label: "Address2"
     sql: ${TABLE}.address2
+    
+  - dimension: adjustercd
+    label: "Adjuster Code"
+    sql: ${TABLE}.adjustercd 
+ 
+  - dimension: adjustername
+    label: "Adjuster Name"
+    sql: ${TABLE}.adjustername
        
   - dimension: postalcode
     label: "Postal Code"
