@@ -116,58 +116,11 @@
     #Dimensions which are attributes/no measures, should all contain a label#
     #########################################################################
 
-    
   - dimension: policy.agencycd
     hidden: true
     label: "Agency Code"
     sql: ${TABLE}.agencycd
     
-  - dimension: policy.transactioncd
-    label: "Transaction Code"
-#     hidden: true
-    sql: ${TABLE}.transactioncd
-    
-  - dimension: policy.newrenewalcd
-    label: "New Renewal Code"
-    sql: ${TABLE}.newrenewalcd
-    
-  - dimension: policy.policynumber
-    label: "Policy Number"
-    sql: ${TABLE}.policynumber
-    
-  - dimension: policy.policyversion
-    label: "Policy Version"
-    sql: ${TABLE}.policyversion
-    
-  - dimension: policy.statecd
-    label: "Policy State"
-    sql: ${TABLE}.statecd
-    
-  - dimension: policy.feecd
-    label: "Fee"
-    sql: ${TABLE}.feecd
-    
-  - dimension: policy.policystatuscd
-    hidden: true
-    label: "Policy Status"
-    sql: ${TABLE}.policystatuscd
-    
-  - dimension: policy.policyyear
-    label: "Policy Year"
-    sql: ${TABLE}.policyyear
-    
-  - dimension: policy.insurancetypecd
-    label: "Insurance Type"
-    sql: ${TABLE}.insurancetypecd
-    
-  - dimension: policy.coveredperilscd
-    label: "Covered Perils"
-    sql: ${TABLE}.coveredperilscd
-    
-  - dimension: policy.commissionareacd
-    label: "Commission Area"
-    sql: ${TABLE}.commissionareacd
-  
   - dimension: policy.coinsurancepct
     label: "Co-Insurance %"
     type: number
@@ -204,36 +157,11 @@
   - dimension: policy.feecd
     label: "Fee"
     sql: ${TABLE}.feecd
-    
+   
   - dimension: policy.insurancetypecd
     label: "Insurance Type"
     sql: ${TABLE}.insurancetypecd
-  
-  - dimension: policy.newrenewalcd
-    label: "New Renewal Code"
-    sql: ${TABLE}.newrenewalcd
-    
-  - dimension: policy.policynumber
-    label: "Policy Number"
-    sql: ${TABLE}.policynumber
-    
-  - dimension: policy.policystatuscd
-    hidden: true
-    label: "Policy Status"
-    sql: ${TABLE}.policystatuscd
-    
-  - dimension: policy.policyyear
-    label: "Policy Year"
-    sql: ${TABLE}.policyyear
-    
-  - dimension: policy.policyversion
-    label: "Policy Version"
-    sql: ${TABLE}.policyversion
-    
-  - dimension: policy.statecd
-    label: "Policy State"
-    sql: ${TABLE}.statecd
-    
+ 
   - dimension: policy.limit1
     label: "Limit 1"
     sql: ${TABLE}.limit1
@@ -270,23 +198,48 @@
     label: "Limit 9"
     sql: ${TABLE}.limit9
     
-
-  - dimension: policy.deductible1
-    label: "Deductible 1"
-    sql: ${TABLE}.deductible1
-
-  - dimension: policy.deductible2
-    label: "Deductible 2"
-    sql: ${TABLE}.deductible2
- 
-  - dimension: policy.productname
-    label: "Product Name"
-    sql: ${TABLE}.productname
+  - dimension: policy.newrenewalcd
+    label: "New Renewal Code"
+    sql: ${TABLE}.newrenewalcd
     
   - dimension: policy.policyinceptiondt
     hidden: true
     label: "Policy Inception Date"
     sql: ${TABLE}.policyinceptiondt
+    
+  - dimension: policy.policynumber
+    label: "Policy Number"
+    sql: ${TABLE}.policynumber
+    
+  - dimension: policy.policystatuscd
+    hidden: true
+    label: "Policy Status"
+    sql: ${TABLE}.policystatuscd
+  
+  - dimension: policy.policyversion
+    label: "Policy Version"
+    sql: ${TABLE}.policyversion
+    
+  - dimension: policy.policyyear
+    label: "Policy Year"
+    sql: ${TABLE}.policyyear
+        
+  - dimension: policy.productname
+    label: "Product Name"
+    sql: ${TABLE}.productname
+    
+  - dimension: policy.statecd
+    label: "Policy State"
+    sql: ${TABLE}.statecd
+  
+  - dimension: policy.territorycd
+    label: "Policy Territory"
+    sql: ${TABLE}.territorycd
+    
+  - dimension: policy.transactioncd
+    label: "Transaction Code"
+#     hidden: true
+    sql: ${TABLE}.transactioncd
     
 
   ######################################

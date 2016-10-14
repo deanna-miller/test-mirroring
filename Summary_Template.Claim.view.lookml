@@ -255,7 +255,7 @@
     sql: ${itdincurredamt}
     filters:
       claim.reservecd: "Adjustment"
-  
+ 
   - measure: claim.adjustment_incurredmtd
     label: "Adjustment Incurred MTD"
     value_format: "#,##0.00"
@@ -300,7 +300,7 @@
     label: "Adjustment Paid ITD"
     value_format: "#,##0.00"
     type: sum
-    sql: ${itdpaidamt}
+    sql: ${claim.itdpaidamt}
     filters:
       claim.reservecd: "Adjustment"
       
@@ -388,7 +388,7 @@
     label: "Defense Paid ITD"
     value_format: "#,##0.00"
     type: sum
-    sql: ${itdpaidamt}
+    sql: ${claim.itdpaidamt}
     filters:
       claim.reservecd: "Defense"
       
@@ -557,7 +557,7 @@
     label: "Indemnity Paid ITD"
     value_format: "#,##0.00"
     type: sum
-    sql: ${itdpaidamt}
+    sql: ${claim.itdpaidamt}
     filters:
       claim.reservecd: "Indemnity"
       
@@ -709,7 +709,7 @@
     value_format: "#,##0.00"
     label: "Paid ITD"
     type: sum
-    sql: ${itdpaidamt}
+    sql: ${claim.itdpaidamt}
   
   - measure: claim.paid_loss_mtd
     label: "Paid MTD"
@@ -787,176 +787,8 @@
     type: sum
     sql: ${ytdpostedrecoveryamt}
     filters:
-      claim.reservecd: "Subrogation" 
-      
-
-  - measure: claim.adjustment_incurredmtd
-    label: "Adjustment Incurred MTD"
-    value_format: "#,##0.00"
-    type: sum
-    sql: ${mtdincurredamt}
-    filters:
-      claim.reservecd: "Adjustment"  
-      
-  - measure: claim.defense_incurredmtd
-    label: "Defense Incurred MTD"
-    value_format: "#,##0.00"
-    type: sum
-    sql: ${mtdincurredamt}
-    filters:
-      claim.reservecd: "Defense"    
+      claim.reservecd: "Subrogation"
     
-  - measure: claim.incurred_loss_itd
-    label: "Incurred Loss ITD"  
-    value_format: "#,##0.00"
-    type: sum
-    sql: ${itdincurredamt}
-    
-  - measure: claim.indemnity_incurreditd
-    label: "Indemnity Incurred ITD"
-    value_format: "#,##0.00"
-    type: sum
-    sql: ${itdincurredamt}
-    filters:
-      claim.reservecd: "Indemnity"
-      
-  - measure: claim.adjustment_incurreditd
-    label: "Adjustment Incurred ITD"
-    value_format: "#,##0.00"
-    type: sum
-    sql: ${itdincurredamt}
-    filters:
-      claim.reservecd: "Adjustment"  
-      
-  - measure: claim.defense_incurreditd
-    label: "Defense Incurred ITD"
-    value_format: "#,##0.00"
-    type: sum
-    sql: ${itdincurredamt}
-    filters:
-      claim.reservecd: "Defense"   
-
-  - measure: claim.incurred_loss_ytd
-    label: "Incurred Loss YTD"  
-    value_format: "#,##0.00"
-    type: sum
-    sql: ${ytdincurredamt}
-    
-  - measure: claim.indemnity_incurredytd
-    label: "Indemnity Incurred YTD"
-    value_format: "#,##0.00"
-    type: sum
-    sql: ${ytdincurredamt}
-    filters:
-      claim.reservecd: "Indemnity"
-      
-  - measure: claim.adjustment_incurredytd
-    label: "Adjustment Incurred YTD"
-    value_format: "#,##0.00"
-    type: sum
-    sql: ${ytdincurredamt}
-    filters:
-      claim.reservecd: "Adjustment"  
-      
-  - measure: claim.defense_incurredytd
-    label: "Defense Incurred YTD"
-    value_format: "#,##0.00"
-    type: sum
-    sql: ${ytdincurredamt}
-    filters:
-      claim.reservecd: "Defense"  
-  
-  - measure: claim.paid_loss_mtd
-    label: "Paid MTD"
-    value_format: "#,##0.00"
-    type: sum
-    sql: ${mtdpaidamt}
-    
-  - measure: claim.indemnity_paid_mtd
-    label: "Indemnity Paid MTD"
-    value_format: "#,##0.00"
-    type: sum
-    sql: ${mtdpaidamt}
-    filters:
-      claim.reservecd: "Indemnity"
-      
-  - measure: claim.adjustment_paid_mtd
-    label: "Adjustment Paid MTD"
-    value_format: "#,##0.00"
-    type: sum
-    sql: ${mtdpaidamt}
-    filters:
-      claim.reservecd: "Adjustment"  
-      
-  - measure: claim.defense_paid_mtd
-    label: "Defense Paid MTD"
-    value_format: "#,##0.00"
-    type: sum
-    sql: ${mtdpaidamt}
-    filters:
-      claim.reservecd: "Defense"  
-      
-  - measure: claim.paid_loss_ytd
-    label: "Paid YTD"
-    value_format: "#,##0.00"
-    type: sum
-    sql: ${ytdpaidamt}
-    
-  - measure: claim.indemnity_paidytd
-    label: "Indemnity Paid YTD"
-    value_format: "#,##0.00"
-    type: sum
-    sql: ${ytdpaidamt}
-    filters:
-      claim.reservecd: "Indemnity"
-      
-  - measure: claim.adjustment_paidytd
-    label: "Adjustment Paid YTD"
-    value_format: "#,##0.00"
-    type: sum
-    sql: ${ytdpaidamt}
-    filters:
-      claim.reservecd: "Adjustment"  
-      
-  - measure: claim.defense_paidytd
-    label: "Defense Paid YTD"
-    value_format: "#,##0.00"
-    type: sum
-    sql: ${ytdpaidamt}
-    filters:
-      claim.reservecd: "Defense"      
-    
-  - measure: claim.paid_loss_itd
-    value_format: "#,##0.00"
-    label: "Paid ITD"
-    type: sum
-    sql: ${claim.itdpaidamt}
-    
-  - measure: claim.indemnity_paiditd
-    label: "Indemnity Paid ITD"
-    value_format: "#,##0.00"
-    type: sum
-    sql: ${claim.itdpaidamt}
-    filters:
-      claim.reservecd: "Indemnity"
-      
-  - measure: claim.adjustment_paiditd
-    label: "Adjustment Paid ITD"
-    value_format: "#,##0.00"
-    type: sum
-    sql: ${claim.itdpaidamt}
-    filters:
-      claim.reservecd: "Adjustment"  
-      
-  - measure: claim.defense_paiditd
-    label: "Defense Paid ITD"
-    value_format: "#,##0.00"
-    type: sum
-    sql: ${claim.itdpaidamt}
-    filters:
-      claim.reservecd: "Defense"      
-    
-
   - measure: claim.reserve_change_amt_mtd
     label: "Reserve Change MTD"
     value_format: "#,##0.00"
