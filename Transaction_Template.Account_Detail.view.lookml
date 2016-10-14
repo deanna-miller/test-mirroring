@@ -58,6 +58,7 @@
     sql: ${TABLE}.batchid
     
   - dimension: beachcoastal
+    hidden: true
     label: "Beach Costal"
     sql: ${TABLE}.beachcoastal
 
@@ -266,6 +267,7 @@
     sql: ${TABLE}.policyversion
     
   - dimension: productname
+    hidden: true
     label: "Product Name"
     sql: ${TABLE}.productname
 
