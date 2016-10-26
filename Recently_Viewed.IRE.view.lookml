@@ -2,7 +2,6 @@
   derived_table:
     sql: |
       SELECT 
-          history.source_schema,
           history.id as history_id,
           "user".email as user_id,
           query.id as query_id,
@@ -16,9 +15,9 @@
           history.completed_at as execution_completeion_ts
       FROM 
           history AS history
-          LEFT JOIN look AS look ON history.LOOK_ID = look.ID and history.source_schema = look.source_schema
-          LEFT JOIN query AS query ON history.QUERY_ID = query.ID and history.source_schema = query.source_schema
-          LEFT JOIN "user" AS "user" ON history.USER_ID = ("user".ID) and ("user".source_schema) = history.source_schema
+          LEFT JOIN look AS look ON history.LOOK_ID = look.ID
+          LEFT JOIN query AS query ON history.QUERY_ID = query.ID
+          LEFT JOIN "user" AS "user" ON history.USER_ID = ("user".ID)
       WHERE 
           history.source = 'explore'
           and query.model != 'IRE'
@@ -62,13 +61,16 @@
     
     
 # Measures
+
+  - measure: execution_count
+    type: count_distinct
+    sql: ${history_id}
+    
   - measure: last_execution
     type: date
     sql: max(${execution_completion_time})
   
-  - measure: execution_count
-    type: count_distinct
-    sql: ${history_id}
+
     
 # Filters    
   - filter: user_filter

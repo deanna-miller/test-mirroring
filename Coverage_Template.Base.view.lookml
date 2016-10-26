@@ -3,9 +3,6 @@
   
   fields:
   
-   - dimension: coverage.riskcd
-     label: "Risk Code"
-     sql: ${TABLE}.riskcd
      
    - dimension: coverage.coveragecd
      label: "Coverage"  
@@ -14,7 +11,11 @@
    - dimension: coverage.coverageitemcd
      label: "Coverage Item"
      sql: ${TABLE}.coverageitemcd
+     
+   - dimension: coverage.riskcd
+     label: "Risk Code"
+     sql: ${TABLE}.riskcd
     
-   - dimension: rateareaname
+   - dimension: coverage.rateareaname
      label: "Rate Area Name"
      sql: ${TABLE}.rateareaname

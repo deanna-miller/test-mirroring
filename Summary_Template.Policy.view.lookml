@@ -6,6 +6,21 @@
     # Dimensions for Measures should be hidden#
     ###########################################
     
+  - dimension: inforceamt
+    type: number
+    hidden: true
+    sql: ${TABLE}.inforceamt
+    
+  - dimension: lastinforceamt
+    type: number
+    hidden: true
+    sql: ${TABLE}.lastinforceamt
+  
+  - dimension: monthunearnedamt
+    type: number
+    hidden: true
+    sql: ${TABLE}.monthunearnedamt
+  
   - dimension: mtdearnedpremiumamt
     type: number
     hidden: true
@@ -31,31 +46,6 @@
     hidden: true
     sql: ${TABLE}.mtdwrittenpremiumfeeamt
     
-  - dimension: monthunearnedamt
-    type: number
-    hidden: true
-    sql: ${TABLE}.monthunearnedamt
-
-  - dimension: ytdwrittencommissionamt
-    type: number
-    hidden: true
-    sql: ${TABLE}.ytdwrittencommissionamt
-
-  - dimension: ytdwrittencommissionfeeamt
-    type: number
-    hidden: true
-    sql: ${TABLE}.ytdwrittencommissionfeeamt
-
-  - dimension: ytdwrittenpremiumamt
-    type: number
-    hidden: true
-    sql: ${TABLE}.ytdwrittenpremiumamt
-
-  - dimension: ytdwrittenpremiumfeeamt
-    type: number
-    hidden: true
-    sql: ${TABLE}.ytdwrittenpremiumfeeamt
-
   - dimension: ttdearnedpremiumamt
     type: number
     hidden: true
@@ -80,76 +70,77 @@
     type: number
     hidden: true
     sql: ${TABLE}.ttdwrittenpremiumfeeamt
-
-  - dimension: ytdearnedpremiumamt
-    type: number
-    hidden: true
-    sql: ${TABLE}.ytdearnedpremiumamt
-    
-  - dimension: inforceamt
-    type: number
-    hidden: true
-    sql: ${TABLE}.inforceamt
-    
-  - dimension: lastinforceamt
-    type: number
-    hidden: true
-    sql: ${TABLE}.lastinforceamt
     
   - dimension: unearnedamt
     type: number
     hidden: true
     sql: ${TABLE}.unearnedamt
     
+
+  - dimension: reportpd
+    sql: ${TABLE}.reportpd
+    hidden: true  
+    
+  - dimension: policy.policyref
+    label: "Policy Reference"
+    type: number
+    sql: ${TABLE}.policyref
+
+  - dimension: ytdwrittencommissionamt
+    type: number
+    hidden: true
+    sql: ${TABLE}.ytdwrittencommissionamt
+
+  - dimension: ytdwrittencommissionfeeamt
+    type: number
+    hidden: true
+    sql: ${TABLE}.ytdwrittencommissionfeeamt
+
+  - dimension: ytdwrittenpremiumamt
+    type: number
+    hidden: true
+    sql: ${TABLE}.ytdwrittenpremiumamt
+
+  - dimension: ytdwrittenpremiumfeeamt
+    type: number
+    hidden: true
+    sql: ${TABLE}.ytdwrittenpremiumfeeamt
+
+  - dimension: ytdearnedpremiumamt
+    type: number
+    hidden: true
+    sql: ${TABLE}.ytdearnedpremiumamt
+
+    
     #########################################################################
     #Dimensions which are attributes/no measures, should all contain a label#
     #########################################################################
-    
-  - dimension: policy.newrenewalcd
-    label: "New Renewal Code"
-    sql: ${TABLE}.newrenewalcd
-    
-  - dimension: policy.policynumber
-    label: "Policy Number"
-    sql: ${TABLE}.policynumber
-    
-  - dimension: policy.policyversion
-    label: "Policy Version"
-    sql: ${TABLE}.policyversion
-    
-  - dimension: policy.statecd
-    label: "Policy State"
-    sql: ${TABLE}.statecd
-    
-  - dimension: policy.feecd
-    label: "Fee"
-    sql: ${TABLE}.feecd
-    
-  - dimension: policy.policystatuscd
+
+  - dimension: policy.agencycd
     hidden: true
-    label: "Policy Status"
-    sql: ${TABLE}.policystatuscd
-    
-  - dimension: policy.policyyear
-    label: "Policy Year"
-    sql: ${TABLE}.policyyear
-    
-  - dimension: policy.insurancetypecd
-    label: "Insurance Type"
-    sql: ${TABLE}.insurancetypecd
-    
-  - dimension: policy.coveredperilscd
-    label: "Covered Perils"
-    sql: ${TABLE}.coveredperilscd
-    
-  - dimension: policy.commissionareacd
-    label: "Commission Area"
-    sql: ${TABLE}.commissionareacd
+    label: "Agency Code"
+    sql: ${TABLE}.agencycd
     
   - dimension: policy.coinsurancepct
     label: "Co-Insurance %"
     type: number
     sql: ${TABLE}.coinsurancepct
+  
+  - dimension: policy.commissionareacd
+    label: "Commission Area"
+    sql: ${TABLE}.commissionareacd
+    
+  - dimension: policy.coveredperilscd
+    label: "Covered Perils"
+    sql: ${TABLE}.coveredperilscd
+    
+  - dimension: policy.deductible1
+    label: "Deductible 1"
+    sql: ${TABLE}.deductible1
+
+  - dimension: policy.deductible2
+    label: "Deductible 2"
+    sql: ${TABLE}.deductible2
     
   - dimension_group: policy.effectivedt
     label: "Effective"
@@ -162,7 +153,15 @@
     type: time
     timeframes: [date, week, month]
     sql: ${TABLE}.expirationdt
-    
+  
+  - dimension: policy.feecd
+    label: "Fee"
+    sql: ${TABLE}.feecd
+   
+  - dimension: policy.insurancetypecd
+    label: "Insurance Type"
+    sql: ${TABLE}.insurancetypecd
+ 
   - dimension: policy.limit1
     label: "Limit 1"
     sql: ${TABLE}.limit1
@@ -199,23 +198,89 @@
     label: "Limit 9"
     sql: ${TABLE}.limit9
     
-  - dimension: policy.deductible1
-    label: "Deductible 1"
-    sql: ${TABLE}.deductible1
-
-  - dimension: policy.deductible2
-    label: "Deductible 2"
-    sql: ${TABLE}.deductible2
+  - dimension: policy.newrenewalcd
+    label: "New Renewal Code"
+    sql: ${TABLE}.newrenewalcd
     
+  - dimension: policy.policyinceptiondt
+    hidden: true
+    label: "Policy Inception Date"
+    sql: ${TABLE}.policyinceptiondt
+    
+  - dimension: policy.policynumber
+    label: "Policy Number"
+    sql: ${TABLE}.policynumber
+    
+  - dimension: policy.policystatuscd
+    hidden: true
+    label: "Policy Status"
+    sql: ${TABLE}.policystatuscd
+  
+  - dimension: policy.policyversion
+    label: "Policy Version"
+    sql: ${TABLE}.policyversion
+    
+  - dimension: policy.policyyear
+    label: "Policy Year"
+    sql: ${TABLE}.policyyear
+        
+  - dimension: policy.productname
+    label: "Product Name"
+    sql: ${TABLE}.productname
+    
+  - dimension: policy.statecd
+    label: "Policy State"
+    sql: ${TABLE}.statecd
+  
+  - dimension: policy.territorycd
+    label: "Policy Territory"
+    sql: ${TABLE}.territorycd
+    
+  - dimension: policy.transactioncd
+    label: "Transaction Code"
+#     hidden: true
+    sql: ${TABLE}.transactioncd
+    
+
   ######################################
   #Measures, should all contain a label#
   ######################################
  
+  - measure: policy.earned_premium_mtd
+    label: "Earned Premium MTD"
+    value_format: "#,##0.00"
+    type: sum
+    sql: ${mtdearnedpremiumamt}
+  
+  - measure: policy.earned_premium_ttd
+    label: "Earned Premium TTD"
+    value_format: "#,##0.00"
+    type: sum
+    sql: ${ttdearnedpremiumamt}
+    
+  - measure: policy.earned_premium_ytd
+    label: "Earned Premium YTD"
+    value_format: "#,##0.00"
+    type: sum
+    sql: ${ytdearnedpremiumamt}
+    
   - measure: policy.inforce_amt
     label: "Inforce Premium"
     value_format: "#,##0.00"
     type: sum
     sql: ${inforceamt}
+    
+  - measure: policy.last_inforce_amt
+    label: "Last Inforce Premium"
+    value_format: "#,##0.00"
+    type: sum
+    sql: ${lastinforceamt}
+    
+  - measure: policy.month_unearned_amt
+    label: "Month Unearned Premium"
+    value_format: "#,##0.00"
+    type: sum
+    sql: ${monthunearnedamt} 
     
   - measure: policy.unearned_amt
     label: "Unearned Premium"
@@ -223,104 +288,142 @@
     type: sum
     sql: ${unearnedamt}
     
-  - measure: policy.last_inforce_amt
-    label: "Last Inforce Premium"
+  - measure: policy.written_commission_fee_mtd
+    label: "Written Commission Fee MTD"
     value_format: "#,##0.00"
     type: sum
-    sql: ${lastinforceamt}
- 
-  - measure: policy.earned_premium_mtd
-    label: "Earned Premium MTD"
+    sql: ${mtdwrittencommissionfeeamt}
+    
+  - measure: policy.written_commission_fee_ttd
+    label: "Written Commission Fee TTD"
     value_format: "#,##0.00"
     type: sum
-    sql: ${mtdearnedpremiumamt}
+    sql: ${ttdwrittencommissionfeeamt}
+    
+  - measure: policy.written_commission_fee_ytd
+    label: "Written Commission Fee YTD"
+    value_format: "#,##0.00"
+    type: sum
+    sql: ${ytdwrittencommissionfeeamt}
     
   - measure: policy.written_commission_mtd
     label: "Written Commission MTD"
     value_format: "#,##0.00"
     type: sum
     sql: ${mtdwrittencommissionamt}
-
-  - measure: policy.written_commission_fee_mtd
-    label: "Written Commission Fee MTD"
+    
+  - measure: policy.written_commission_ttd
+    label: "Written Commission TTD"
     value_format: "#,##0.00"
     type: sum
-    sql: ${mtdwrittencommissionfeeamt}
-
-  - measure: policy.written_premium_mtd
-    label: "Written Premium MTD"
+    sql: ${ttdwrittencommissionamt}
+    
+  - measure: policy.written_commission_ytd
+    label: "Written Commission YTD"
     value_format: "#,##0.00"
     type: sum
-    sql: ${mtdwrittenpremiumamt}
-
+    sql: ${ytdwrittencommissionamt}
+    
   - measure: policy.written_premium_fee_mtd
     label: "Written Premium Fee MTD"
     value_format: "#,##0.00"
     type: sum
     sql: ${mtdwrittenpremiumfeeamt}
     
-  - measure: policy.month_unearned_amt
-    label: "Month Unearned Premium"
-    value_format: "#,##0.00"
-    type: sum
-    sql: ${monthunearnedamt} 
-
-  - measure: policy.earned_premium_ytd
-    label: "Earned Premium YTD"
-    value_format: "#,##0.00"
-    type: sum
-    sql: ${ytdearnedpremiumamt}
-
-  - measure: policy.written_commission_ytd
-    label: "Written Commission YTD"
-    value_format: "#,##0.00"
-    type: sum
-    sql: ${ytdwrittencommissionamt}
-
-  - measure: policy.written_commission_fee_ytd
-    label: "Written Commission Fee YTD"
-    value_format: "#,##0.00"
-    type: sum
-    sql: ${ytdwrittencommissionfeeamt}
-
-  - measure: policy.written_premium_ytd
-    label: "Written Premium YTD"
-    value_format: "#,##0.00"
-    type: sum
-    sql: ${ytdwrittenpremiumamt}
-
-  - measure: policy.written_premium_fee_ytd
-    label: "Written Premium Fee YTD"
-    value_format: "#,##0.00"
-    type: sum
-    sql: ${ytdwrittenpremiumfeeamt}
-
-  - measure: policy.earned_premium_ttd
-    label: "Earned Premium TTD"
-    value_format: "#,##0.00"
-    type: sum
-    sql: ${ttdearnedpremiumamt}
-
-  - measure: policy.written_commission_ttd
-    label: "Written Commission TTD"
-    value_format: "#,##0.00"
-    type: sum
-    sql: ${ttdwrittencommissionamt}
-
-  - measure: policy.written_commission_fee_ttd
-    label: "Written Commission Fee TTD"
-    value_format: "#,##0.00"
-    type: sum
-    sql: ${ttdwrittencommissionfeeamt}
-
-  - measure: policy.written_premium_ttd
-    label: "Written Premium TTD"
-    value_format: "#,##0.00"
-    type: sum
-    sql: ${ttdwrittenpremiumamt}
-
   - measure: policy.written_premium_fee_ttd
     label: "Written Premium Fee TTD"
     value_format: "#,##0.00"
     type: sum
     sql: ${ttdwrittenpremiumfeeamt}
+    
+  - measure: policy.written_premium_fee_ytd
+    label: "Written Premium Fee YTD"
+    value_format: "#,##0.00"
+    type: sum
+    sql: ${ytdwrittenpremiumfeeamt}
+  
+  - measure: policy.written_premium_mtd
+    label: "Written Premium MTD"
+    value_format: "#,##0.00"
+    type: sum
+    sql: ${mtdwrittenpremiumamt}
+ 
+  - measure: policy.written_premium_ttd
+    label: "Written Premium TTD"
+    value_format: "#,##0.00"
+    type: sum
+    sql: ${ttdwrittenpremiumamt}
+    
+  - measure: policy.written_premium_ytd
+    label: "Written Premium YTD"
+    value_format: "#,##0.00"
+    type: sum
+    sql: ${ttdwrittenpremiumfeeamt}
+    
+  - dimension: policy.effectivedtinmonth
+    label: "Effective Date in Month"
+    type: string
+    sql: | 
+        Case When (Cast(Datepart(Year,${TABLE}.effectivedt) As varchar) + Right('00'+ Cast(Datepart(Month,${TABLE}.effectivedt) As varChar), 2)) = ${reportpd} Then 'Yes'
+             Else 'No'
+             End     
+  
+  - dimension: policy.expirationdtinmonth
+    label: "Expiration Date in Month"
+    type: string
+    sql: | 
+        Case When (Cast(Datepart(Year,${policy.expirationdt_date}) As varchar) + Right('00'+ Cast(Datepart(Month,${policy.expirationdt_date) As varChar), 2)) = ${reportpd} Then 'Yes'
+             Else 'No'
+             End   
+             
+  - dimension: policy.reinstateeffectivedtinmonth
+    label: "Reinstate Effective Date in Month"
+    type: string
+    sql: | 
+        Case When (Cast(Datepart(Year,${TABLE}.reinstatedate) As varchar) + Right('00'+ Cast(Datepart(Month,${TABLE}.reinstatedate) As varChar), 2)) = ${reportpd} Then 'Yes'
+             Else 'No'
+             End 
+             
+  - measure: policy.inforce_amt_new
+    type: sum
+    sql: ${inforceamt}
+    filters:
+     policy.newrenewalcd: 'New'
+     
+  - measure: policy.inforce_amt_renewal
+    type: sum
+    sql: ${inforceamt}
+    filters:
+     policy.newrenewalcd: 'Renewal' 
+     
+  - measure: policy.effective_new_premium
+    type: sum
+    sql: ${ttdwrittenpremiumamt}
+    filters:
+     policy.newrenewalcd: 'New'   
+     policy.effectivedtinmonth: 'Yes'  
+     
+  - measure: policy.expiring_premium_in_month
+    type: sum
+    sql: ${ttdwrittenpremiumamt}
+    filters:
+     policy.expirationdtinmonth: 'Yes'
+ 
+  - measure: policy.effective_renewal_premium
+    type: sum
+    sql: ${ttdwrittenpremiumamt}
+    filters:
+     policy.newrenewalcd: 'Renewal'   
+     policy.effectivedtinmonth: 'Yes'   
+     
+  - measure: policy.premium_retention
+    label: "Premium Retention"
+    type: number
+    sql: (${policy.effective_renewal_premium}/NullIf(${policy.expiring_premium_in_month},0))
+    value_format: '0.00%'
+   
+  
+   
+  
+  
+

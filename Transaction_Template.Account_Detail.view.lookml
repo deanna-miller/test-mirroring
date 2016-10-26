@@ -1,4 +1,4 @@
-- view: transaction_template_account
+- view: transaction_template_account_detail
   sql_table_name: masked_data.accountstats
   fields:
 
@@ -56,6 +56,11 @@
   - dimension: batchid
     label: "Batch Id"
     sql: ${TABLE}.batchid
+    
+  - dimension: beachcoastal
+    hidden: true
+    label: "Beach Costal"
+    sql: ${TABLE}.beachcoastal
 
   - dimension: billingentitysequencenumber
     hidden: true
@@ -260,6 +265,11 @@
   - dimension: policyversion
     label: "Policy Version"
     sql: ${TABLE}.policyversion
+    
+  - dimension: productname
+    hidden: true
+    label: "Product Name"
+    sql: ${TABLE}.productname
 
   - dimension: providercd
     label: "Provider Code"
@@ -379,7 +389,7 @@
       categorycd: "Tax"  
       
   - measure: paidundfee
-    label: "Paid Underwritting Fees"
+    label: "Paid Underwriting Fees"
     value_format: "#,##0.00"
     type: sum
     sql: ${paidamt}
@@ -393,6 +403,12 @@
     sql: ${paidamt}
     filters:
       categorycd: "LateFee, NSFFee, ReinstatementFee"  
+      
+  - measure: openiningbalance
+    label: "Opening Balance"
+    value_format: "#,##0.00"
+    type: number
+    sql: (${payoffamount}-${balanceamount})      
       
   - measure: payoffamount
     label: "Pay Off Amount"
@@ -446,6 +462,24 @@
     filters:
         categorycd: "LateFee, NSFFee, ReinstatementFee"  
         
+  - measure: totalcharges
+    label: "Total Charges"
+    value_format: "#,##0.00"
+    type: number
+    sql: ${account_detail.chargeamtbillfee} +${account_detail.chargeamtinstall} +${account_detail.chargeamtpremium} + ${account_detail.chargeamttax} +${account_detail.chargeamttotalundfee}   
+
+  - measure: totalpayments
+    label: "Total Payments"
+    value_format: "#,##0.00"
+    type: number
+    sql: ${account_detail.paidbillingfee} + ${account_detail.paidinstallfee} + ${account_detail.paidpremium} + ${account_detail.paidtax} + ${account_detail.paidundfee}
+  
+  - measure: arbalanceclosing
+    label: "AR Balance Closing"
+    value_format: "#,##0.00"
+    type: number
+    sql: ${account_detail.chargeamtbillfee} +${account_detail.chargeamtinstall} + ${account_detail.chargeamtpremium} + ${account_detail.chargeamttax} + ${account_detail.chargeamttotalundfee} - ${account_detail.paidbillingfee} - ${account_detail.paidinstallfee} - ${account_detail.paidpremium} - ${account_detail.paidtax} - ${account_detail.paidundfee} + ${account_detail.adjustmentamount}
+    
   - measure: count
     hidden: true
     type: count

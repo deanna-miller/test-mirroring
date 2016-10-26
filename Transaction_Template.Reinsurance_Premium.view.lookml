@@ -202,13 +202,13 @@
     type: number
     sql: ${TABLE}.writtenpremiumamt
     
+  
   - measure: inforcechange
     label: "Inforce Change"
     value_format: "#,##0.00"
     type: sum
     sql: ${TABLE}.inforcechangeamt  
     
-  
   - measure: writtencommission
     label: "Written Commission"
     value_format: "#,##0.00"

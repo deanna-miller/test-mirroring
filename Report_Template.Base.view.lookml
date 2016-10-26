@@ -2,6 +2,13 @@
   extends: summary_template
 
   fields:
+  
+  - dimension_group: date.accountingdt
+    label: "Accounting"
+    type: time
+    timeframes: [date,month, year]
+    sql: ${TABLE}.accountingdt
+    
   - dimension: date.report_period
     sql: ${TABLE}.reportperiod
     hidden: true
@@ -22,12 +29,6 @@
 #    label: "Report Period Month"
 #    type: number
 #    sql: ${TABLE}.reportperiod_month  
-    
-  - dimension_group: date.accountingdt
-    label: "Accounting"
-    type: time
-    timeframes: [date,month, year]
-    sql: ${TABLE}.accountingdt
 
   - dimension: report.record_type
     label: "Report Type"

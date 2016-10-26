@@ -12,16 +12,17 @@
 
   fields:
 
-  - filter: rank_reportperiod_filter
-    type: date_month
-
+  - dimension: premium
+    sql: ${TABLE}.premium_ytd
+  
   - dimension: producer 
     primary_key: true
     sql: ${TABLE}.producer
 
-  - dimension: premium
-    sql: ${TABLE}.premium_ytd
-
   - dimension: rank
     type: number
     sql: ${TABLE}.rank
+    
+  - filter: rank_reportperiod_filter
+    type: date_month
+

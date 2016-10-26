@@ -1,7 +1,7 @@
 - connection: warehouse
 
 - scoping: true           # for backward compatibility
-- include: "*.Account.view.lookml" 
+- include: "*.Account_Detail.view.lookml" 
 - include: "*.Claims_Detail.view.lookml" 
 - include: "*.Payable.view.lookml"  
 - include: "*.Policy_Details.view.lookml"

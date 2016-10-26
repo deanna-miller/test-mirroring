@@ -105,6 +105,7 @@
     sql: ${TABLE}.claimanttransactionnumber
 
   - dimension: claimlimit
+    hidden: true
     label: "Claim Limit"
     sql: ${TABLE}.claimlimit
 
@@ -131,6 +132,7 @@
     sql: ${TABLE}.combinedkey
 
   - dimension: companycd
+    hidden: true
     label: "Comapny Code"
     sql: ${TABLE}.companycd
 
@@ -170,6 +172,16 @@
   - dimension: deductibledescription
     label: "Deductible Description"
     sql: ${TABLE}.deductibledescription
+    
+  - dimension: disposalamt
+    hidden: true
+    label: "Disposal Amount"
+    sql: ${TABLE}.disposalamt
+    
+  - dimension: disposaldate
+    hidden: true
+    label: "Disposal Date"
+    sql: ${TABLE}.disposaldt
 
   - dimension_group: effectivedt
     label: "Effective"
@@ -222,6 +234,16 @@
   - dimension: featuretypecd
     label: "Feature Type Code"
     sql: ${TABLE}.featuretypecd
+    
+  - dimension: indadjuster
+    hidden: true
+    label: "Independent Adjuster"
+    sql: ${TABLE}.independentadjuster
+    
+  - dimension: insurancedname
+    hidden: true
+    label: "Insured Name"
+    sql: ${TABLE}.insuredname
 
   - dimension: insurancetypecd
     label: "Insurance Type Code"
@@ -249,10 +271,40 @@
     type: time
     timeframes: [date, week, month]
     sql: ${TABLE}.lossdt
+    
+  - dimension: losslocationcity
+    hidden: true
+    label: "Loss Location City"
+    sql: ${TABLE}.losslocationcity
+    
+  - dimension: losslocationcounty
+    hidden: true
+    label: "Loss Location County"
+    sql: ${TABLE}.losslocationcounty
+    
+  - dimension: losslocationterritorycd
+    hidden: true
+    label: "Loss Location Territory"
+    sql: ${TABLE}.losslocationterritorycd
+    
+  - dimension: lossreportedby
+    hidden: true
+    label: "Loss Reported By"
+    sql: ${TABLE}.lossreportedby
 
   - dimension: lossyear
     label: "Loss Year"
     sql: ${TABLE}.lossyear
+    
+  - dimension: memberinsurer
+    hidden: true
+    label: "Member Insurer"
+    sql: ${TABLE}.memberinsurer
+    
+  - dimension: memberinsurerpolnu
+    hidden: true
+    label: "Member Insured Policy Number"
+    sql: ${TABLE}.memberinsuredpolicynumber
 
   - dimension: paidamt
     hidden: true
@@ -287,9 +339,9 @@
     label: "Policy Number"
     sql: ${TABLE}.policynumber
 
-  - dimension: policyproductname
-    label: "Product Name"
-    sql: ${TABLE}.policyproductname
+#   - dimension: policyproductname
+#     label: "Product Name"
+#     sql: ${TABLE}.policyproductname
 
   - dimension: policyproductversionidref
     hidden: true
@@ -347,6 +399,7 @@
     sql: ${TABLE}.providerref
 
   - dimension: providerrole
+    hidden: true
     label: "Provider Role"
     sql: ${TABLE}.providerrole
 
@@ -392,6 +445,16 @@
   - dimension: riskcd
     label: "Risk Code"
     sql: ${TABLE}.riskcd
+  
+  - dimension: salvagedate
+    hidden: true
+    label: "Salvage Date"
+    sql: ${TABLE}.salvagedt
+    
+  - dimension: salvagevalue
+    hidden: true
+    label: "Salvage Value"
+    sql: ${TABLE}.salvagevalue
 
   - dimension_group: serviceperiodenddt
     hidden: true
@@ -467,20 +530,6 @@
 
  # ----------Measures ----------------------
 
-  - measure: paidloss
-    label: "Paid Loss"
-    value_format: "#,##0.00"
-    type: sum
-    sql: ${paidamt}
-    
-  - measure: indemnitypaid
-    label: "Indemnity Paid"
-    value_format: "#,##0.00"
-    type: sum
-    sql: ${paidamt}
-    filters:
-      reservecd: "Indemnity"
-      
   - measure: adjustmentpaid
     label: "Adjustment Paid"
     value_format: "#,##0.00"
@@ -515,15 +564,16 @@
     label: "Indemnity Reserve Change"
     value_format: "#,##0.00"
     type: sum
-    sql: ${reservechange}
+    sql: ${reservechangeamt}
     filters:
       reservecd: "Indemnity"
+  
       
   - measure: adjustmentreservechange
     label: "Adjustment Reserve Change"
     value_format: "#,##0.00"
     type: sum
-    sql: ${reservechange}
+    sql: ${reservechangeamt}
     filters:
       reservecd: "Adjustment"  
       
@@ -531,7 +581,7 @@
     label: "Defense Reserve Change"
     value_format: "#,##0.00"
     type: sum
-    sql: ${reservechange}
+    sql: ${reservechangeamt}
     filters:
       reservecd: "Defense"  
       
@@ -539,7 +589,7 @@
     label: "Loss Expense Reserve Change"
     value_format: "#,##0.00"
     type: sum
-    sql: ${reservechange}
+    sql: ${reservechangeamt}
     filters:
       reservecd: "Defense, Adjustment"     
     
@@ -564,6 +614,7 @@
     sql: ${postedrecoveryamt}  
     filters:
       reservecd: "Subrogation"  
+
       
   - measure: expectedrecoverychange
     label: "Expected Recovery Change"
@@ -575,7 +626,7 @@
     label: "Expected Salvage Change"
     value_format: "#,##0.00"
     type: sum
-    sql: ${expectedrecoverychange}
+    sql: ${expectedrecoverychangeamt}
     filters:
       reservecd: "Salvage"    
     
@@ -583,10 +634,101 @@
     label: "Expected Subrogation Change"
     value_format: "#,##0.00"
     type: sum
-    sql: ${expectedrecoverychange}  
+    sql: ${expectedrecoverychangeamt}  
     filters:
-      reservecd: "Subrogation"    
+      reservecd: "Subrogation"   
+      
+  - measure: dol_to_add_date
+    label: "DOL to AddDate"
+    value_format: "#,##0"
+    type: sum
+    sql: ${lossdt_date} - ${adddt_date}
     
+
+  - measure: defensepaid
+    label: "Defense Paid"
+    value_format: "#,##0.00"
+    type: sum
+    sql: ${paidamt}
+    filters:
+      reservecd: "Defense"
+      
+  - measure: defensereservechange
+    label: "Defense Reserve Change"
+    value_format: "#,##0.00"
+    type: sum
+    sql: ${reservechange}
+    filters:
+      reservecd: "Defense" 
+      
+  - measure: indemnitypaid
+    label: "Indemnity Paid"
+    value_format: "#,##0.00"
+    type: sum
+    sql: ${paidamt}
+    filters:
+      reservecd: "Indemnity"
+      
+  - measure: indemnityreservechange
+    label: "Indemnity Reserve Change"
+    value_format: "#,##0.00"
+    type: sum
+    sql: ${reservechange}
+    filters:
+      reservecd: "Indemnity"
+      
+  - measure: lossexpensepaid
+    label: "Loss Expense Paid"
+    value_format: "#,##0.00"
+    type: sum
+    sql: ${paidamt}
+    filters:
+      reservecd: "Defense, Adjustment"
+      
+  - measure: lossexpensereservechange
+    label: "Loss Expense Reserve Change"
+    value_format: "#,##0.00"
+    type: sum
+    sql: ${reservechange}
+    filters:
+      reservecd: "Defense, Adjustment"
+  
+  - measure: paidloss
+    label: "Paid Loss"
+    value_format: "#,##0.00"
+    type: sum
+    sql: ${paidamt}
+    
+  - measure: postedreecoveryamt
+    label: "Posted Recovery"
+    value_format: "#,##0.00"
+    type: sum
+    sql: ${postedrecoveryamt}
+    
+  - measure: postedsalvage
+    label: "Posted Salvage"
+    value_format: "#,##0.00"
+    type: sum
+    sql: ${postedrecoveryamt}
+    filters:
+      reservecd: "Salvage"    
+    
+  - measure: postedsubrogation
+    label: "Posted Subrogation "
+    value_format: "#,##0.00"
+    type: sum
+    sql: ${postedrecoveryamt}  
+    filters:
+      reservecd: "Subrogation"
+    
+  - measure: reservechange
+    label: "Reserve Change"
+    value_format: "#,##0.00"
+    type: sum
+    sql: ${reservechangeamt}
+    
+
+  
   - measure: count
     hidden: true
     type: count
