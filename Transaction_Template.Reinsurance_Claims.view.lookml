@@ -243,12 +243,6 @@
     type: number
     sql: ${TABLE}.transactionnumber
   
-    
-
-    
-      
-
-      
   - measure: adjustmentpaid
     label: "Adjustment Paid"
     value_format: "#,##0.00"
@@ -261,7 +255,7 @@
     label: "Adjustment Reserve Change"
     value_format: "#,##0.00"
     type: sum
-    sql: ${reservechange}
+    sql: ${reservechangeamt}
     filters:
       reservecd: "Adjustment"
       
@@ -277,7 +271,7 @@
     label: "Defense Reserve Change"
     value_format: "#,##0.00"
     type: sum
-    sql: ${reservechange}
+    sql: ${reservechangeamt}
     filters:
       reservecd: "Defense"
       
@@ -299,7 +293,7 @@
     label: "Indemnity Reserve Change"
     value_format: "#,##0.00"
     type: sum
-    sql: ${reservechange}
+    sql: ${reservechangeamt}
     filters:
       reservecd: "Indemnity"
       
@@ -315,7 +309,7 @@
     label: "Loss Expense Reserve Change"
     value_format: "#,##0.00"
     type: sum
-    sql: ${reservechange}
+    sql: ${reservechangeamt}
     filters:
       reservecd: "Defense, Adjustment" 
       

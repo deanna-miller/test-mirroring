@@ -53,6 +53,10 @@
     label: "Classification Code"
     sql: ${TABLE}.classificationcd
 
+  - dimension: carriercd
+    label: "Carrier Code"
+    sql: ${TABLE}.carriercd
+    
   - dimension: combinedkey
     hidden: true
     sql: ${TABLE}.combinedkey

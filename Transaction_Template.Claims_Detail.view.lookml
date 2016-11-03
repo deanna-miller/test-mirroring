@@ -657,7 +657,7 @@
     label: "Defense Reserve Change"
     value_format: "#,##0.00"
     type: sum
-    sql: ${reservechange}
+    sql: ${reservechangeamt}
     filters:
       reservecd: "Defense" 
       
@@ -673,7 +673,7 @@
     label: "Indemnity Reserve Change"
     value_format: "#,##0.00"
     type: sum
-    sql: ${reservechange}
+    sql: ${reservechangeamt}
     filters:
       reservecd: "Indemnity"
       
@@ -689,7 +689,7 @@
     label: "Loss Expense Reserve Change"
     value_format: "#,##0.00"
     type: sum
-    sql: ${reservechange}
+    sql: ${reservechangeamt}
     filters:
       reservecd: "Defense, Adjustment"
   
