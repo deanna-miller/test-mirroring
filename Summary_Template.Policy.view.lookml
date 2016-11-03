@@ -372,7 +372,7 @@
     label: "Expiration Date in Month"
     type: string
     sql: | 
-        Case When (Cast(Datepart(Year,${policy.expirationdt_date}) As varchar) + Right('00'+ Cast(Datepart(Month,${policy.expirationdt_date) As varChar), 2)) = ${reportpd} Then 'Yes'
+        Case When (Cast(Datepart(Year,${policy.expirationdt_date}) As varchar) + Right('00'+ Cast(Datepart(Month,${policy.expirationdt_date} As varChar), 2)) = ${reportpd} Then 'Yes'
              Else 'No'
              End   
              
