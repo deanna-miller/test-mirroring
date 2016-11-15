@@ -2,10 +2,18 @@
   sql_table_name: masked_data.policystats
   fields:
 
+   ###########################################
+    # Dimensions for Measures should be hidden#
+    ###########################################
+    
   - dimension: id
     hidden: true
     primary_key: true
     sql: ${TABLE}.id
+    
+   #########################################################################
+    #Dimensions which are attributes/no measures, should all contain a label#
+    #########################################################################
 
   - dimension_group: accountingdt
     label: "Accounting"
