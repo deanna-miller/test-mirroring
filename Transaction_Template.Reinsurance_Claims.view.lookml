@@ -243,6 +243,10 @@
     type: number
     sql: ${TABLE}.transactionnumber
   
+   #################################
+      ###Measures###
+   ################################
+  
   - measure: adjustmentpaid
     label: "Adjustment Paid"
     value_format: "#,##0.00"
