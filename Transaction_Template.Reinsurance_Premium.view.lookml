@@ -201,8 +201,11 @@
     hidden: true
     type: number
     sql: ${TABLE}.writtenpremiumamt
-    
   
+  ###################################
+        ###Measures### 
+  ##################################
+ 
   - measure: inforcechange
     label: "Inforce Change"
     value_format: "#,##0.00"
