@@ -300,6 +300,10 @@
     type: number
     sql: ${TABLE}.writtenpremiumfeeamt
 
+  #####################################
+      ##MEASURES##
+  #####################################
+  
   - measure: count
     hidden: true
     type: count
