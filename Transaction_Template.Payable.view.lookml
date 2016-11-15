@@ -26,6 +26,7 @@
     sql: ${TABLE}.adddt
 
   - dimension: allocationamt
+    hidden: true
     label: "Allocation Amount"
     type: number
     sql: ${TABLE}.allocationamt
@@ -35,6 +36,10 @@
     type: time
     timeframes: [date, week, month]
     sql: ${TABLE}.bookdt
+    
+  - dimension: carriercd
+    label: "Carrier Code"
+    sql: ${TABLE}.carriercd
 
   - dimension: claimantnumber
     label: "Claimant #"
@@ -52,10 +57,6 @@
   - dimension: classificationcd
     label: "Classification Code"
     sql: ${TABLE}.classificationcd
-
-  - dimension: carriercd
-    label: "Carrier Code"
-    sql: ${TABLE}.carriercd
     
   - dimension: combinedkey
     hidden: true
@@ -64,10 +65,13 @@
   - dimension: combinepaymentind
     label: "Combine Payment Indicator"
     sql: ${TABLE}.combinepaymentind
+  
+  - dimension: insuredname
+    label: "Insured Name"
+    sql: ${TABLE}.insuredname
 
   - dimension: itemamt
-    label: "Check Amount"
-    value_format: "#,##0.00"
+    hidden: true
     type: number
     sql: ${TABLE}.itemamt
 
@@ -116,6 +120,10 @@
   - dimension: printertemplateidref
     hidden: true
     sql: ${TABLE}.printertemplateidref
+    
+  - dimension: productcd
+    label: "Product Code"
+    sql: ${TABLE}.productcd
 
   - dimension: providercd
     label: "Provider Code"
@@ -160,6 +168,10 @@
   - dimension: statcd
     label: "Stat Code"
     sql: ${TABLE}.statcd
+  
+  - dimension: statecd
+    label: "State Code"
+    sql: ${TABLE}.statecd
 
   - dimension: statsequence
     hidden: true
@@ -212,7 +224,20 @@
   - dimension: typecd
     label: "Type Code"
     sql: ${TABLE}.typecd
-
+  
+  - measure: checkallocation
+    label: "Allocation Amount"
+    value_format: "#,##0.00"
+    type: sum_distinct
+    sql_distinct_key: ${sourceref}
+    sql: ${allocationamt} 
+    
+  - measure: itemamount
+    label: "Check Amount"
+    value_format: "#,##0.00"
+    type: sum
+    sql: ${itemamt}
+    
   - measure: count
     hidden: true
     type: count
