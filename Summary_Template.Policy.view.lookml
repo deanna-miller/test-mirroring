@@ -46,6 +46,10 @@
     hidden: true
     sql: ${TABLE}.mtdwrittenpremiumfeeamt
     
+  - dimension: reportpd
+    sql: ${TABLE}.reportpd
+    hidden: true  
+    
   - dimension: ttdearnedpremiumamt
     type: number
     hidden: true
@@ -75,16 +79,6 @@
     type: number
     hidden: true
     sql: ${TABLE}.unearnedamt
-    
-
-  - dimension: reportpd
-    sql: ${TABLE}.reportpd
-    hidden: true  
-    
-  - dimension: policy.policyref
-    label: "Policy Reference"
-    type: number
-    sql: ${TABLE}.policyref
 
   - dimension: ytdwrittencommissionamt
     type: number
@@ -142,11 +136,27 @@
     label: "Deductible 2"
     sql: ${TABLE}.deductible2
     
+  - dimension: policy.effectivedtinmonth
+    label: "Effective Date in Month"
+    type: string
+    sql: | 
+        Case When (Cast(Datepart(Year,${TABLE}.effectivedt) As varchar) + Right('00'+ Cast(Datepart(Month,${TABLE}.effectivedt) As varChar), 2)) = ${reportpd} Then 'Yes'
+             Else 'No'
+             End     
+    
   - dimension_group: policy.effectivedt
     label: "Effective"
     type: time
     timeframes: [date, week, month]
     sql: ${TABLE}.effectivedt
+  
+  - dimension: policy.expirationdtinmonth
+    label: "Expiration Date in Month"
+    type: string
+    sql: | 
+        Case When (Cast(Datepart(Year,${policy.expirationdt_date}) As varchar) + Right('00'+ Cast(Datepart(Month,${policy.expirationdt_date} As varChar), 2)) = ${reportpd} Then 'Yes'
+             Else 'No'
+             End   
     
   - dimension_group: policy.expirationdt
     label: "Expiration"
@@ -211,6 +221,11 @@
     label: "Policy Number"
     sql: ${TABLE}.policynumber
     
+  - dimension: policy.policyref
+    label: "Policy Reference"
+    type: number
+    sql: ${TABLE}.policyref
+    
   - dimension: policy.policystatuscd
     hidden: true
     label: "Policy Status"
@@ -227,6 +242,14 @@
   - dimension: policy.productname
     label: "Product Name"
     sql: ${TABLE}.productname
+    
+  - dimension: policy.reinstateeffectivedtinmonth
+    label: "Reinstate Effective Date in Month"
+    type: string
+    sql: | 
+        Case When (Cast(Datepart(Year,${TABLE}.reinstatedate) As varchar) + Right('00'+ Cast(Datepart(Month,${TABLE}.reinstatedate) As varChar), 2)) = ${reportpd} Then 'Yes'
+             Else 'No'
+             End 
     
   - dimension: policy.statecd
     label: "Policy State"
@@ -264,11 +287,43 @@
     type: sum
     sql: ${ytdearnedpremiumamt}
     
+  - measure: policy.effective_new_premium
+    type: sum
+    sql: ${ttdwrittenpremiumamt}
+    filters:
+     policy.newrenewalcd: 'New'   
+     policy.effectivedtinmonth: 'Yes'  
+     
+  - measure: policy.effective_renewal_premium
+    type: sum
+    sql: ${ttdwrittenpremiumamt}
+    filters:
+     policy.newrenewalcd: 'Renewal'   
+     policy.effectivedtinmonth: 'Yes'  
+     
+  - measure: policy.expiring_premium_in_month
+    type: sum
+    sql: ${ttdwrittenpremiumamt}
+    filters:
+     policy.expirationdtinmonth: 'Yes'
+    
   - measure: policy.inforce_amt
     label: "Inforce Premium"
     value_format: "#,##0.00"
     type: sum
     sql: ${inforceamt}
+    
+  - measure: policy.inforce_amt_new
+    type: sum
+    sql: ${inforceamt}
+    filters:
+     policy.newrenewalcd: 'New'
+    
+  - measure: policy.inforce_amt_renewal
+    type: sum
+    sql: ${inforceamt}
+    filters:
+     policy.newrenewalcd: 'Renewal' 
     
   - measure: policy.last_inforce_amt
     label: "Last Inforce Premium"
@@ -281,6 +336,12 @@
     value_format: "#,##0.00"
     type: sum
     sql: ${monthunearnedamt} 
+    
+  - measure: policy.premium_retention
+    label: "Premium Retention"
+    type: number
+    sql: (${policy.effective_renewal_premium}/NullIf(${policy.expiring_premium_in_month},0))
+    value_format: '0.00%'
     
   - measure: policy.unearned_amt
     label: "Unearned Premium"
@@ -359,71 +420,3 @@
     value_format: "#,##0.00"
     type: sum
     sql: ${ttdwrittenpremiumfeeamt}
-    
-  - dimension: policy.effectivedtinmonth
-    label: "Effective Date in Month"
-    type: string
-    sql: | 
-        Case When (Cast(Datepart(Year,${TABLE}.effectivedt) As varchar) + Right('00'+ Cast(Datepart(Month,${TABLE}.effectivedt) As varChar), 2)) = ${reportpd} Then 'Yes'
-             Else 'No'
-             End     
-  
-  - dimension: policy.expirationdtinmonth
-    label: "Expiration Date in Month"
-    type: string
-    sql: | 
-        Case When (Cast(Datepart(Year,${policy.expirationdt_date}) As varchar) + Right('00'+ Cast(Datepart(Month,${policy.expirationdt_date} As varChar), 2)) = ${reportpd} Then 'Yes'
-             Else 'No'
-             End   
-             
-  - dimension: policy.reinstateeffectivedtinmonth
-    label: "Reinstate Effective Date in Month"
-    type: string
-    sql: | 
-        Case When (Cast(Datepart(Year,${TABLE}.reinstatedate) As varchar) + Right('00'+ Cast(Datepart(Month,${TABLE}.reinstatedate) As varChar), 2)) = ${reportpd} Then 'Yes'
-             Else 'No'
-             End 
-             
-  - measure: policy.inforce_amt_new
-    type: sum
-    sql: ${inforceamt}
-    filters:
-     policy.newrenewalcd: 'New'
-     
-  - measure: policy.inforce_amt_renewal
-    type: sum
-    sql: ${inforceamt}
-    filters:
-     policy.newrenewalcd: 'Renewal' 
-     
-  - measure: policy.effective_new_premium
-    type: sum
-    sql: ${ttdwrittenpremiumamt}
-    filters:
-     policy.newrenewalcd: 'New'   
-     policy.effectivedtinmonth: 'Yes'  
-     
-  - measure: policy.expiring_premium_in_month
-    type: sum
-    sql: ${ttdwrittenpremiumamt}
-    filters:
-     policy.expirationdtinmonth: 'Yes'
- 
-  - measure: policy.effective_renewal_premium
-    type: sum
-    sql: ${ttdwrittenpremiumamt}
-    filters:
-     policy.newrenewalcd: 'Renewal'   
-     policy.effectivedtinmonth: 'Yes'   
-     
-  - measure: policy.premium_retention
-    label: "Premium Retention"
-    type: number
-    sql: (${policy.effective_renewal_premium}/NullIf(${policy.expiring_premium_in_month},0))
-    value_format: '0.00%'
-   
-  
-   
-  
-  
-
