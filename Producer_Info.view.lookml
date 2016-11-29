@@ -10,7 +10,7 @@
         bestcity as city,
         bestpostalcode as postalcode,
         beststateprovcd as state
-      From masked_data.allcontacts
+      From dw.allcontacts
       Where  sourcetypecd  = 'Producer'
 
   fields:

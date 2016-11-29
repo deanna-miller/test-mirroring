@@ -1,5 +1,5 @@
 - view: transaction_template_account_detail
-  sql_table_name: masked_data.accountstats
+  sql_table_name: dw.accountstats
   fields:
 
   - dimension: id

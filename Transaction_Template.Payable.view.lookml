@@ -1,5 +1,5 @@
 - view: transaction_template_payable
-  sql_table_name: masked_data.payablestats
+  sql_table_name: dw.payablestats
   fields:
 
   - dimension: id

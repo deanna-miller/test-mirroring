@@ -1,5 +1,5 @@
 - view: transaction_template_reinsurance_premium
-  sql_table_name: masked_data.policyreinsurancestats
+  sql_table_name: dw.policyreinsurancestats
   fields:
 
   - dimension: id

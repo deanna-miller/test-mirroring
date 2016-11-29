@@ -5,7 +5,7 @@
       producercd as producer
       , sum(ytdwrittenpremiumamt) as premium_ytd
       , row_number() over (order by premium_ytd desc) as rank
-      from masked_data.accountingsummarystats
+      from dw.accountingsummarystats
       where 
         {% condition rank_reportperiod_filter %} reportperiod {% endcondition %}  
       group by 1

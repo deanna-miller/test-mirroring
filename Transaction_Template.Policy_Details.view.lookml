@@ -1,5 +1,5 @@
 - view: transaction_template_policy_details
-  sql_table_name: masked_data.policystats
+  sql_table_name: dw.policystats
   fields:
 
    ###########################################
