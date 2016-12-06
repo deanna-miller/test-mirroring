@@ -12,10 +12,12 @@
      label: "Coverage Item"
      sql: ${TABLE}.coverageitemcd
      
+   - dimension: coverage.rateareaname
+     label: "Rate Area Name"
+     sql: ${TABLE}.rateareaname
+   
    - dimension: coverage.riskcd
      label: "Risk Code"
      sql: ${TABLE}.riskcd
     
-   - dimension: coverage.rateareaname
-     label: "Rate Area Name"
-     sql: ${TABLE}.rateareaname
+

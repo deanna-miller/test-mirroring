@@ -346,23 +346,93 @@
     label: "Transaction Type Code"
     sql: ${TABLE}.transactiontypecd
     
+  ###Measures###  
+    
+  - measure: adjustmentamount
+    label: "Adjustment Amount"
+    value_format: "#,##0.00"
+    type: sum
+    sql: ${adjustmentamt}
+    
+  - measure: arbalanceclosing
+    label: "AR Balance Closing"
+    value_format: "#,##0.00"
+    type: number
+    sql: ${account_detail.chargeamtbillfee} +${account_detail.chargeamtinstall} + ${account_detail.chargeamtpremium} + ${account_detail.chargeamttax} + ${account_detail.chargeamttotalundfee} - ${account_detail.paidbillingfee} - ${account_detail.paidinstallfee} - ${account_detail.paidpremium} - ${account_detail.paidtax} - ${account_detail.paidundfee} + ${account_detail.adjustmentamount}
+    
   - measure: balanceamount
     label: "Balance Amount"
     value_format: "#,##0.00"
     type: sum
     sql: ${balanceamt}
     
-  - measure: adjustmentamount
-    label: "Adjustment Amount"
+  - measure: chargeamtbillfee
+    label: "Billing Fee Charge"
     value_format: "#,##0.00"
     type: sum
-    sql: ${adjustmentamt} 
+    sql: ${chargeamt}
+    filters:
+        categorycd: "LateFee, NSFFee, ReinstatementFee"
     
-  - measure: paidreceipts
-    label:  "Paid Recepts"
+  - measure: chargeamtinstall
+    label: "Installment Fee Charge"
+    value_format: "#,##0.00"
+    type: sum
+    sql: ${chargeamt}    
+    filters:
+      categorycd: "InstallmentFee"
+      
+  - measure: chargeamtpremium
+    label: "Premium Charge"
+    value_format: "#,##0.00"
+    type: sum
+    sql: ${chargeamt}
+    filters:
+      categorycd: "Premium"
+      
+  - measure: chargeamttax
+    label: "Tax Charge"
+    value_format: "#,##0.00"
+    type: sum
+    sql: ${chargeamt} 
+    filters:
+      categorycd: "Tax"
+      
+  - measure: chargeamttotal
+    label: "Charge Amount"
+    value_format: "#,##0.00"
+    type: sum
+    sql: ${chargeamt}
+    
+  - measure: chargeamttotalundfee
+    label: "Underwriting Fee Charge"
+    value_format: "#,##0.00"
+    type: sum
+    sql: ${chargeamt} 
+    filters:
+      categorycd: "CAFraud, CIGA, ICS, InspectionFee, PolicyFee, SeismicSafetyCommission"
+    
+  - measure: openiningbalance
+    label: "Opening Balance"
+    value_format: "#,##0.00"
+    type: number
+    sql: (${payoffamount}-${balanceamount}) 
+    
+  - measure: paidbillingfee
+    label: "Paid Billing Fees"
     value_format: "#,##0.00"
     type: sum
     sql: ${paidamt}
+    filters:
+      categorycd: "LateFee, NSFFee, ReinstatementFee"
+    
+  - measure: paidinstallfee
+    label: "Paid Install Fee"
+    value_format: "#,##0.00"
+    type: sum
+    sql: ${paidamt}
+    filters:
+      categorycd: "InstallmentFee"
     
   - measure: paidpremium
     label: "Paid Premium"
@@ -372,14 +442,12 @@
     filters:
       categorycd: "Premium"
       
-  - measure: paidinstallfee
-    label: "Paid Install Fee"
+  - measure: paidreceipts
+    label:  "Paid Recepts"
     value_format: "#,##0.00"
     type: sum
     sql: ${paidamt}
-    filters:
-      categorycd: "InstallmentFee" 
-   
+      
   - measure: paidtax
     label: "Paid Tax"
     value_format: "#,##0.00"
@@ -396,72 +464,12 @@
     filters:
       categorycd: "CAFraud, CIGA, ICS, InspectionFee, PolicyFee, SeismicSafetyCommission"     
           
-  - measure: paidbillingfee
-    label: "Paid Billing Fees"
-    value_format: "#,##0.00"
-    type: sum
-    sql: ${paidamt}
-    filters:
-      categorycd: "LateFee, NSFFee, ReinstatementFee"  
-      
-  - measure: openiningbalance
-    label: "Opening Balance"
-    value_format: "#,##0.00"
-    type: number
-    sql: (${payoffamount}-${balanceamount})      
-      
   - measure: payoffamount
     label: "Pay Off Amount"
     value_format: "#,##0.00"
     type: sum
     sql: ${payoffamt}  
       
-  - measure: chargeamttotal
-    label: "Charge Amount"
-    value_format: "#,##0.00"
-    type: sum
-    sql: ${chargeamt}
-    
-  - measure: chargeamtpremium
-    label: "Premium Charge"
-    value_format: "#,##0.00"
-    type: sum
-    sql: ${chargeamt}
-    filters:
-      categorycd: "Premium"
-      
-  - measure: chargeamtinstall
-    label: "Installment Fee Charge"
-    value_format: "#,##0.00"
-    type: sum
-    sql: ${chargeamt}    
-    filters:
-      categorycd: "InstallmentFee" 
-      
-  - measure: chargeamttax
-    label: "Tax Charge"
-    value_format: "#,##0.00"
-    type: sum
-    sql: ${chargeamt} 
-    filters:
-      categorycd: "Tax" 
-      
-  - measure: chargeamttotalundfee
-    label: "Underwriting Fee Charge"
-    value_format: "#,##0.00"
-    type: sum
-    sql: ${chargeamt} 
-    filters:
-      categorycd: "CAFraud, CIGA, ICS, InspectionFee, PolicyFee, SeismicSafetyCommission"    
-      
-  - measure: chargeamtbillfee
-    label: "Billing Fee Charge"
-    value_format: "#,##0.00"
-    type: sum
-    sql: ${chargeamt}
-    filters:
-        categorycd: "LateFee, NSFFee, ReinstatementFee"  
-        
   - measure: totalcharges
     label: "Total Charges"
     value_format: "#,##0.00"
@@ -474,12 +482,6 @@
     type: number
     sql: ${account_detail.paidbillingfee} + ${account_detail.paidinstallfee} + ${account_detail.paidpremium} + ${account_detail.paidtax} + ${account_detail.paidundfee}
   
-  - measure: arbalanceclosing
-    label: "AR Balance Closing"
-    value_format: "#,##0.00"
-    type: number
-    sql: ${account_detail.chargeamtbillfee} +${account_detail.chargeamtinstall} + ${account_detail.chargeamtpremium} + ${account_detail.chargeamttax} + ${account_detail.chargeamttotalundfee} - ${account_detail.paidbillingfee} - ${account_detail.paidinstallfee} - ${account_detail.paidpremium} - ${account_detail.paidtax} - ${account_detail.paidundfee} + ${account_detail.adjustmentamount}
-    
   - measure: count
     hidden: true
     type: count
