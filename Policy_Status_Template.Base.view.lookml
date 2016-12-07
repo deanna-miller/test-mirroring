@@ -2,9 +2,9 @@
   sql_table_name: insight.policy_status
   fields:
 
-  ###########################################
+   ###########################################
     # Dimensions for Measures should be hidden#
-  ###########################################
+   ###########################################
     
   - dimension: accountingdt
     hidden: true
