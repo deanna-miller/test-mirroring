@@ -79,6 +79,11 @@
     type: number
     hidden: true
     sql: ${TABLE}.unearnedamt
+    
+  - dimension: ytdearnedpremiumamt
+    type: number
+    hidden: true
+    sql: ${TABLE}.ytdearnedpremiumamt
 
   - dimension: ytdwrittencommissionamt
     type: number
@@ -99,12 +104,6 @@
     type: number
     hidden: true
     sql: ${TABLE}.ytdwrittenpremiumfeeamt
-
-  - dimension: ytdearnedpremiumamt
-    type: number
-    hidden: true
-    sql: ${TABLE}.ytdearnedpremiumamt
-
     
     #########################################################################
     #Dimensions which are attributes/no measures, should all contain a label#
@@ -261,7 +260,6 @@
     
   - dimension: policy.transactioncd
     label: "Transaction Code"
-#     hidden: true
     sql: ${TABLE}.transactioncd
     
 
@@ -419,4 +417,4 @@
     label: "Written Premium YTD"
     value_format: "#,##0.00"
     type: sum
-    sql: ${ttdwrittenpremiumfeeamt}
+    sql: ${ytdwrittenpremiumamt}
