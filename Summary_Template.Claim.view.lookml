@@ -66,14 +66,6 @@
     hidden: true
     sql: ${TABLE}.originalreserve
 
-  - dimension: reportperiod
-    sql: ${TABLE}.reportperiod
-    hidden: true
-    
-  - dimension: reportpd
-    sql: ${TABLE}.reportpd
-    hidden: true  
-
   - dimension: outstandingamt
     type: number
     hidden: true
@@ -83,6 +75,14 @@
     type: number
     hidden: true
     sql: ${TABLE}.outstandingexpectedrecoveryamt
+    
+  - dimension: reportperiod
+    sql: ${TABLE}.reportperiod
+    hidden: true
+    
+  - dimension: reportpd
+    sql: ${TABLE}.reportpd
+    hidden: true 
     
   - dimension: ytdexpectedrecoverychangeamt
     type: number
@@ -119,6 +119,10 @@
     #Dimensions which are attributes/no measures, should all contain a label#
     #########################################################################
     
+  - dimension: claim.adjusterprovidercd
+    label: "Adjuster Provider"
+    sql: ${TABLE}.adjusterprovidercd
+  
   - dimension: claim.aggregatelimit
     label: "Aggregate Limit"
     sql: ${TABLE}.aggregatelimit
@@ -182,26 +186,16 @@
     timeframes: [date, week, month]
     sql: ${TABLE}.firstcloseddt
     
-
-  - dimension: claim.aggregatelimitdescription
-    label: "Aggregate Limit Description"
-    sql: ${TABLE}.aggregatelimitdescription
-    
-  - dimension: claim.productname
-    label: "Product Name"
-    sql: ${TABLE}.productname
-    
-  - dimension: claim.insuredname
-    label: "Insured Name"
-    sql: ${TABLE}.insuredname
-
   - dimension_group: claim.firstindemnitypaymentdt
     label: "First Indemnity Payment"
     type: time
     timeframes: [date, week, month]
     sql: ${TABLE}.firstindemnitypaymentdt
-
     
+  - dimension: claim.insuredname
+    label: "Insured Name"
+    sql: ${TABLE}.insuredname
+
   - dimension: claim.losscausecd
     label: "Loss Cause"
     sql: ${TABLE}.losscausecd
@@ -222,27 +216,37 @@
     timeframes: [date, week, month]
     sql: ${TABLE}.openeddt
     
+  - dimension: claim.productname
+    label: "Product Name"
+    sql: ${TABLE}.productname
+    
+  - dimension_group: claim.reportdt
+    label: "Reported"
+    type: time
+    timeframes: [date, week, month]
+    sql: ${TABLE}.reportdt
+    
+  - dimension: claim.reservecd
+    label: "Reserve"
+    sql: ${TABLE}.reservecd
+    
   - dimension_group: claim.reservelastclosedt
     label: "Reserve Last Closed"
     type: time
     timeframes: [date, week, month]
     sql: ${TABLE}.reservelastclosedt
     
-  - dimension: claim.reservecd
-    label: "Reserve"
-    sql: ${TABLE}.reservecd
-  
   - dimension: claim.reservetypecd
     label: "Reserve Type"
     sql: ${TABLE}.reservetypecd
     
-  - dimension: claim.subreservecd
-    label: "Sub Reserve"
-    sql: ${TABLE}.subreservecd
-    
   - dimension: claim.sublosscausecd
     label: "Sub Loss Cause"
     sql: ${TABLE}.sublosscausecd
+    
+  - dimension: claim.subreservecd
+    label: "Sub Reserve"
+    sql: ${TABLE}.subreservecd
     
   ######################################
   #Measures, should all contain a label#
@@ -468,6 +472,22 @@
     filters:
       claim.reservecd: "Subrogation"
       
+  - measure: claim.expenses_paid_mtd
+    label: "Expenses Paid MTD"
+    value_format: "#,##0.00"
+    type: sum
+    sql: ${mtdpaidamt}
+    filters:
+      claim.reservecd: "Adjustment, Defense"
+
+  - measure: claim.expenses_paid_ytd
+    label: "Expenses Paid YTD"
+    value_format: "#,##0.00"
+    type: sum
+    sql: ${ytdpaidamt}
+    filters:
+      claim.reservecd: "Adjustment, Defense"
+      
   - measure: claim.incurred_loss_itd
     label: "Incurred Loss ITD"  
     value_format: "#,##0.00"
@@ -485,6 +505,14 @@
     value_format: "#,##0.00"
     type: sum
     sql: ${ytdincurredamt}
+    
+  - measure: claim.incurred_loss_reserves_ytd
+    label: "Incurred Loss YTD + Reserves" 
+    value_format: "#,##0.00"
+    type: sum
+    sql: ${openingreserve} + ${ytdpaidamt}
+    filters:
+      claim.reservecd: "Indemnity"
     
   - measure: claim.incurred_net_recovery_amt_itd
     label: "Incurred Net Recovery ITD"
@@ -505,6 +533,14 @@
     sql: ${ytdincurrednetrecoveryamt}
   
     
+  - measure: claim.indemnity_incurreditd
+    label: "Indemnity Incurred ITD"
+    value_format: "#,##0.00"
+    type: sum
+    sql: ${itdincurredamt}
+    filters:
+      claim.reservecd: "Indemnity"
+  
   - measure: claim.indemnity_incurredmtd
     label: "Indemnity Incurred MTD"
     value_format: "#,##0.00"
@@ -513,14 +549,6 @@
     filters:
       claim.reservecd: "Indemnity"
 
-  - measure: claim.indemnity_incurreditd
-    label: "Indemnity Incurred ITD"
-    value_format: "#,##0.00"
-    type: sum
-    sql: ${itdincurredamt}
-    filters:
-      claim.reservecd: "Indemnity"
-      
   - measure: claim.indemnity_incurredytd
     label: "Indemnity Incurred YTD"
     value_format: "#,##0.00"
@@ -592,21 +620,7 @@
     sql: ${ytdreservechangeamt} 
     filters:
       claim.reservecd: "Indemnity"
-      
-  - measure: claim.opening_reserve
-    label: "Opening Reserve"
-    value_format: "#,##0.00"
-    type: sum
-    sql: ${openingreserve} 
-    
-  - measure: claim.opening_indemnity_reserve
-    label: "Opening Indemnity Reserve"
-    value_format: "#,##0.00"
-    type: sum
-    sql: ${openingreserve} 
-    filters:
-      claim.reservecd: "Indemnity"
-      
+
   - measure: claim.opening_adjustment_reserve
     label: "Opening Adjustment Reserve"
     value_format: "#,##0.00"
@@ -621,7 +635,21 @@
     type: sum
     sql: ${openingreserve} 
     filters:
-      claim.reservecd: "Defense"    
+      claim.reservecd: "Defense"  
+      
+  - measure: claim.opening_indemnity_reserve
+    label: "Opening Indemnity Reserve"
+    value_format: "#,##0.00"
+    type: sum
+    sql: ${openingreserve} 
+    filters:
+      claim.reservecd: "Indemnity"
+      
+  - measure: claim.opening_reserve
+    label: "Opening Reserve"
+    value_format: "#,##0.00"
+    type: sum
+    sql: ${openingreserve} 
     
   - measure: claim.original_adjustment_reserve
     label: "Original Adjustment Reserve"
@@ -631,12 +659,14 @@
     filters:
       claim.reservecd: "Adjustment" 
   
-  - measure: claim.original_reserve
-    label: "Original Reserve"
+  - measure: claim.original_defense_reserve
+    label: "Original Defense Reserve"
     value_format: "#,##0.00"
     type: sum
     sql: ${originalreserve} 
-    
+    filters:
+      claim.reservecd: "Defense" 
+      
   - measure: claim.original_indemnity_reserve
     label: "Original Indemnity Reserve"
     value_format: "#,##0.00"
@@ -644,51 +674,13 @@
     sql: ${originalreserve} 
     filters:
       claim.reservecd: "Indemnity"
-      
-  - measure: claim.original_defense_reserve
-    label: "Original Defense Reserve"
+  
+  - measure: claim.original_reserve
+    label: "Original Reserve"
     value_format: "#,##0.00"
     type: sum
     sql: ${originalreserve} 
-    filters:
-      claim.reservecd: "Defense"   
-  
-  - measure: claim.outstanding_expected_recovery
-    label: "Outstanding Expected Recovery"
-    value_format: "#,##0.00"
-    type: sum
-    sql: ${outstandingexpectedrecoveryamt}
     
-  - measure: claim.outstanding_expected_subrogation
-    label: "Outstanding Expected Subrogation"
-    value_format: "#,##0.00"
-    type: sum
-    sql: ${outstandingexpectedrecoveryamt}   
-    filters:
-      claim.reservecd: "Subrogation"
-      
-  - measure: claim.outstanding_expected_salvage
-    label: "Outstanding Expected Salvage"
-    value_format: "#,##0.00"
-    type: sum
-    sql: ${outstandingexpectedrecoveryamt}   
-    filters:
-      claim.reservecd: "Salvage"    
-    
-  - measure: claim.outstanding_reserve
-    label: "Outstanding Reserve"
-    value_format: "#,##0.00"
-    type: sum
-    sql: ${outstandingamt}
-    
-  - measure: claim.outstanding_indemnity_reserve
-    label: "Outstanding Indemnity Reserve"
-    value_format: "#,##0.00"
-    type: sum
-    sql: ${outstandingamt}  
-    filters:
-      claim.reservecd: "Indemnity"
-  
   - measure: claim.outstanding_adjustment_reserve
     label: "Outstanding Adjustment Reserve"
     value_format: "#,##0.00"
@@ -704,10 +696,54 @@
     sql: ${outstandingamt}  
     filters:
       claim.reservecd: "Defense"
-      
-  - measure: claim.paid_loss_itd
+
+  - measure: claim.outstanding_expected_recovery
+    label: "Outstanding Expected Recovery"
     value_format: "#,##0.00"
+    type: sum
+    sql: ${outstandingexpectedrecoveryamt}
+    
+  - measure: claim.outstanding_expected_salvage
+    label: "Outstanding Expected Salvage"
+    value_format: "#,##0.00"
+    type: sum
+    sql: ${outstandingexpectedrecoveryamt}   
+    filters:
+      claim.reservecd: "Salvage"
+      
+  - measure: claim.outstanding_expected_subrogation
+    label: "Outstanding Expected Subrogation"
+    value_format: "#,##0.00"
+    type: sum
+    sql: ${outstandingexpectedrecoveryamt}   
+    filters:
+      claim.reservecd: "Subrogation"
+      
+  - measure: claim.outstanding_expense_reserve
+    label: "Outstanding Expense Reserve"
+    value_format: "#,##0.00"
+    type: sum
+    sql: ${outstandingamt}  
+    filters:
+      claim.reservetypecd: "Adjustment"
+      
+  - measure: claim.outstanding_indemnity_reserve
+    label: "Outstanding Indemnity Reserve"
+    value_format: "#,##0.00"
+    type: sum
+    sql: ${outstandingamt}  
+    filters:
+      claim.reservecd: "Indemnity"  
+    
+  - measure: claim.outstanding_reserve
+    label: "Outstanding Reserve"
+    value_format: "#,##0.00"
+    type: sum
+    sql: ${outstandingamt}
+    
+  - measure: claim.paid_loss_itd
     label: "Paid ITD"
+    value_format: "#,##0.00"
     type: sum
     sql: ${claim.itdpaidamt}
   
@@ -800,4 +836,12 @@
     value_format: "#,##0.00"
     type: sum
     sql: ${ytdreservechangeamt} 
+    
+  - measure: claim.salvage_subrogation_ytd
+    label: "Salvage Posted YTD + Subrogation Posted YTD"
+    value_format: "#,##0.00"
+    type: sum
+    sql: ${ytdpostedrecoveryamt}
+    filters:
+      claim.reservecd: "salvage,subrogation"
  
