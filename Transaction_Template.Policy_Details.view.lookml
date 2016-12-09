@@ -412,7 +412,7 @@
 
   - dimension: locationzip
     hidden: true
-    sql: ${TABLE}.
+    sql: ${TABLE}.locationzip
     
   - dimension: memberinsurer
     hidden: true
