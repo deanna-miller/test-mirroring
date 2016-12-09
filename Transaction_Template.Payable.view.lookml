@@ -197,6 +197,10 @@
     label: "Transaction Amount"
     type: number
     sql: ${TABLE}.transactionamt
+    
+  - measure: transactiondt
+    label: "Max Transaction Date"
+    sql: MAX(${transactiondt_date}::date)
 
   - dimension_group: transactiondt
     label: "Transaction"
