@@ -339,9 +339,9 @@
     label: "Policy Number"
     sql: ${TABLE}.policynumber
 
-#   - dimension: policyproductname
-#     label: "Product Name"
-#     sql: ${TABLE}.policyproductname
+  - dimension: policyproductname
+    label: "Product Name"
+    sql: ${TABLE}.policyproductname
 
   - dimension: policyproductversionidref
     hidden: true
@@ -536,38 +536,7 @@
     type: sum
     sql: ${paidamt}
     filters:
-      reservecd: "Adjustment"  
-      
-  - measure: defensepaid
-    label: "Defense Paid"
-    value_format: "#,##0.00"
-    type: sum
-    sql: ${paidamt}
-    filters:
-      reservecd: "Defense"  
-      
-  - measure: lossexpensepaid
-    label: "Loss Expense Paid"
-    value_format: "#,##0.00"
-    type: sum
-    sql: ${paidamt}
-    filters:
-      reservecd: "Defense, Adjustment"      
-    
-  - measure: reservechange
-    label: "Reserve Change"
-    value_format: "#,##0.00"
-    type: sum
-    sql: ${reservechangeamt}
-    
-  - measure: indemnityreservechange
-    label: "Indemnity Reserve Change"
-    value_format: "#,##0.00"
-    type: sum
-    sql: ${reservechangeamt}
-    filters:
-      reservecd: "Indemnity"
-  
+      reservecd: "Adjustment" 
       
   - measure: adjustmentreservechange
     label: "Adjustment Reserve Change"
@@ -577,14 +546,75 @@
     filters:
       reservecd: "Adjustment"  
       
+  - measure: defensepaid
+    label: "Defense Paid"
+    value_format: "#,##0.00"
+    type: sum
+    sql: ${paidamt}
+    filters:
+      reservecd: "Defense" 
+
   - measure: defensereservechange
     label: "Defense Reserve Change"
     value_format: "#,##0.00"
     type: sum
     sql: ${reservechangeamt}
     filters:
-      reservecd: "Defense"  
+      reservecd: "Defense" 
       
+  - measure: dol_to_add_date
+    label: "DOL to AddDate"
+    value_format: "#,##0"
+    type: sum
+    sql: ${lossdt_date} - ${adddt_date}
+      
+  - measure: expectedrecoverychange
+    label: "Expected Recovery Change"
+    value_format: "#,##0.00"
+    type: sum
+    sql: ${expectedrecoverychangeamt}   
+    
+  - measure: expectedsalvagechange
+    label: "Expected Salvage Change"
+    value_format: "#,##0.00"
+    type: sum
+    sql: ${expectedrecoverychangeamt}
+    filters:
+      reservecd: "Salvage"    
+    
+  - measure: expectedsubrogationchange
+    label: "Expected Subrogation Change"
+    value_format: "#,##0.00"
+    type: sum
+    sql: ${expectedrecoverychangeamt}  
+    filters:
+      reservecd: "Subrogation"  
+      
+  - measure: indemnitypaid
+    label: "Indemnity Paid"
+    value_format: "#,##0.00"
+    type: sum
+    sql: ${paidamt}
+    filters:
+      reservecd: "Indemnity"
+      
+  - measure: indemnityreservechange
+    label: "Indemnity Reserve Change"
+    value_format: "#,##0.00"
+    type: sum
+    sql: ${reservechangeamt}
+    filters:
+      reservecd: "Indemnity"
+
+      
+  - measure: lossexpensepaid
+    label: "Loss Expense Paid"
+    value_format: "#,##0.00"
+    type: sum
+    sql: ${paidamt}
+    filters:
+      reservecd: "Defense, Adjustment"
+  
   - measure: lossexpensereservechange
     label: "Loss Expense Reserve Change"
     value_format: "#,##0.00"
@@ -593,6 +623,12 @@
     filters:
       reservecd: "Defense, Adjustment"     
     
+  - measure: paidloss
+    label: "Paid Loss"
+    value_format: "#,##0.00"
+    type: sum
+    sql: ${paidamt}
+  
   - measure: postedreecoveryamt
     label: "Posted Recovery"
     value_format: "#,##0.00"
@@ -615,120 +651,12 @@
     filters:
       reservecd: "Subrogation"  
 
-      
-  - measure: expectedrecoverychange
-    label: "Expected Recovery Change"
-    value_format: "#,##0.00"
-    type: sum
-    sql: ${expectedrecoverychangeamt}   
-    
-  - measure: expectedsalvagechange
-    label: "Expected Salvage Change"
-    value_format: "#,##0.00"
-    type: sum
-    sql: ${expectedrecoverychangeamt}
-    filters:
-      reservecd: "Salvage"    
-    
-  - measure: expectedsubrogationchange
-    label: "Expected Subrogation Change"
-    value_format: "#,##0.00"
-    type: sum
-    sql: ${expectedrecoverychangeamt}  
-    filters:
-      reservecd: "Subrogation"   
-      
-  - measure: dol_to_add_date
-    label: "DOL to AddDate"
-    value_format: "#,##0"
-    type: sum
-    sql: ${lossdt_date} - ${adddt_date}
-    
-
-  - measure: defensepaid
-    label: "Defense Paid"
-    value_format: "#,##0.00"
-    type: sum
-    sql: ${paidamt}
-    filters:
-      reservecd: "Defense"
-      
-  - measure: defensereservechange
-    label: "Defense Reserve Change"
-    value_format: "#,##0.00"
-    type: sum
-    sql: ${reservechangeamt}
-    filters:
-      reservecd: "Defense" 
-      
-  - measure: indemnitypaid
-    label: "Indemnity Paid"
-    value_format: "#,##0.00"
-    type: sum
-    sql: ${paidamt}
-    filters:
-      reservecd: "Indemnity"
-      
-  - measure: indemnityreservechange
-    label: "Indemnity Reserve Change"
-    value_format: "#,##0.00"
-    type: sum
-    sql: ${reservechangeamt}
-    filters:
-      reservecd: "Indemnity"
-      
-  - measure: lossexpensepaid
-    label: "Loss Expense Paid"
-    value_format: "#,##0.00"
-    type: sum
-    sql: ${paidamt}
-    filters:
-      reservecd: "Defense, Adjustment"
-      
-  - measure: lossexpensereservechange
-    label: "Loss Expense Reserve Change"
-    value_format: "#,##0.00"
-    type: sum
-    sql: ${reservechangeamt}
-    filters:
-      reservecd: "Defense, Adjustment"
-  
-  - measure: paidloss
-    label: "Paid Loss"
-    value_format: "#,##0.00"
-    type: sum
-    sql: ${paidamt}
-    
-  - measure: postedreecoveryamt
-    label: "Posted Recovery"
-    value_format: "#,##0.00"
-    type: sum
-    sql: ${postedrecoveryamt}
-    
-  - measure: postedsalvage
-    label: "Posted Salvage"
-    value_format: "#,##0.00"
-    type: sum
-    sql: ${postedrecoveryamt}
-    filters:
-      reservecd: "Salvage"    
-    
-  - measure: postedsubrogation
-    label: "Posted Subrogation "
-    value_format: "#,##0.00"
-    type: sum
-    sql: ${postedrecoveryamt}  
-    filters:
-      reservecd: "Subrogation"
-    
   - measure: reservechange
     label: "Reserve Change"
     value_format: "#,##0.00"
     type: sum
     sql: ${reservechangeamt}
     
-
-  
   - measure: count
     hidden: true
     type: count
