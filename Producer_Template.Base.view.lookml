@@ -5,4 +5,4 @@
   
   - dimension: producer.producercd
     type: string
-    sql: ${TABLE}.producercd
+    sql: nvl(${TABLE}.producercd,${TABLE}.producerprovidercd)
