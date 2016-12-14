@@ -4,3 +4,9 @@ Put your documentation here! Your text is rendered with [GitHub Flavored Markdow
 
 Click the "Edit" button above to make changes.
 
+
+## Version History
+
+* 1.0.0 -- Initial version of LookML
+* 1.1.0 -- Updated with code from NJUA/WRC
+
