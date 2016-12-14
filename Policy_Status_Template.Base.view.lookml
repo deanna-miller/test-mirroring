@@ -1,5 +1,75 @@
 - view: policy_status_template
-  sql_table_name: insight.policy_status
+  #sql_table_name: insight.policy_status
+  derived_table:
+    sql: |
+      Select       
+        pss1.reportperiod as reportpd,
+        to_date(pss1.reportperiod,'YYYYMM') as reportperiod,
+        pss1.policyref as policyref,
+        pss2.inforcemonthend,
+        pss2.inforceinmonth,
+        case 
+          when pss3.issuedinmonth = 'Yes' then 'Yes' 
+          else 'No' 
+        end as issuedinmonth,
+        stats.cancelissued,
+        stats.canceldate,
+        stats.canceleffective,
+        stats.reinstateissued,
+        stats.reinstatedate,
+        stats.reinstateeffective
+        From (Select reportperiod,policyref
+             From  dw.policysummarystats
+             Where statuscd = 'Active'
+        Group by reportperiod,policyref
+        ) pss1 
+        Left Join
+        (
+               Select reportperiod, policyref, 
+               Case When Sum(unearnedamt) > 0 Then 'Yes'
+                   Else 'No'
+               End As inforcemonthend,
+               Case When Sum(mtdearnedpremiumamt) > 0 Then 'Yes'
+                   Else 'No'
+               End As inforceinmonth
+              from  dw.policysummarystats     
+              Group By reportperiod,policyref
+        ) pss2
+        On pss1.reportperiod = pss2.reportperiod and pss1.policyref = pss2.policyref
+        Left Join
+        (
+              Select policyref, min(reportperiod) as reportperiod, 'Yes' as issuedinmonth
+              from  dw.policysummarystats
+              where statuscd = 'Active'
+              group by policyref
+        ) pss3
+        On pss1.reportperiod = pss3.reportperiod and pss1.policyref = pss3.policyref
+        Left Join
+        (
+              Select ps1.reportperiod, ps1.policyref, 
+              Case When transactioncd = 'Cancellation' Then 'Yes' Else 'No' End as cancelissued,
+              Case When transactioncd = 'Cancellation' Then transactioneffectivedt Else Null End as canceldate,
+              Case When transactioncd = 'Cancellation' and 
+                   (Cast(Datepart(Year,transactioneffectivedt) As varchar) + Right('00'+ Cast(Datepart(Month,transactioneffectivedt) As varChar), 2)) = ps1.reportperiod 
+              Then 'Yes' Else 'No' End as canceleffective,
+              Case When transactioncd = 'Reinstatement' Then 'Yes' Else 'No' End as reinstateissued,
+              Case When transactioncd = 'Reinstatement' and 
+                   (Cast(Datepart(Year,transactioneffectivedt) As varchar) + Right('00'+ Cast(Datepart(Month,transactioneffectivedt) As varChar), 2)) = ps1.reportperiod 
+              Then 'Yes' Else 'No' End as reinstateeffective,
+              Case When transactioncd = 'Reinstatement' Then transactioneffectivedt Else Null End as reinstatedate
+          From
+          (
+              Select max(systemid) as id , policyref, cast(datepart(year,accountingdt) as varchar)||right('00'||cast(datepart(month,accountingdt) as varchar),2) as reportperiod
+              from  dw.policystats
+              group by policyref, cast(datepart(year,accountingdt) as varchar)||right('00'||cast(datepart(month,accountingdt) as varchar),2) 
+          ) ps1
+         Left Join
+           dw.policystats ps2
+          On ps1.id = ps2.systemid
+          ) stats
+          On pss1.reportperiod = stats.reportperiod and pss1.policyref = stats.policyref
+  
+  
   fields:
 
    ###########################################
@@ -85,6 +155,12 @@
     hidden: true
     type: string
     sql: ${TABLE}.reportpd
+    
+  - dimension_group: report_period
+    hidden: true
+    type: time
+    timeframes: [year, month, raw]
+    sql: ${TABLE}.reportperiod
     
   ######################################
   #Measures, should all contain a label#

@@ -9,4 +9,5 @@ Click the "Edit" button above to make changes.
 
 * 1.0.0 -- Initial version of LookML
 * 1.1.0 -- Updated with code from NJUA/WRC
+* 1.1.1 -- Updated claims/policy status views to use derived table
 

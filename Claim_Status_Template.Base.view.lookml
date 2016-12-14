@@ -1,5 +1,476 @@
 - view: claim_status_template
-  sql_table_name: insight.claim_status
+  #sql_table_name: insight.claim_status
+  derived_table:
+    sql: |
+      Select 
+        to_date(nvl(featurekpi.rperiod,claimkpi.report_period),'YYYYMM') as reportperiod,
+        nvl(featurekpi.rperiod,claimkpi.report_period) as reportpd,
+        nvl(featurekpi.claim_num,claimkpi.claim_number) as claimnumber,
+        featurekpi.claimant_code as claimantcode,
+        featurekpi.feature_code as featurecode,
+        featurekpi.update_date as  featureupdatedate,
+        featurekpi.featurestatus,
+        featurekpi.featurestatactivity,
+        featurekpi.featurecloseddate,
+        featurekpi.featurereopendate,
+        featurekpi.featureopendate,
+        featurekpi.featureopenedinmonth,
+        featurekpi.adjuster,
+        featurekpi.adjusterref,
+        featurekpi.exaiminer,
+        featurekpi.exaiminerref,
+        featurekpi.featureclosedinmonth,
+        featurekpi.featurereopeninmonth,
+        featurekpi.featuredaysopen,
+        featurekpi.featuretotaldaysopen,
+        featurekpi.featureclosednopayitd,
+        featurekpi.featureclosednopayytd,
+        featurekpi.featureclosednopaymtd,
+        featurekpi.featurezerooutstanding,
+        featurekpi.featureclosed500lessitd,
+        featurekpi.featureclosed500lessytd,
+        featurekpi.featureclosed500lessmtd,
+        featurekpi.featureclosed1000lessitd,
+        featurekpi.featureclosed1000lessytd,
+        featurekpi.featureclosed1000lessmtd,
+        claimkpi.updatedate as claimupdatedate,
+        claimkpi.claimstatus as claimstatus,
+        claimkpi.statactivity as claimstatusactivity,
+        claimkpi.closeddate,
+        claimkpi.reopendate,
+        claimkpi.claimadddt,
+        claimkpi.openedinmonth,
+        claimkpi.openedinyear,
+        claimkpi.reportinmonth,
+        claimkpi.reportinyear,
+        claimkpi.occurredinmonth,
+        claimkpi.daystoopen,
+        claimkpi.daystoreport,
+        claimkpi.shortdesc,
+        claimkpi.reportedby,
+        claimkpi.reportedto,
+        claimkpi.insiuind,
+        claimkpi.doicomplaintind,
+        claimkpi.suitfiledind,
+        claimkpi.fraudscore,
+        claimkpi.fraudscoredescription,
+        claimkpi.closedinmonth,
+        claimkpi.closedinyear,
+        claimkpi.reopeninmonth,
+        claimkpi.daysopen,
+        claimkpi.totaldaysopen,
+        claimkpi.closednopayitd,
+        claimkpi.closednopayytd,
+        claimkpi.closednopaymtd,
+        claimkpi.closednopayitdyearend,
+        claimkpi.closednopayytdyearend,
+        claimkpi.zerooutstanding,
+        claimkpi.closed500lessitd,
+        claimkpi.closed500lessytd,
+        claimkpi.closed500lessmtd,
+        claimkpi.closed1000lessitd,
+        claimkpi.closed1000lessytd,
+        claimkpi.closed1000lessmtd
+      From
+      (
+      Select
+            feature1.reportperiod as rperiod,
+            feature1.claimnumber as claim_num,
+            feature1.claimantcd as claimant_code,
+            feature1.featurecd as feature_code,
+            feature1.updatedt as update_date, 
+            feature1.featurestatus,
+            feature1.featurestatactivity,
+            feature1.featurecloseddate,
+            feature1.featurereopendate,
+            feature1.featureopendate,
+            feature1.featureopenedinmonth,
+            feature1.adjuster,
+            feature1.adjusterref,
+            feature1.exaiminer,
+            feature1.exaiminerref,
+            Case When (Cast(Datepart(Year,feature1.featurecloseddate) As varchar) + Right('00'+ Cast(Datepart(Month,feature1.featurecloseddate) As varChar), 2)) = feature1.reportperiod
+                             Then 'Yes'
+                             Else 'No'
+                       End As featureclosedinmonth,
+            Case When (Cast(Datepart(Year,feature1.featurereopendate) As varchar) + Right('00'+ Cast(Datepart(Month,feature1.featurereopendate) As varChar), 2)) = feature1.reportperiod
+                             Then 'Yes'
+                             Else 'No'
+                       End As featurereopeninmonth,    
+            Case When Left(feature1.featurestatus,6) = 'Closed' 
+                        Then datediff(days,isnull(feature1.featurereopendate,feature1.featureopendate),feature1.featurecloseddate)
+                        Else Case When Left(feature1.featurestatus,6) = 'Reopen' 
+                             Then datediff(days,feature1.featurereopendate,feature1.updatedt)
+                             Else datediff(days,feature1.featureopendate,feature1.updatedt) 
+                             End
+                   End As featuredaysopen,
+            Case When Left(feature1.featurestatus,6) = 'Closed' 
+                        Then datediff(days,feature1.featureopendate,feature1.featurecloseddate)
+                        Else datediff(days,feature1.featureopendate,feature1.updatedt) 
+                   End As featuretotaldaysopen,
+            Case When (Cast(Datepart(Year,feature1.featurecloseddate) As varchar) + Right('00'+ Cast(Datepart(Month,feature1.featurecloseddate) As varChar), 2)) = feature1.reportperiod and featurepay.itdpaid  = 0 
+                            Then  'Yes' 
+                            Else 'No'
+                   End As featureclosednopayitd,
+            Case When (Cast(Datepart(Year,feature1.featurecloseddate) As varchar) + Right('00'+ Cast(Datepart(Month,feature1.featurecloseddate) As varChar), 2)) = feature1.reportperiod and featurepay.ytdpaid  = 0 
+                            Then  'Yes' 
+                            Else 'No' 
+                   End As featureclosednopayytd,
+            Case When (Cast(Datepart(Year,feature1.featurecloseddate) As varchar) + Right('00'+ Cast(Datepart(Month,feature1.featurecloseddate) As varChar), 2)) = feature1.reportperiod Then 
+                            Case When featurepay.mtdpaid  = 0 Then  'Yes' Else 'No' End
+                        Else Null
+                   End As featureclosednopaymtd,
+            Case When featurepay.outstanding = 0 Then 'Yes'
+                        Else 'No'
+                   End As featurezerooutstanding,
+            Case When (Cast(Datepart(Year,feature1.featurecloseddate) As varchar) + Right('00'+ Cast(Datepart(Month,feature1.featurecloseddate) As varChar), 2)) = feature1.reportperiod and featurepay.itdpaid  <= 500 
+                            Then  'Yes' 
+                            Else 'No' 
+                   End As featureclosed500lessitd,
+            Case When (Cast(Datepart(Year,feature1.featurecloseddate) As varchar) + Right('00'+ Cast(Datepart(Month,feature1.featurecloseddate) As varChar), 2)) = feature1.reportperiod and featurepay.ytdpaid  <= 500 
+                            Then  'Yes' 
+                            Else 'No' 
+                   End As featureclosed500lessytd,
+            Case When (Cast(Datepart(Year,feature1.featurecloseddate) As varchar) + Right('00'+ Cast(Datepart(Month,feature1.featurecloseddate) As varChar), 2)) = feature1.reportperiod and featurepay.mtdpaid <= 500 
+                            Then  'Yes' 
+                            Else 'No' 
+                   End As featureclosed500lessmtd,
+            Case When (Cast(Datepart(Year,feature1.featurecloseddate) As varchar) + Right('00'+ Cast(Datepart(Month,feature1.featurecloseddate) As varChar), 2)) = feature1.reportperiod and featurepay.itdpaid  <= 1000 
+                            Then  'Yes' 
+                            Else 'No' 
+                   End As featureclosed1000lessitd,
+            Case When (Cast(Datepart(Year,feature1.featurecloseddate) As varchar) + Right('00'+ Cast(Datepart(Month,feature1.featurecloseddate) As varChar), 2)) = feature1.reportperiod 
+                and featurepay.ytdpaid  <= 1000 
+                  Then  'Yes' 
+                  Else 'No' 
+                   End As featureclosed1000lessytd,
+            Case When (Cast(Datepart(Year,feature1.featurecloseddate) As varchar) + Right('00'+ Cast(Datepart(Month,feature1.featurecloseddate) As varChar), 2)) = feature1.reportperiod  and featurepay.mtdpaid <= 1000 
+                            Then  'Yes' 
+                            Else 'No' 
+                   End As featureclosed1000lessmtd
+      From
+      
+         (
+          Select fstatus.reportperiod,fstatus.claimnumber,fstatus.claimantcd,fstatus.featurecd,fstatus.updatedt,
+                 Case When fstatus.featurestatus  isNull Then lag(fstatus.featurestatus,1)  Ignore Nulls over (Partition by fstatus.claimnumber,fstatus.claimantcd,fstatus.featurecd order by fstatus.reportperiod)
+                 Else fstatus.featurestatus
+                 End, 
+                 fstatus.featurestatactivity,
+                 Case When fstatus.featurecloseddate  isNull Then lag(fstatus.featurecloseddate,1)  Ignore Nulls over (Partition by fstatus.claimnumber,fstatus.claimantcd,fstatus.featurecd order by fstatus.reportperiod)
+                 Else fstatus.featurecloseddate
+                 End,
+                 Case When fstatus.featurereopendate  isNull Then lag(fstatus.featurereopendate,1)  Ignore Nulls over (Partition by fstatus.claimnumber,fstatus.claimantcd,fstatus.featurecd order by fstatus.reportperiod)
+                 Else fstatus.featurereopendate
+                 End,
+                 opendt.featureopendate,  
+                 Case When (Cast(Datepart(Year,opendt.featureopendate) As varchar) + Right('00'+ Cast(Datepart(Month,opendt.featureopendate) As varChar), 2)) = fstatus.reportperiod
+                       Then 'Yes'
+                       Else 'No'
+                 End As featureopenedinmonth,
+                 Case When fstatus.adjuster  isNull Then lag(fstatus.adjuster,1)  Ignore Nulls over (Partition by fstatus.claimnumber,fstatus.claimantcd,fstatus.featurecd order by fstatus.reportperiod)
+                 Else fstatus.adjuster
+                 End, 
+                 Case When fstatus.adjusterref  isNull Then lag(fstatus.adjusterref,1)  Ignore Nulls over (Partition by fstatus.claimnumber,fstatus.claimantcd,fstatus.featurecd order by fstatus.reportperiod)
+                 Else fstatus.adjusterref
+                 End, 
+                 Case When fstatus.exaiminer  isNull Then lag(fstatus.exaiminer,1)  Ignore Nulls over (Partition by fstatus.claimnumber,fstatus.claimantcd,fstatus.featurecd order by fstatus.reportperiod)
+                 Else fstatus.exaiminer
+                 End, 
+                 Case When fstatus.exaiminerref  isNull Then lag(fstatus.exaiminerref,1)  Ignore Nulls over (Partition by fstatus.claimnumber,fstatus.claimantcd,fstatus.featurecd order by fstatus.reportperiod)
+                 Else fstatus.exaiminerref
+                 End
+          From
+          (
+              Select fpclm.reportperiod,fpclm.claimnumber,fpclm.claimantcd,fpclm.featurecd,fpclm.updatedt,featurestatus.featurestatus,featurestatus.featurestatactivity,featurestatus.featurecloseddate,featurestatus.featurereopendate
+              ,featurestatus.adjuster,featurestatus.adjusterref, featurestatus.exaiminer, featurestatus.exaiminerref
+              From
+              (
+              Select distinct reportperiod,claimnumber,claimantcd,featurecd,updatedt
+              From dw.claimsummarystats
+              ) fpclm
+              Left Join
+              (
+                Select 
+                      ft3.reportperiod As reportperiod,
+                      ft3.updatedt As statusdt,
+                      ft4.claimnumber As claimnumber,             
+                      ft4.claimantcd As claimantcd,
+                      ft4.featurecd As featurecd,
+                      ft4.featurestatuscd As featurestatus,
+                      ft4.adjusterprovidercd As adjuster,
+                      ft4.adjusterproviderref As adjusterref,
+                      ft4.examinerprovidercd As exaiminer,
+                      ft4.examinerproviderref As exaiminerref,
+                      'Yes' As featurestatactivity,
+                      Case When Left(ft4.featurestatuscd,6) = 'Closed' then updatedt else Null End As featurecloseddate,
+                      Case When Left(ft4.featurestatuscd,6) = 'Reopen' then updatedt else Null End As featurereopendate
+                From
+                     (  
+                      Select  
+                           Max(ft1.maxsystemid) As id,
+                           Max(ft1.bookdt) As updatedt, 
+                           Cast(Datepart(Year,Max(ft1.bookdt)) As varchar) + Right('00'+ Cast(Datepart(Month,Max(ft1.bookdt)) As varChar), 2) As reportperiod, 
+                           ft1.claimnumber, ft1.claimantcd,ft1.featurecd
+                       From
+                           (Select bookdt,
+                                   claimnumber,
+                                   claimantcd,
+                                   featurecd, 
+                                   max(systemid) as maxsystemid  
+                            From dw.claimstats
+                            Group By bookdt,claimnumber,claimantcd,featurecd
+                            Having max(systemid)) ft1   
+                            Left Join
+                            dw.claimstats ft2
+                            On ft1.maxsystemid = ft2.systemid 
+                            Group By 
+                            Cast(Datepart(Year,ft1.bookdt) As varchar) + Right('00'+ Cast(Datepart(Month,ft1.bookdt) As varChar), 2), 
+                            ft1.claimnumber, ft1.claimantcd,ft1.featurecd
+                            Having Max(ft1.maxsystemid)          
+                      ) ft3
+                      Left Join 
+                      dw.claimstats ft4  
+                      On ft3.id = ft4.systemid     
+          ) featurestatus
+              On fpclm.reportperiod = featurestatus.reportperiod 
+              and fpclm.claimnumber = featurestatus.claimnumber 
+              and fpclm.claimantcd = featurestatus.claimantcd 
+              and fpclm.featurecd = featurestatus.featurecd
+          ) fstatus
+          Left Join 
+          (
+          Select claimnumber,claimantcd,featurecd, min(adddt) as featureopendate
+          From dw.claimstats 
+          group by claimnumber,claimantcd,featurecd
+          ) opendt
+          On fstatus.claimnumber = opendt.claimnumber and fstatus.claimantcd = opendt.claimantcd and fstatus.featurecd = opendt.featurecd
+          ) feature1
+          Left Join
+          (Select css.reportperiod,css.claimnumber,css.claimantcd,css.featurecd,
+                         Sum(itdpaidamt) As itdpaid,
+                         Sum(mtdpaidamt) As mtdpaid,
+                         Sum(ytdpaidamt) As ytdpaid,
+                         Sum(outstandingamt)  As outstanding
+          From dw.claimsummarystats css
+          Group By css.reportperiod,css.claimnumber,css.claimantcd,css.featurecd
+          ) featurepay
+           On feature1.reportperiod = featurepay.reportperiod 
+              and feature1.claimnumber = featurepay.claimnumber 
+              and feature1.claimantcd = featurepay.claimantcd 
+              and feature1.featurecd = featurepay.featurecd
+      
+      ) featurekpi
+      Full Outer Join 
+      (
+      Select   ckpi1.reportperiod as report_period,
+               ckpi1.claimnumber as claim_number,
+               ckpi1.updatedt as updatedate,
+               ckpi1.statactivity,
+               ckpi1.status as claimstatus,
+               ckpi1.closeddate,
+               ckpi1.reopendate,
+               ckpi1.claimadddt,
+               ckpi1.openedinmonth,
+               ckpi1.openedinyear,
+               ckpi1.reportinmonth,
+               ckpi1.reportinyear,
+               ckpi1.occurredinmonth,
+               ckpi1.daystoopen,
+               ckpi1.daystoreport,
+               ckpi1.shortdesc,
+               ckpi1.reportedby,
+               ckpi1.reportedto,
+               ckpi1.insiuind,
+               ckpi1.doicomplaintind,
+               ckpi1.suitfiledind,
+               ckpi1.fraudscore,
+               ckpi1.fraudscoredescription,
+               Case When (Cast(Datepart(Year,ckpi1.closeddate) As varchar) + Right('00'+ Cast(Datepart(Month,ckpi1.closeddate) As varChar), 2)) = ckpi1.reportperiod
+                         Then 'Yes'
+                         Else 'No'
+                   End As closedinmonth,
+               Case When Cast(Datepart(Year,ckpi1.closeddate) As varchar)  = Left(ckpi1.reportperiod,4) and ckpi1.status = 'Closed'
+                         Then 'Yes'
+                         Else 'No'
+                   End As closedinyear,    
+               Case When (Cast(Datepart(Year,ckpi1.reopendate) As varchar) + Right('00'+ Cast(Datepart(Month,ckpi1.reopendate) As varChar), 2)) = ckpi1.reportperiod
+                         Then 'Yes'
+                         Else 'No'
+                   End As reopeninmonth,    
+               Case When Left(ckpi1.status,6) = 'Closed' 
+                    Then datediff(days,isnull(ckpi1.reopendate,ckpi1.claimadddt),ckpi1.closeddate)
+                    Else Case When Left(ckpi1.status,6) = 'Reopen' 
+                         Then datediff(days,ckpi1.reopendate,ckpi1.updatedt)
+                         Else datediff(days,ckpi1.claimadddt,ckpi1.updatedt) 
+                         End
+               End As daysopen,
+                  Case When Left(ckpi1.status,6) = 'Closed' 
+                    Then datediff(days,ckpi1.claimadddt,ckpi1.closeddate)
+                    Else datediff(days,ckpi1.claimadddt,ckpi1.updatedt) 
+               End As totaldaysopen,
+               Case When (Cast(Datepart(Year,ckpi1.closeddate) As varchar) + Right('00'+ Cast(Datepart(Month,ckpi1.closeddate) As varChar), 2)) = ckpi1.reportperiod and 
+                        ckpi2.itdpaid  = 0 
+                    Then  'Yes' 
+                    Else 'No' 
+               End As closednopayitd,
+                Case When (Cast(Datepart(Year,ckpi1.closeddate) As varchar) + Right('00'+ Cast(Datepart(Month,ckpi1.closeddate) As varChar), 2)) = ckpi1.reportperiod  
+                        and ckpi2.ytdpaid  = 0 
+                    Then  'Yes' 
+                    Else 'No' 
+               End As closednopayytd,
+               Case When (Cast(Datepart(Year,ckpi1.closeddate) As varchar) + Right('00'+ Cast(Datepart(Month,ckpi1.closeddate) As varChar), 2)) = ckpi1.reportperiod and ckpi2.mtdpaid  = 0 
+                    Then  'Yes' 
+                    Else 'No' 
+               End As closednopaymtd,
+               Case When Cast(Datepart(Year,ckpi1.closeddate) As varchar)  = Left(ckpi1.reportperiod,4) and ckpi1.status = 'Closed' and ckpi2.itdpaid  = 0 
+                    Then  'Yes' 
+                    Else 'No' 
+               End As closednopayitdyearend,
+               Case When Cast(Datepart(Year,ckpi1.closeddate) As varchar)  = Left(ckpi1.reportperiod,4) and ckpi1.status = 'Closed' and ckpi2.ytdpaid  = 0 
+                  Then  'Yes' 
+                  Else 'No' 
+                  End As closednopayytdyearend,
+               Case When outstanding = 0 Then 'Yes'
+                    Else 'No'
+               End As zerooutstanding,
+                 Case When (Cast(Datepart(Year,ckpi1.closeddate) As varchar) + Right('00'+ Cast(Datepart(Month,ckpi1.closeddate) As varChar), 2)) = ckpi1.reportperiod and
+                        ckpi2.itdpaid  <= 500 
+                        Then  'Yes' 
+                        Else 'No' 
+               End As closed500lessitd,
+                Case When (Cast(Datepart(Year,ckpi1.closeddate) As varchar) + Right('00'+ Cast(Datepart(Month,ckpi1.closeddate) As varChar), 2)) = ckpi1.reportperiod and ckpi2.ytdpaid  <= 500 
+                  Then  'Yes' 
+                  Else 'No' 
+               End As closed500lessytd,
+                Case When (Cast(Datepart(Year,ckpi1.closeddate) As varchar) + Right('00'+ Cast(Datepart(Month,ckpi1.closeddate) As varChar), 2)) = ckpi1.reportperiod   
+                        and ckpi2.mtdpaid <= 500 
+                        Then  'Yes' 
+                        Else 'No' 
+               End As closed500lessmtd,
+               Case When (Cast(Datepart(Year,ckpi1.closeddate) As varchar) + Right('00'+ Cast(Datepart(Month,ckpi1.closeddate) As varChar), 2)) = ckpi1.reportperiod and
+                         ckpi2.itdpaid  <= 1000 
+                         Then  'Yes' 
+                         Else 'No' 
+               End As closed1000lessitd,
+                Case When (Cast(Datepart(Year,ckpi1.closeddate) As varchar) + Right('00'+ Cast(Datepart(Month,ckpi1.closeddate) As varChar), 2)) = ckpi1.reportperiod and
+                         ckpi2.ytdpaid  <= 1000 
+                         Then  'Yes' 
+                         Else 'No'
+               End As closed1000lessytd,
+               Case When (Cast(Datepart(Year,ckpi1.closeddate) As varchar) + Right('00'+ Cast(Datepart(Month,ckpi1.closeddate) As varChar), 2)) = ckpi1.reportperiod and
+                         ckpi2.mtdpaid <= 1000 
+                         Then  'Yes' 
+                         Else 'No'
+               End As closed1000lessmtd
+        From 
+        (
+            Select cstatus.reportperiod,cstatus.claimnumber,cstatus.updatedt,
+                   Case When cstatus.status  isNull Then lag(cstatus.status,1)  Ignore Nulls over (Partition by cstatus.claimnumber order by cstatus.reportperiod)
+                   Else cstatus.status
+                   End, 
+                   cstatus.statactivity,
+                   Case When cstatus.closeddate  isNull Then lag(cstatus.closeddate,1)  Ignore Nulls over (Partition by cstatus.claimnumber order by cstatus.reportperiod)
+                   Else cstatus.closeddate
+                   End,
+                   Case When cstatus.reopendate  isNull Then lag(cstatus.reopendate,1)  Ignore Nulls over (Partition by cstatus.claimnumber order by cstatus.reportperiod)
+                   Else cstatus.reopendate
+                   End,
+                   c.adddt As claimadddt,
+                   Case When (Cast(Datepart(Year,c.adddt) As varchar) + Right('00'+ Cast(Datepart(Month,c.adddt) As varChar), 2)) = cstatus.reportperiod
+                         Then 'Yes'
+                         Else 'No'
+                   End As openedinmonth,
+                    Case When Cast(Datepart(Year,c.adddt) As varchar)  = Left(cstatus.reportperiod,4)
+                         Then 'Yes'
+                         Else 'No'
+                   End As openedinyear,
+                   Case When (Cast(Datepart(Year,c.reporteddt) As varchar) + Right('00'+ Cast(Datepart(Month,c.reporteddt) As varChar), 2)) = cstatus.reportperiod
+                         Then 'Yes'
+                         Else 'No'
+                   End As reportinmonth,
+                  Case When Cast(Datepart(Year,c.reporteddt) As varchar) = Left(cstatus.reportperiod,4)
+                         Then 'Yes'
+                         Else 'No'
+                   End As reportinyear,
+                   Case When (Cast(Datepart(Year,c.lossdt) As varchar) + Right('00'+ Cast(Datepart(Month,c.lossdt) As varChar), 2)) = cstatus.reportperiod
+                         Then 'Yes'
+                         Else 'No'
+                   End As occurredinmonth,
+                   datediff(days,c.lossdt,c.adddt) As daystoopen,
+                   datediff(days,c.lossdt,c.reporteddt) As daystoreport,
+                   c.shortdesc,
+                   c.reportedby,
+                   c.reportedto,
+                   c.insiuind,
+                   c.doicomplaintind,
+                   c.suitfiledind,
+                   Null As fraudscore,
+                   Null As fraudscoredescription
+            From
+            (
+                Select rpclm.reportperiod,rpclm.claimnumber,rpclm.updatedt,status.status,status.statactivity,status.closeddate,status.reopendate
+                From
+                (
+                Select distinct reportperiod,claimnumber,updatedt
+                From dw.claimsummarystats
+                ) rpclm
+                Left Join
+                (
+                  Select 
+                        st3.reportperiod As reportperiod,
+                        st3.updatedt As statusdt,
+                        st4.claimnumber As claimnumber,
+                        st4.claimstatuscd As status,
+                        'Yes' As statactivity,
+                        Case When Left(st4.claimstatuscd,6) = 'Closed' then updatedt else Null End As closeddate,
+                        Case When Left(st4.claimstatuscd,6) = 'Reopen' then updatedt else Null End As reopendate
+                  From
+                       (  
+                        Select  
+                             Max(st1.maxsystemid) As id,
+                             Max(st1.bookdt) As updatedt, 
+                             Cast(Datepart(Year,Max(st1.bookdt)) As varchar) + Right('00'+ Cast(Datepart(Month,Max(st1.bookdt)) As varChar), 2) As reportperiod, 
+                             st1.claimnumber
+                         From
+                             (Select bookdt,
+                                     claimnumber, 
+                                     max(systemid) as maxsystemid  
+                              From dw.claimstats
+                              Group By bookdt,claimnumber 
+                              Having max(systemid)) st1   
+                              Left Join
+                              dw.claimstats st2
+                              On st1.maxsystemid = st2.systemid 
+                              Group By 
+                              Cast(Datepart(Year,st1.bookdt) As varchar) + Right('00'+ Cast(Datepart(Month,st1.bookdt) As varChar), 2), 
+                              st1.claimnumber
+                              Having Max(st1.maxsystemid)          
+                        ) st3
+                        Left Join 
+                        dw.claimstats st4  
+                        On st3.id = st4.systemid     
+            ) status
+                On rpclm.reportperiod = status.reportperiod and rpclm.claimnumber = status.claimnumber
+            ) cstatus
+            Left Join dw.claim c
+            On cstatus.claimnumber = c.claimnumber
+        ) ckpi1
+        Left Join
+        (
+        Select reportperiod,claimnumber,
+               Sum(itdpaidamt) As itdpaid,
+               Sum(mtdpaidamt) As mtdpaid,
+               Sum(ytdpaidamt) As ytdpaid,
+               Sum(outstandingamt)  As outstanding
+        From dw.claimsummarystats 
+        Group By reportperiod,claimnumber
+        ) ckpi2
+        On ckpi2.reportperiod =  ckpi1.reportperiod and  ckpi2.claimnumber = ckpi1.claimnumber
+      ) claimkpi
+            On featurekpi.rperiod = claimkpi.report_period 
+                    and featurekpi.claim_num = claimkpi.claim_number
+  
+  
   fields:
 
   # - dimension: activity_in_month
@@ -380,10 +851,11 @@
     sql: ${TABLE}.reportpd
     hidden: true 
   
-  - dimension: reportperiod
+  - dimension_group: report_period
     hidden: true
     view_label: 'Report Dates'
-    type: string
+    type: time
+    timeframes: [month, year, raw]
     sql: ${TABLE}.reportperiod
 
   - dimension: short_desc
