@@ -46,11 +46,6 @@
     label: "Annual Statement Line Code"
     sql: ${TABLE}.annualstatementlinecd
 
-  - dimension: areasofcoverage
-    hidden: true
-    label: "Areas of Coverage"
-    sql: ${TABLE}.areasofcoverage
-
   - dimension: assigneddriver
     hidden: true
     label: "Assigned Driver"
@@ -77,16 +72,6 @@
     type: time
     timeframes: [date, week, month]
     sql: ${TABLE}.bookdt
-
-  - dimension: buildinglimit
-    hidden: true
-    label: "Building Limit"
-    sql: ${TABLE}.buildinglimit
-
-  - dimension: businessclass
-    hidden: true
-    label: "Business Class"
-    sql: ${TABLE}.businessclass
 
   - dimension: businesssourcecd
     label: "Business Source Code"
@@ -478,7 +463,6 @@
     sql: ${TABLE}.pointscharged
 
   - dimension: policyformcode
-    hidden: true
     label: "Policy Form"
     sql: ${TABLE}.policyformcode
 
@@ -528,11 +512,6 @@
   - dimension: policyyear
     label: "Policy Year"
     sql: ${TABLE}.policyyear
-
-  - dimension: postalcode
-    hidden: true
-    label: "Postal Code"
-    sql: ${TABLE}.postalcode
 
   - dimension: previouscarriercd
     label: "Previous Carrier"
