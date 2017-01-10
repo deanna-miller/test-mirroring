@@ -1084,6 +1084,7 @@
     label: 'Paid Loss ITD for Features Closed in Month'
     description: 'Paid ITD for Features Closed in Month'
     type: sum
+    value_format: "#,##0.00"
     sql: ${itdpaidamt}
     filters:
       feature_closed_in_month: "Yes"
@@ -1123,6 +1124,7 @@
     label: 'Paid Loss ITD for Claims Closed in Month'
     description: 'Paid ITD for Claims Closed in Month'
     type: sum
+    value_format: "#,##0.00"
     sql: ${itdpaidamt}
     filters:
       closed_in_month: "Yes"
@@ -1264,6 +1266,7 @@
     label: 'Incurred Loss for Open Claims'
     description: 'Incurred Loss for Open Claims'
     type: sum
+    value_format: "#,##0.00"
     sql: ${itdincurredamt} 
     filter: 
      claim_status: "Reopen,Reopen-Adjustment,Reopen-Recovery,Open,Open-Adjustment,Open-Recovery" 
@@ -1272,6 +1275,7 @@
     hidden: true
     label: 'Reserve for Open Claims'
     type: sum
+    value_format: "#,##0.00"
     sql: ${outstandingamt} 
     filter: 
      claim_status: "Reopen,Reopen-Adjustment,Reopen-Recovery,Open,Open-Adjustment,Open-Recovery"

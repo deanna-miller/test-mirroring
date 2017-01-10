@@ -144,12 +144,132 @@
  
   fields:
   
-  - measure: count
-    view_label: Counts
-    label: 
+  - dimension: carriercd
+    view_label: Policy Classification
+    label: 'Carrier'
     description:
-    type: count
-    drill_fields: detail*
+    type: string
+    sql: ${TABLE}.carriercd
+    
+  - dimension: carriergroupcd
+    view_label: Policy Classification
+    label: 'Carrier Group'
+    description:
+    type: string
+    sql: ${TABLE}.carriergroupcd
+
+  - dimension: catastrophenumber
+    view_label: Claim Details
+    label: 'Catastrophe Number'
+    description:
+    type: string
+    sql: ${TABLE}.catastrophenumber
+  
+  - dimension: catastropheref
+    view_label: Claim Details
+    label: 'Catastrophe Reference'
+    description:
+    type: string
+    sql: ${TABLE}.catastropheref
+
+  - dimension: claimnumber
+    view_label: Claim Details
+    label: 'Claim Number'
+    description:
+    type: string
+    sql: ${TABLE}.claimnumber
+
+  - dimension: claimref
+    view_label: Claim Details
+    label: 'Claim Ref'
+    description:
+    type: string
+    sql: ${TABLE}.claimref
+
+  - dimension: customerref
+    view_label: Policy Contacts
+    label: 'Customer Reference'
+    description:
+    type: string
+    sql: ${TABLE}.customerref
+
+  - dimension: losscausecd
+    view_label: Claim Details
+    label: 'Loss Cause'
+    description:
+    type: string
+    sql: ${TABLE}.losscausecd
+
+  - dimension: lossdt
+    view_label: Claim Dates
+    label: 'Loss Date'
+    description:
+    type: date
+    sql: ${TABLE}.lossdt
+
+  - dimension: lossyear
+    view_label: Claim Dates
+    label: 'Loss Year'
+    description:
+    type: string
+    sql: ${TABLE}.lossyear    
+  
+  - dimension: policynumber
+    view_label: Policy Coverage Terms
+    label: 'Policy Number'
+    description:
+    type: string
+    sql: ${TABLE}.policynumber
+
+  - dimension: policyref
+    view_label: Policy Coverage Terms
+    label: 'Policy Ref'
+    description:
+    type: string
+    sql: ${TABLE}.policyref
+
+  - dimension: policyversion
+    view_label: Policy Coverage Terms
+    label: 'Policy Version'
+    description:
+    type: string
+    sql: ${TABLE}.policyversion
+
+  - dimension: policyyear
+    view_label: Policy Coverage Terms
+    label: 'Policy Year'
+    description:
+    type: string
+    sql: ${TABLE}.policyyear
+  
+  - dimension: producerprovidercd
+    view_label: Policy Contacts
+    label: 'Producer Code'
+    description:
+    type: string
+    sql: ${TABLE}.producerprovidercd
+
+  - dimension: productname
+    view_label: Policy Classification
+    label: 'Product Name'
+    description:
+    type: string
+    sql: ${TABLE}.productname
+
+  - dimension: statecd
+    view_label: Location
+    label: 'State Code'
+    description:
+    type: string
+    sql: ${TABLE}.statecd
+
+  - dimension: reportdt
+    hidden: true
+    view_label: Claim Dates
+    label: 'Report Date'
+    description:
+    type: date
+    sql: ${TABLE}.reportdt
 
   - dimension: reportperiod
     hidden: true
@@ -166,280 +286,363 @@
     convert_tz: false
     timeframes: [month, year]
     sql: ${TABLE}.updatedt   
-
-  - dimension: claimnumber
-    view_label: Claim Details
-    label: 'Claim Number'
-    description:
-    type: string
-    sql: ${TABLE}.claimnumber
-
+  
   - dimension: updatedt
     view_label: Report Period
     label: 'Update'
     description:
     type: date
-    sql: ${TABLE}.updatedt    
+    sql: ${TABLE}.updatedt  
     
-  - dimension: lossdt
-    view_label: Claim Dates
-    label: 'Loss Date'
+  ############################
+  #####   MEASURES   #########
+  ############################
+  
+  - measure: count
+    view_label: Counts
+    label: 
     description:
-    type: date
-    sql: ${TABLE}.lossdt
+    type: count
+    drill_fields: detail*
     
-  - dimension: reportdt
-    hidden: true
-    view_label: Claim Dates
-    label: 'Report Date'
-    description:
-    type: date
-    sql: ${TABLE}.reportdt
-    
-  - dimension: policyyear
-    view_label: Policy Coverage Terms
-    label: 'Policy Year'
-    description:
-    type: date
-    sql: ${TABLE}.policyyear
-    
-  - dimension: lossyear
-    view_label: Claim Dates
-    label: 'Loss Year'
-    description:
-    type: date
-    sql: ${TABLE}.lossyear    
-    
-  - dimension: policyref
-    view_label: Policy Coverage Terms
-    label: 'Policy Ref'
-    description:
-    type: string
-    sql: ${TABLE}.policyref
-    
-  - dimension: policynumber
-    view_label: Policy Coverage Terms
-    label: 'Policy Number'
-    description:
-    type: string
-    sql: ${TABLE}.policynumber
-    
-  - dimension: policyversion
-    view_label: Policy Coverage Terms
-    label: 'Policy Version'
-    description:
-    type: string
-    sql: ${TABLE}.policyversion
-    
-  - dimension: producerprovidercd
-    view_label: Policy Contacts
-    label: 'Producer Code'
-    description:
-    type: string
-    sql: ${TABLE}.producerprovidercd
-    
-  - dimension: statecd
-    view_label: Location
-    label: 'State Code'
-    description:
-    type: string
-    sql: ${TABLE}.statecd
-    
-  - dimension: claimref
-    view_label: Claim Details
-    label: 'Claim Ref'
-    description:
-    type: string
-    sql: ${TABLE}.claimref
-    
-  - dimension: carriercd
-    view_label: Policy Classification
-    label: 'Carrier'
-    description:
-    type: string
-    sql: ${TABLE}.carriercd
-    
-  - dimension: carriergroupcd
-    view_label: Policy Classification
-    label: 'Carrier Group'
-    description:
-    type: string
-    sql: ${TABLE}.carriergroupcd
-    
-  - dimension: losscausecd
-    view_label: Claim Details
-    label: 'Loss Cause'
-    description:
-    type: string
-    sql: ${TABLE}.losscausecd
-    
-  - dimension: productname
-    view_label: Policy Classification
-    label: 'Product Name'
-    description:
-    type: string
-    sql: ${TABLE}.productname
-    
-  - dimension: customerref
-    view_label: Policy Contacts
-    label: 'Customer Reference'
-    description:
-    type: string
-    sql: ${TABLE}.customerref
-    
-  - dimension: catastropheref
-    view_label: Claim Details
-    label: 'Catastrophe Reference'
-    description:
-    type: string
-    sql: ${TABLE}.catastropheref
-    
-  - dimension: catastrophenumber
-    view_label: Claim Details
-    label: 'Catastrophe Number'
-    description:
-    type: string
-    sql: ${TABLE}.catastrophenumber
-    
-  - measure: outstandingamt
-    view_label: Point In Time Measures
-    label: 'Outstanding Reserve'
-    description: 'The reserve total at the end of the period'
-    type: sum
-    sql: ${TABLE}.outstandingamt
-    
-  - measure: prioryearendoutstandingamt
-    view_label: Point In Time Measures
-    label: 'Prior Year End Outstanding Reserve'
-    description: 'The reserve total at the end of the previous period'
-    type: number
-    sql: (${claim_level_summary.outstandingamt}-${claim_level_summary.ytdreservechangeamt})
-
-  - measure: mtdreservechangeamt
-    view_label: Month to Date Measures
-    label: 'Resereve Change MTD'
-    description: 'The reserve change during the month'
-    type: sum
-    sql: ${TABLE}.mtdreservechangeamt
-
-  - measure: ytdreservechangeamt
-    view_label: Year To Date Measures
-    label: 'Resereve Change YTD'
-    description: 'The reserve change during the year'  
-    type: sum
-    sql: ${TABLE}.ytdreservechangeamt
-
-  - measure: outstandingexpectedrecoveryamt
-    view_label: Point In Time Measures
-    label: 'Outstanding Expected Recovery'
-    description: 'The outstanding expected recovery not recieved'
-    type: sum
-    sql: ${TABLE}.outstandingexpectedrecoveryamt
-
-  - measure: mtdexpectedrecoverychangeamt
-    view_label: Month to Date Measures
-    label: 'Expected Recovery Change MTD'
-    description: 'The expected recovery change in month'
-    type: sum
-    sql: ${TABLE}.mtdexpectedrecoverychangeamt
-
-  - measure: ytdexpectedrecoverychangeamt
-    view_label: Year To Date Measures
-    label: 'Expected Recovery Change YTD'
-    description: 'The expected recovery change in year'
-    type: sum
-    sql: ${TABLE}.ytdexpectedrecoverychangeamt
-
-  - measure: itdpaidamt
+  - measure: cededitdincurredamt
     view_label: Inception To Date Measures
-    label: 'Paid Loss ITD'
-    description: 'Paid Loss from inception of claim'
+    label: 'Ceded Incurred Loss ITD'
+    description: 'Ceded Incurred Loss since inception'
     type: sum
-    sql: ${TABLE}.itdpaidamt
+    value_format: "#,##0.00"
+    sql: ${TABLE}.cededitdincurredamt
 
-  - measure: mtdpaidamt
-    view_label: Month to Date Measures
-    label: 'Paid Loss MTD'
-    description: 'Paid Loss during month'
-    type: sum
-    sql: ${TABLE}.mtdpaidamt
-
-  - measure: ytdpaidamt
-    view_label: Year To Date Measures
-    label: 'Paid Loss YTD'
-    description: 'Paid Loss during year'
-    type: sum
-    sql: ${TABLE}.ytdpaidamt
-
-  - measure: itdpostedrecoveryamt
+  - measure: cededitdincurrednetrecoveryamt
     view_label: Inception To Date Measures
-    label: 'Recovery Posted ITD'
-    description: 'Recovery received from inception'
+    label: 'Ceded Incurred Loss Net Reinsurance Recovery ITD'
+    description: 'Ceded Incurred Loss Net Reinsurance Recovery since inception'
     type: sum
-    sql: ${TABLE}.itdpostedrecoveryamt
+    value_format: "#,##0.00"
+    sql: ${TABLE}.cededitdincurrednetrecoveryamt
 
-  - measure: mtdpostedrecoveryamt
-    view_label: Month to Date Measures
-    label: 'Recovery Posted MTD'
-    description: 'Recovery received during month'
-    type: sum
-    sql: ${TABLE}.mtdpostedrecoveryamt
-
-  - measure: ytdpostedrecoveryamt
-    view_label: Year To Date Measures
-    label: 'Recovery Posted YTD'
-    description: 'Recovery received during year'
-    type: sum
-    sql: ${TABLE}.ytdpostedrecoveryamt
-
-  - measure: itdincurredamt
+  - measure: cededitdpaidamt
     view_label: Inception To Date Measures
-    label: 'Incurred Loss ITD'
-    description: 'Incurred Loss since inception'
+    label: 'Ceded Paid Loss ITD'
+    description: 'Ceded Paid Loss from inception of claim'
     type: sum
-    sql: ${TABLE}.itdincurredamt
+    value_format: "#,##0.00"
+    sql: ${TABLE}.cededitdpaidamt
 
-  - measure: mtdincurredamt
-    view_label: Month to Date Measures
-    label: 'Incurred Loss MTD'
-    description: 'Incurred Loss during month'
-    type: sum
-    sql: ${TABLE}.mtdincurredamt
-
-  - measure: ytdincurredamt
-    view_label: Year To Date Measures
-    label: 'Incurred Loss YTD'
-    description: 'Incurred Loss during year'
-    type: sum
-    sql: ${TABLE}.ytdincurredamt
-
-  - measure: itdincurrednetrecoveryamt
+  - measure: cededitdpostedrecoveryamt
     view_label: Inception To Date Measures
-    label: 'Incurred Loss Net Recovery ITD'
-    description: 'Incurred Loss Net Recovery since inception'
+    label: 'Posted Reinsurance Recovery ITD'
+    description: 'Reinsurance Recovery received from inception'
     type: sum
-    sql: ${TABLE}.itdincurrednetrecoveryamt
+    value_format: "#,##0.00"
+    sql: ${TABLE}.cededitdpostedrecoveryamt
 
-  - measure: mtdincurrednetrecoveryamt
+  - measure: cededmtdexpectedrecoverychangeamt
+    hidden: true  
     view_label: Month to Date Measures
-    label: 'Incurred Loss Net Recovery MTD'
-    description: 'Incurred Loss Net Recovery during month'
+    label: 'Expected Reinsurance Recovery MTD'
+    description: 'The expected reinsurance recovery change in month'
     type: sum
-    sql: ${TABLE}.mtdincurrednetrecoveryamt
+    value_format: "#,##0.00"
+    sql: ${TABLE}.cededmtdexpectedrecoverychangeamt
 
-  - measure: ytdincurrednetrecoveryamt
-    view_label: Year To Date Measures
-    label: 'Incurred Loss Net Recovery YTD'
-    description: 'Incurred Loss Net Recovery during year'
+  - measure: cededmtdincurredamt
+    view_label: Month to Date Measures
+    label: 'Ceded Incurred Loss MTD'
+    description: 'Ceded Incurred Loss during month'
     type: sum
-    sql: ${TABLE}.ytdincurrednetrecoveryamt
+    value_format: "#,##0.00"
+    sql: ${TABLE}.cededmtdincurredamt
+
+  - measure: cededmtdincurrednetrecoveryamt
+    view_label: Month to Date Measures
+    label: 'Ceded Incurred Loss Net Reinsurance Recovery MTD'
+    description: 'Ceded Incurred Loss Net Reinsurance Recovery during month'
+    type: sum
+    value_format: "#,##0.00"
+    sql: ${TABLE}.cededmtdincurrednetrecoveryamt
+    
+  - measure: cededmtdpaidamt
+    view_label: Month to Date Measures
+    label: 'Ceded Paid Loss MTD'
+    description: 'Ceded Paid Loss during month'
+    type: sum
+    value_format: "#,##0.00"
+    sql: ${TABLE}.cededmtdpaidamt
+
+  - measure: cededmtdpostedrecoveryamt
+    view_label: Month to Date Measures
+    label:  'Posted Reinsurance Recovery MTD'
+    description: 'Reinsurance Recovery received during month'
+    type: sum
+    value_format: "#,##0.00"
+    sql: ${TABLE}.cededmtdpostedrecoveryamt
+
+  - measure: cededmtdreservechangeamt
+    view_label: Month to Date Measures
+    label: 'Ceded Resereve Change MTD'
+    description: 'The ceded reserve change during the month'
+    type: sum
+    value_format: "#,##0.00"
+    sql: ${TABLE}.cededmtdreservechangeamt
 
   - measure: cededoutstandingamt
     view_label: Point In Time Measures
     label: 'Ceded Outstanding Reserve'
     description: 'The ceded reserve total at the end of the period'
     type: sum
+    value_format: "#,##0.00"
     sql: ${TABLE}.cededoutstandingamt
+
+  - measure: cededoutstandingexpectedrecoveryamt
+    hidden: true
+    view_label: Point In Time Measures
+    label: 'Outstanding Expected Reinsurance Recovery'
+    description: 'The outstanding expected reinsurance recovery not recieved'
+    type: sum
+    value_format: "#,##0.00"
+    sql: ${TABLE}.cededoutstandingexpectedrecoveryamt
+
+  - measure: cededytdexpectedrecoverychangeamt
+    hidden: true
+    view_label: Year To Date Measures
+    label: 'Expected Reinsurance Recovery YTD'
+    description: 'The ceded expected reinsurance recovery change in year'
+    type: sum
+    value_format: "#,##0.00"
+    sql: ${TABLE}.cededytdexpectedrecoverychangeamt
+
+  - measure: cededytdincurredamt
+    view_label: Year To Date Measures
+    label: 'Ceded Incurred Loss YTD'
+    description: 'Ceded Incurred Loss during year'
+    type: sum
+    value_format: "#,##0.00"
+    sql: ${TABLE}.cededytdincurredamt
+
+  - measure: cededytdincurrednetrecoveryamt
+    view_label: Year To Date Measures
+    label: 'Ceded Incurred Loss Net Reinsurance Recovery YTD'
+    description: 'Ceded Incurred Loss Net Reinsurance Recovery during year'
+    type: sum
+    value_format: "#,##0.00"
+    sql: ${TABLE}.cededytdincurrednetrecoveryamt
+
+  - measure: cededytdpaidamt
+    view_label: Year To Date Measures
+    label: 'Ceded Paid Loss YTD'
+    description: 'Ceded Paid Loss during year'
+    type: sum
+    value_format: "#,##0.00"
+    sql: ${TABLE}.cededytdpaidamt
+
+  - measure: cededytdpostedrecoveryamt
+    view_label: Year To Date Measures
+    label: 'Posted Reinsurance Recovery YTD'
+    description: 'Reinsurance Recovery received during year'
+    type: sum
+    value_format: "#,##0.00"
+    sql: ${TABLE}.cededytdpostedrecoveryamt
+
+  - measure: cededytdreservechangeamt
+    label: 'Ceded Resereve Change YTD'
+    description: 'The ceded reserve change during the year'  
+    type: sum
+    value_format: "#,##0.00"
+    view_label: Year To Date Measures
+    sql: ${TABLE}.cededytdreservechangeamt
+
+  - measure: itdincurredamt
+    view_label: Inception To Date Measures
+    label: 'Incurred Loss ITD'
+    description: 'Incurred Loss since inception'
+    type: sum
+    value_format: "#,##0.00"
+    sql: ${TABLE}.itdincurredamt
+
+  - measure: itdincurrednetrecoveryamt
+    view_label: Inception To Date Measures
+    label: 'Incurred Loss Net Recovery ITD'
+    description: 'Incurred Loss Net Recovery since inception'
+    type: sum
+    value_format: "#,##0.00"
+    sql: ${TABLE}.itdincurrednetrecoveryamt
+
+  - measure: itdpaidamt
+    view_label: Inception To Date Measures
+    label: 'Paid Loss ITD'
+    description: 'Paid Loss from inception of claim'
+    type: sum
+    value_format: "#,##0.00"
+    sql: ${TABLE}.itdpaidamt
+
+  - measure: itdpostedrecoveryamt
+    view_label: Inception To Date Measures
+    label: 'Recovery Posted ITD'
+    description: 'Recovery received from inception'
+    type: sum
+    value_format: "#,##0.00"
+    sql: ${TABLE}.itdpostedrecoveryamt
+
+  - measure: mtdexpectedrecoverychangeamt
+    view_label: Month to Date Measures
+    label: 'Expected Recovery Change MTD'
+    description: 'The expected recovery change in month'
+    type: sum
+    value_format: "#,##0.00"
+    sql: ${TABLE}.mtdexpectedrecoverychangeamt
+
+  - measure: mtdincurredamt
+    view_label: Month to Date Measures
+    label: 'Incurred Loss MTD'
+    description: 'Incurred Loss during month'
+    type: sum
+    value_format: "#,##0.00"
+    sql: ${TABLE}.mtdincurredamt
+
+  - measure: mtdincurrednetrecoveryamt
+    view_label: Month to Date Measures
+    label: 'Incurred Loss Net Recovery MTD'
+    description: 'Incurred Loss Net Recovery during month'
+    type: sum
+    value_format: "#,##0.00"
+    sql: ${TABLE}.mtdincurrednetrecoveryamt
+
+  - measure: mtdpaidamt
+    view_label: Month to Date Measures
+    label: 'Paid Loss MTD'
+    description: 'Paid Loss during month'
+    type: sum
+    value_format: "#,##0.00"
+    sql: ${TABLE}.mtdpaidamt
+
+  - measure: mtdpostedrecoveryamt
+    view_label: Month to Date Measures
+    label: 'Recovery Posted MTD'
+    description: 'Recovery received during month'
+    type: sum
+    value_format: "#,##0.00"
+    sql: ${TABLE}.mtdpostedrecoveryamt
+
+  - measure: mtdreservechangeamt
+    view_label: Month to Date Measures
+    label: 'Resereve Change MTD'
+    description: 'The reserve change during the month'
+    type: sum
+    value_format: "#,##0.00"
+    sql: ${TABLE}.mtdreservechangeamt
+
+  - measure: netitdincurredamt
+    view_label: Inception To Date Measures
+    label: 'Net Incurred Loss ITD'
+    description: 'Incurred Loss since inception'
+    type: sum
+    value_format: "#,##0.00"
+    sql: ${TABLE}.netitdincurredamt
+
+  - measure: netitdincurrednetrecoveryamt
+    view_label: Inception To Date Measures
+    label: 'Net Incurred Loss Net Recovery ITD'
+    description: 'Incurred Loss Net Recovery since inception'
+    type: sum
+    value_format: "#,##0.00"
+    sql: ${TABLE}.netitdincurrednetrecoveryamt
+ 
+  - measure: netitdpaidamt
+    view_label: Inception To Date Measures
+    label: 'Net Paid Loss ITD'
+    description: 'Net Paid Loss from inception of claim'
+    type: sum
+    value_format: "#,##0.00"
+    sql: ${TABLE}.netitdpaidamt
+
+  - measure: netmtdincurredamt
+    view_label: Month to Date Measures
+    label: 'Net Incurred Loss MTD'
+    description: 'Net Incurred Loss Net Recovery during month'
+    type: sum
+    value_format: "#,##0.00"
+    sql: ${TABLE}.netmtdincurredamt
+
+  - measure: netmtdincurrednetrecoveryamt
+    view_label: Month to Date Measures
+    label: 'Net Incurred Loss Net Recovery MTD'
+    description: 'Net Incurred Loss Net Recovery during month'
+    type: sum
+    value_format: "#,##0.00"
+    sql: ${TABLE}.netmtdincurrednetrecoveryamt    
+
+  - measure: netmtdpaidamt
+    view_label: Month to Date Measures
+    label: 'Net Paid Loss MTD'
+    description: 'Net Paid Loss during month'
+    type: sum
+    value_format: "#,##0.00"
+    sql: ${TABLE}.netmtdpaidamt
+
+  - measure: netmtdreservechangeamt
+    view_label: Month to Date Measures
+    label: 'Net Resereve Change MTD'
+    description: 'The net reserve change during the month'
+    type: sum
+    value_format: "#,##0.00"
+    sql: ${TABLE}.netmtdreservechangeamt
+
+  - measure: netoutstandingamt
+    view_label: Point In Time Measures
+    label: 'Net Outstanding Reserve'
+    description: 'The net reserve total at the end of the period'
+    type: sum
+    value_format: "#,##0.00"
+    sql: ${TABLE}.netoutstandingamt
+
+  - measure: netytdincurredamt
+    view_label: Year To Date Measures
+    label: 'Net Incurred Loss YTD'
+    description: 'Net Incurred Loss during year'
+    type: sum
+    value_format: "#,##0.00"
+    sql: ${TABLE}.netytdincurredamt
+
+  - measure: netytdincurrednetrecoveryamt
+    view_label: Year To Date Measures
+    label: 'Net Incurred Loss Net Recovery YTD'
+    description: 'Net Incurred Loss Net Recovery during year'
+    type: sum
+    value_format: "#,##0.00"
+    sql: ${TABLE}.netytdincurrednetrecoveryamt
+
+  - measure: netytdpaidamt
+    view_label: Year To Date Measures
+    label: 'Net Paid Loss YTD'
+    description: 'Net Paid Loss during year'
+    type: sum
+    value_format: "#,##0.00"
+    sql: ${TABLE}.netytdpaidamt
+    
+  - measure: netytdreservechangeamt
+    view_label: Year To Date Measures
+    label: 'Net Resereve Change YTD'
+    description: 'The net reserve change during the year'
+    type: sum
+    value_format: "#,##0.00"
+    sql: ${TABLE}.netytdreservechangeamt
+ 
+  - measure: outstandingamt
+    view_label: Point In Time Measures
+    label: 'Outstanding Reserve'
+    description: 'The reserve total at the end of the period'
+    type: sum
+    value_format: "#,##0.00"
+    sql: ${TABLE}.outstandingamt
+
+  - measure: outstandingexpectedrecoveryamt
+    view_label: Point In Time Measures
+    label: 'Outstanding Expected Recovery'
+    description: 'The outstanding expected recovery not recieved'
+    type: sum
+    value_format: "#,##0.00"
+    sql: ${TABLE}.outstandingexpectedrecoveryamt
 
   - measure: prioryearendcededoutstandingamt
     view_label: Point In Time Measures
@@ -448,220 +651,68 @@
     type: number
     sql: (${claim_level_summary.cededoutstandingamt}-${claim_level_summary.cededytdreservechangeamt})
 
-  - measure: cededmtdreservechangeamt
-    view_label: Month to Date Measures
-    label: 'Ceded Resereve Change MTD'
-    description: 'The ceded reserve change during the month'
-    type: sum
-    sql: ${TABLE}.cededmtdreservechangeamt
-
-  - measure: cededytdreservechangeamt
-    label: 'Ceded Resereve Change YTD'
-    description: 'The ceded reserve change during the year'  
-    type: sum
-    view_label: Year To Date Measures
-    sql: ${TABLE}.cededytdreservechangeamt
-
-  - measure: cededoutstandingexpectedrecoveryamt
-    hidden: true
-    view_label: Point In Time Measures
-    label: 'Outstanding Expected Reinsurance Recovery'
-    description: 'The outstanding expected reinsurance recovery not recieved'
-    type: sum
-    sql: ${TABLE}.cededoutstandingexpectedrecoveryamt
-
-  - measure: cededmtdexpectedrecoverychangeamt
-    hidden: true  
-    view_label: Month to Date Measures
-    label: 'Expected Reinsurance Recovery MTD'
-    description: 'The expected reinsurance recovery change in month'
-    type: sum
-    sql: ${TABLE}.cededmtdexpectedrecoverychangeamt
-
-  - measure: cededytdexpectedrecoverychangeamt
-    hidden: true
-    view_label: Year To Date Measures
-    label: 'Expected Reinsurance Recovery YTD'
-    description: 'The ceded expected reinsurance recovery change in year'
-    type: sum
-    sql: ${TABLE}.cededytdexpectedrecoverychangeamt
-
-  - measure: cededitdpaidamt
-    view_label: Inception To Date Measures
-    label: 'Ceded Paid Loss ITD'
-    description: 'Ceded Paid Loss from inception of claim'
-    type: sum
-    sql: ${TABLE}.cededitdpaidamt
-
-  - measure: cededmtdpaidamt
-    view_label: Month to Date Measures
-    label: 'Ceded Paid Loss MTD'
-    description: 'Ceded Paid Loss during month'
-    type: sum
-    sql: ${TABLE}.cededmtdpaidamt
-
-  - measure: cededytdpaidamt
-    view_label: Year To Date Measures
-    label: 'Ceded Paid Loss YTD'
-    description: 'Ceded Paid Loss during year'
-    type: sum
-    sql: ${TABLE}.cededytdpaidamt
-
-  - measure: cededitdpostedrecoveryamt
-    view_label: Inception To Date Measures
-    label: 'Posted Reinsurance Recovery ITD'
-    description: 'Reinsurance Recovery received from inception'
-    type: sum
-    sql: ${TABLE}.cededitdpostedrecoveryamt
-
-  - measure: cededmtdpostedrecoveryamt
-    view_label: Month to Date Measures
-    label:  'Posted Reinsurance Recovery MTD'
-    description: 'Reinsurance Recovery received during month'
-    type: sum
-    sql: ${TABLE}.cededmtdpostedrecoveryamt
-
-  - measure: cededytdpostedrecoveryamt
-    view_label: Year To Date Measures
-    label: 'Posted Reinsurance Recovery YTD'
-    description: 'Reinsurance Recovery received during year'
-    type: sum
-    sql: ${TABLE}.cededytdpostedrecoveryamt
-
-  - measure: cededitdincurredamt
-    view_label: Inception To Date Measures
-    label: 'Ceded Incurred Loss ITD'
-    description: 'Ceded Incurred Loss since inception'
-    type: sum
-    sql: ${TABLE}.cededitdincurredamt
-
-  - measure: cededmtdincurredamt
-    view_label: Month to Date Measures
-    label: 'Ceded Incurred Loss MTD'
-    description: 'Ceded Incurred Loss during month'
-    type: sum
-    sql: ${TABLE}.cededmtdincurredamt
-
-  - measure: cededytdincurredamt
-    view_label: Year To Date Measures
-    label: 'Ceded Incurred Loss YTD'
-    description: 'Ceded Incurred Loss during year'
-    type: sum
-    sql: ${TABLE}.cededytdincurredamt
-
-  - measure: cededitdincurrednetrecoveryamt
-    view_label: Inception To Date Measures
-    label: 'Ceded Incurred Loss Net Reinsurance Recovery ITD'
-    description: 'Ceded Incurred Loss Net Reinsurance Recovery since inception'
-    type: sum
-    sql: ${TABLE}.cededitdincurrednetrecoveryamt
-
-  - measure: cededmtdincurrednetrecoveryamt
-    view_label: Month to Date Measures
-    label: 'Ceded Incurred Loss Net Reinsurance Recovery MTD'
-    description: 'Ceded Incurred Loss Net Reinsurance Recovery during month'
-    type: sum
-    sql: ${TABLE}.cededmtdincurrednetrecoveryamt
-
-  - measure: cededytdincurrednetrecoveryamt
-    view_label: Year To Date Measures
-    label: 'Ceded Incurred Loss Net Reinsurance Recovery YTD'
-    description: 'Ceded Incurred Loss Net Reinsurance Recovery during year'
-    type: sum
-    sql: ${TABLE}.cededytdincurrednetrecoveryamt
-
-  - measure: netoutstandingamt
-    view_label: Point In Time Measures
-    label: 'Net Outstanding Reserve'
-    description: 'The net reserve total at the end of the period'
-    type: sum
-    sql: ${TABLE}.netoutstandingamt
-    
   - measure: prioryearendnetoutstandingamt
     view_label: Point In Time Measures
     label: 'Prior Year End Net Outstanding Reserve'
     description: 'The net reserve total at the end of the previous year'
     type: number
     sql: (${claim_level_summary.netoutstandingamt}-${claim_level_summary.netytdreservechangeamt})    
+    
+  - measure: prioryearendoutstandingamt
+    view_label: Point In Time Measures
+    label: 'Prior Year End Outstanding Reserve'
+    description: 'The reserve total at the end of the previous period'
+    type: number
+    sql: (${claim_level_summary.outstandingamt}-${claim_level_summary.ytdreservechangeamt})
 
-  - measure: netmtdreservechangeamt
-    view_label: Month to Date Measures
-    label: 'Net Resereve Change MTD'
-    description: 'The net reserve change during the month'
-    type: sum
-    sql: ${TABLE}.netmtdreservechangeamt
-
-  - measure: netytdreservechangeamt
+  - measure: ytdexpectedrecoverychangeamt
     view_label: Year To Date Measures
-    label: 'Net Resereve Change YTD'
-    description: 'The net reserve change during the year'
+    label: 'Expected Recovery Change YTD'
+    description: 'The expected recovery change in year'
     type: sum
-    sql: ${TABLE}.netytdreservechangeamt
+    value_format: "#,##0.00"
+    sql: ${TABLE}.ytdexpectedrecoverychangeamt
 
-  - measure: netitdpaidamt
-    view_label: Inception To Date Measures
-    label: 'Net Paid Loss ITD'
-    description: 'Net Paid Loss from inception of claim'
-    type: sum
-    sql: ${TABLE}.netitdpaidamt
-
-  - measure: netmtdpaidamt
-    view_label: Month to Date Measures
-    label: 'Net Paid Loss MTD'
-    description: 'Net Paid Loss during month'
-    type: sum
-    sql: ${TABLE}.netmtdpaidamt
-
-  - measure: netytdpaidamt
+  - measure: ytdincurredamt
     view_label: Year To Date Measures
-    label: 'Net Paid Loss YTD'
-    description: 'Net Paid Loss during year'
+    label: 'Incurred Loss YTD'
+    description: 'Incurred Loss during year'
     type: sum
-    sql: ${TABLE}.netytdpaidamt
+    value_format: "#,##0.00"
+    sql: ${TABLE}.ytdincurredamt
 
-  - measure: netitdincurredamt
-    view_label: Inception To Date Measures
-    label: 'Net Incurred Loss ITD'
-    description: 'Incurred Loss since inception'
-    type: sum
-    sql: ${TABLE}.netitdincurredamt
-    
-  - measure: netytdincurredamt
+  - measure: ytdincurrednetrecoveryamt
     view_label: Year To Date Measures
-    label: 'Net Incurred Loss YTD'
-    description: 'Net Incurred Loss during year'
+    label: 'Incurred Loss Net Recovery YTD'
+    description: 'Incurred Loss Net Recovery during year'
     type: sum
-    sql: ${TABLE}.netytdincurredamt
-    
-  - measure: netmtdincurredamt
-    view_label: Month to Date Measures
-    label: 'Net Incurred Loss MTD'
-    description: 'Net Incurred Loss Net Recovery during month'
-    type: sum
-    sql: ${TABLE}.netmtdincurredamt
-    
-  - measure: netitdincurrednetrecoveryamt
-    view_label: Inception To Date Measures
-    label: 'Net Incurred Loss Net Recovery ITD'
-    description: 'Incurred Loss Net Recovery since inception'
-    type: sum
-    sql: ${TABLE}.netitdincurrednetrecoveryamt
-    
-  - measure: netytdincurrednetrecoveryamt
+    value_format: "#,##0.00"
+    sql: ${TABLE}.ytdincurrednetrecoveryamt
+
+  - measure: ytdpaidamt
     view_label: Year To Date Measures
-    label: 'Net Incurred Loss Net Recovery YTD'
-    description: 'Net Incurred Loss Net Recovery during year'
+    label: 'Paid Loss YTD'
+    description: 'Paid Loss during year'
     type: sum
-    sql: ${TABLE}.netytdincurrednetrecoveryamt
-    
-  - measure: netmtdincurrednetrecoveryamt
-    view_label: Month to Date Measures
-    label: 'Net Incurred Loss Net Recovery MTD'
-    description: 'Net Incurred Loss Net Recovery during month'
+    value_format: "#,##0.00"
+    sql: ${TABLE}.ytdpaidamt
+
+  - measure: ytdpostedrecoveryamt
+    view_label: Year To Date Measures
+    label: 'Recovery Posted YTD'
+    description: 'Recovery received during year'
     type: sum
-    sql: ${TABLE}.netmtdincurrednetrecoveryamt    
+    value_format: "#,##0.00"
+    sql: ${TABLE}.ytdpostedrecoveryamt
 
-
+  - measure: ytdreservechangeamt
+    view_label: Year To Date Measures
+    label: 'Resereve Change YTD'
+    description: 'The reserve change during the year'  
+    type: sum
+    value_format: "#,##0.00"
+    sql: ${TABLE}.ytdreservechangeamt
+ 
   sets:
     detail:
       - reportperiod
