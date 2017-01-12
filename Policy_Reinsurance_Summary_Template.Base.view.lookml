@@ -272,6 +272,7 @@
     label: 'Ceded Inforce Amount'
     description:
     type: sum
+    value_format: "#,##0.00"
     sql: ${TABLE}.inforceamt    
     
   - measure: lastinforceamt
@@ -279,6 +280,7 @@
     label: 'Ceded Last Inforce Amount'
     description:
     type: sum
+    value_format: "#,##0.00"
     sql: ${TABLE}.lastinforceamt    
 
   - measure: mtdearnedpremiumamt
@@ -286,6 +288,7 @@
     label: 'Ceded Earned Premium MTD'
     description:    
     type: sum
+    value_format: "#,##0.00"
     sql: ${TABLE}.mtdearnedpremiumamt
 
   - measure: mtdwrittencommissionamt
@@ -293,6 +296,7 @@
     label: 'Ceded Written Commission MTD'
     description:    
     type: sum
+    value_format: "#,##0.00"
     sql: ${TABLE}.mtdwrittencommissionamt
 
   - measure: mtdwrittenpremiumamt
@@ -300,6 +304,7 @@
     label: 'Ceded Written Premium MTD'
     description:    
     type: sum
+    value_format: "#,##0.00"
     sql: ${TABLE}.mtdwrittenpremiumamt    
 
   - measure: ttdearnedpremiumamt
@@ -307,6 +312,7 @@
     label: 'Ceded Earned Premium TTD'
     description:   
     type: sum
+    value_format: "#,##0.00"
     sql: ${TABLE}.ttdearnedpremiumamt
 
   - measure: ttdwrittencommissionamt
@@ -314,6 +320,7 @@
     label: 'Ceded Written Commission TTD'
     description:   
     type: sum
+    value_format: "#,##0.00"
     sql: ${TABLE}.ttdwrittencommissionamt
 
   - measure: ttdwrittenpremiumamt
@@ -321,6 +328,7 @@
     label: 'Ceded Written Premium TTD'
     description:   
     type: sum
+    value_format: "#,##0.00"
     sql: ${TABLE}.ttdwrittenpremiumamt
     
   - measure: unearnedamt
@@ -328,6 +336,7 @@
     label: 'Ceded Unearned Premium'
     description:    
     type: sum
+    value_format: "#,##0.00"
     sql: ${TABLE}.unearnedamt
     
   - measure: ytdearnedpremiumamt
@@ -335,6 +344,7 @@
     label: 'Ceded Earned Premium YTD'
     description:    
     type: sum
+    value_format: "#,##0.00"
     sql: ${TABLE}.ytdearnedpremiumamt
 
   - measure: ytdwrittencommissionamt
@@ -342,6 +352,7 @@
     label: 'Ceded Written Commission YTD'
     description:   
     type: sum
+    value_format: "#,##0.00"
     sql: ${TABLE}.ytdwrittencommissionamt
 
   - measure: ytdwrittenpremiumamt
@@ -349,6 +360,7 @@
     label: 'Ceded Written Premium YTD'
     description:   
     type: sum
+    value_format: "#,##0.00"
     sql: ${TABLE}.ytdwrittenpremiumamt
 
   - measure: count
