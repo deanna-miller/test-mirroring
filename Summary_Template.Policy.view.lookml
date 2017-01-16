@@ -153,9 +153,9 @@
     label: "Expiration Date in Month"
     type: string
     sql: | 
-        Case When (Cast(Datepart(Year,${policy.expirationdt_date}) As varchar) + Right('00'+ Cast(Datepart(Month,${policy.expirationdt_date} As varChar), 2)) = ${reportpd} Then 'Yes'
+        Case When (Cast(Datepart(Year,${TABLE}.expirationdt) As varchar) + Right('00'+ Cast(Datepart(Month,${TABLE}.expirationdt) As varChar), 2)) = ${reportpd} Then 'Yes'
              Else 'No'
-             End   
+             End  
     
   - dimension_group: policy.expirationdt
     label: "Expiration"
@@ -241,14 +241,6 @@
   - dimension: policy.productname
     label: "Product Name"
     sql: ${TABLE}.productname
-    
-  - dimension: policy.reinstateeffectivedtinmonth
-    label: "Reinstate Effective Date in Month"
-    type: string
-    sql: | 
-        Case When (Cast(Datepart(Year,${TABLE}.reinstatedate) As varchar) + Right('00'+ Cast(Datepart(Month,${TABLE}.reinstatedate) As varChar), 2)) = ${reportpd} Then 'Yes'
-             Else 'No'
-             End 
     
   - dimension: policy.statecd
     label: "Policy State"

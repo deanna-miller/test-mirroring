@@ -145,6 +145,14 @@
     label: "Reinstate Effective"
     type: string
     sql: ${TABLE}.reinstateeffective
+    
+  - dimension: reinstateeffectivedtinmonth
+    label: "Reinstate Effective Date in Month"
+    type: string
+    sql: | 
+        Case When (Cast(Datepart(Year,${TABLE}.reinstatedate) As varchar) + Right('00'+ Cast(Datepart(Month,${TABLE}.reinstatedate) As varChar), 2)) = ${reportpd} Then 'Yes'
+             Else 'No'
+             End 
 
   - dimension: reinstateissued
     label: "Reinstate Issued"
@@ -308,7 +316,7 @@
     type: count_distinct
     sql: ${policyref} 
     filters:    
-     policy.reinstateeffectivedtinmonth: 'Yes'   
+     reinstateeffectivedtinmonth: 'Yes'   
      
   - measure: reinstate_issued_count
     view_label: 'Policy Counts'
