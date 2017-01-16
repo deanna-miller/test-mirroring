@@ -13,4 +13,5 @@ Click the "Edit" button above to make changes.
 * 1.1.2 -- Added the Claim/Policy Level Summary and Claim/Policy Reinsurance Summary views 
 * 1.1.3 -- Updated the measures Policy Level Summary and Policy Reinsurance Summary with value_format: "#,##0.00"
 * 1.1.4 -- Move reinstateeffectivedtinmonth dimension from Policy Summary to Policy Status in Base
+* 1.1.5 -- Correct spelling of "Resereve" in the Reinsurance views
 

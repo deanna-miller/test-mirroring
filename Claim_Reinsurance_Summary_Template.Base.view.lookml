@@ -511,7 +511,7 @@
     
   - measure: mtdadjustmentreservechangeamt
     view_label: Month to Date Measures
-    label: 'Ceded Resereve Change MTD'
+    label: 'Ceded Reserve Change MTD'
     description: 'The Ceded adjustment reserve change during the month'
     type: sum
     value_format: "#,##0.00"
@@ -541,7 +541,7 @@
  
   - measure: mtddefensereservechangeamt
     view_label: Month to Date Measures
-    label: 'Ceded Defense Resereve Change MTD'
+    label: 'Ceded Defense Reserve Change MTD'
     description: 'The Ceded defense reserve change during the month'
     type: sum
     value_format: "#,##0.00"
@@ -580,7 +580,7 @@
 
   - measure: mtdexpensereservechangeamt
     view_label: Month to Date Measures
-    label: 'Ceded Expense Resereve Change MTD'
+    label: 'Ceded Expense Reserve Change MTD'
     description: 'The Ceded expense reserve change during the month'
     type: sum
     value_format: "#,##0.00"
@@ -625,7 +625,7 @@
 
   - measure: mtdindemnityreservechangeamt
     view_label: Month to Date Measures
-    label: 'Ceded Indemnity Resereve Change MTD'
+    label: 'Ceded Indemnity Reserve Change MTD'
     description: 'The Ceded indemnity reserve change during the month'
     type: sum
     sql: ${TABLE}.mtdreservechangeamt
@@ -648,7 +648,7 @@
 
   - measure: mtdreservechangeamt
     view_label: Month to Date Measures
-    label: 'Ceded Resereve Change MTD'
+    label: 'Ceded Reserve Change MTD'
     description: 'The Ceded reserve change during the month'
     type: sum
     sql: ${TABLE}.mtdreservechangeamt
@@ -731,7 +731,7 @@
 
   - measure: ytdadjustmentreservechangeamt
     view_label: Year To Date Measures
-    label: 'Ceded Adjustment Resereve Change YTD'
+    label: 'Ceded Adjustment Reserve Change YTD'
     description: 'The Ceded adjustment reserve change during the year'  
     type: sum
     sql: ${TABLE}.ytdreservechangeamt
@@ -758,7 +758,7 @@
 
   - measure: ytddefensereservechangeamt
     view_label: Year To Date Measures
-    label: 'Ceded Defense Resereve Change YTD'
+    label: 'Ceded Defense Reserve Change YTD'
     description: 'The Ceded defense reserve change during the year'  
     type: sum
     sql: ${TABLE}.ytdreservechangeamt
@@ -793,7 +793,7 @@
  
   - measure: ytdexpensereservechangeamt
     view_label: Year To Date Measures
-    label: 'Ceded Expense Resereve Change YTD'
+    label: 'Ceded Expense Reserve Change YTD'
     description: 'The Ceded expense reserve change during the year'  
     type: sum
     sql: ${TABLE}.ytdreservechangeamt
@@ -834,7 +834,7 @@
 
   - measure: ytdindemnityreservechangeamt
     view_label: Year To Date Measures
-    label: 'Ceded Indemnity Resereve Change YTD'
+    label: 'Ceded Indemnity Reserve Change YTD'
     description: 'The Ceded indemnity reserve change during the year'  
     type: sum
     sql: ${TABLE}.ytdreservechangeamt
@@ -857,7 +857,7 @@
 
   - measure: ytdreservechangeamt
     view_label: Year To Date Measures
-    label: 'Ceded Resereve Change YTD'
+    label: 'Ceded Reserve Change YTD'
     description: 'The Ceded reserve change during the year'  
     type: sum
     sql: ${TABLE}.ytdreservechangeamt

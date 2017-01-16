@@ -4,12 +4,10 @@
 - include: "*.Claim.view.lookml"       # include claim views in this project
 - include: "*.Base.view.lookml"       # include base views in this project
 - include: "Adjuster.view.lookml"  
-- include: "*Claim_Level_Summary.view.lookml"
-- include: "*Claim_Reinsurance_Summary.view.lookml" 
+ 
 #- include: "*Explore_Claim.view.lookml"       # include base views in this project
 
 #- include: "*.dashboard.lookml"  # include all dashboards in this project
-
 
 
 - explore: claim_reinsurance_summary  

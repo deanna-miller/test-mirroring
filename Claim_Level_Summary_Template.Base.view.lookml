@@ -380,7 +380,7 @@
 
   - measure: cededmtdreservechangeamt
     view_label: Month to Date Measures
-    label: 'Ceded Resereve Change MTD'
+    label: 'Ceded Reserve Change MTD'
     description: 'The ceded reserve change during the month'
     type: sum
     value_format: "#,##0.00"
@@ -445,7 +445,7 @@
     sql: ${TABLE}.cededytdpostedrecoveryamt
 
   - measure: cededytdreservechangeamt
-    label: 'Ceded Resereve Change YTD'
+    label: 'Ceded Reserve Change YTD'
     description: 'The ceded reserve change during the year'  
     type: sum
     value_format: "#,##0.00"
@@ -526,7 +526,7 @@
 
   - measure: mtdreservechangeamt
     view_label: Month to Date Measures
-    label: 'Resereve Change MTD'
+    label: 'Reserve Change MTD'
     description: 'The reserve change during the month'
     type: sum
     value_format: "#,##0.00"
@@ -582,7 +582,7 @@
 
   - measure: netmtdreservechangeamt
     view_label: Month to Date Measures
-    label: 'Net Resereve Change MTD'
+    label: 'Net Reserve Change MTD'
     description: 'The net reserve change during the month'
     type: sum
     value_format: "#,##0.00"
@@ -622,7 +622,7 @@
     
   - measure: netytdreservechangeamt
     view_label: Year To Date Measures
-    label: 'Net Resereve Change YTD'
+    label: 'Net Reserve Change YTD'
     description: 'The net reserve change during the year'
     type: sum
     value_format: "#,##0.00"
@@ -707,7 +707,7 @@
 
   - measure: ytdreservechangeamt
     view_label: Year To Date Measures
-    label: 'Resereve Change YTD'
+    label: 'Reserve Change YTD'
     description: 'The reserve change during the year'  
     type: sum
     value_format: "#,##0.00"
