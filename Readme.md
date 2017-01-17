@@ -14,4 +14,5 @@ Click the "Edit" button above to make changes.
 * 1.1.3 -- Updated the measures Policy Level Summary and Policy Reinsurance Summary with value_format: "#,##0.00"
 * 1.1.4 -- Move reinstateeffectivedtinmonth dimension from Policy Summary to Policy Status in Base
 * 1.1.5 -- Correct spelling of "Resereve" in the Reinsurance views
+* 1.1.6 -- Make Policy Summary to Status changes of dim/meas due to move of reportpd to derived query.  Add 2 inforce measures to Transaction_Template.Premium
 

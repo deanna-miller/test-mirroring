@@ -72,15 +72,7 @@
   
   fields:
 
-   ###########################################
-    # Dimensions for Measures should be hidden#
-   ###########################################
-    
-  - dimension: accountingdt
-    hidden: true
-    type: date
-    sql: ${date.accountingdt_date}
-    
+ 
     #########################################################################
     #Dimensions which are attributes/no measures, should all contain a label#
     #########################################################################  
@@ -89,7 +81,7 @@
     label: "Accounting Date in Month"
     type: string
     sql: | 
-       Case When (Cast(Datepart(Year,${accountingdt}) As varchar) + Right('00'+ Cast(Datepart(Month,${accountingdt}) As varChar), 2)) = ${reportpd} Then 'Yes'
+       Case When (Cast(Datepart(Year,${date.accountingdt_raw}) As varchar) + Right('00'+ Cast(Datepart(Month,${date.accountingdt_raw}) As varChar), 2)) = ${reportpd} Then 'Yes'
        Else 'No'
        End 
        
@@ -115,7 +107,23 @@
     label: "Cancel Issued"
     type: string
     sql: ${TABLE}.cancelissued
-
+    
+  - dimension: effectivedtinmonth
+    label: "Effective Date in Month"
+    type: string
+    sql: | 
+         Case When (Cast(Datepart(Year,${policy.effectivedt_raw}) As varchar) + Right('00'+ Cast(Datepart(Month,${policy.effectivedt_raw}) As varChar), 2)) = ${reportpd} Then 'Yes'
+             Else 'No'
+             End   
+  
+  - dimension: expirationdtinmonth
+    label: "Expiration Date in Month"
+    type: string
+    sql: | 
+        Case When (Cast(Datepart(Year,${policy.expirationdt_raw}) As varchar) + Right('00'+ Cast(Datepart(Month,${policy.expirationdt_raw}) As varChar), 2)) = ${reportpd} Then 'Yes'
+             Else 'No'
+             End   
+             
   - dimension: inforceinmonth
     label: "Inforce in Month"
     type: string
@@ -177,12 +185,12 @@
   - measure: average_new_premium
     label: "Average New Premium"
     type: number
-    sql: ((1.0*(${policy.effective_new_premium}))/Nullif(${effective_new_business_policy_count},0))
+    sql: ((1.0*(${effective_new_premium}))/Nullif(${effective_new_business_policy_count},0))
     
   - measure: average_renewal_premium
     label: "Average Renewal Premium"
     type: number
-    sql: ((1.0*(${policy.effective_renewal_premium}))/Nullif(${effective_renewal_policy_count},0))
+    sql: ((1.0*(${effective_renewal_premium}))/Nullif(${effective_renewal_policy_count},0))
     
   - measure: cancellation_effective_count
     view_label: 'Policy Counts'
@@ -204,16 +212,23 @@
     view_label: 'Policy Counts'
     type: count_distinct
     sql: ${policyref} 
-  
+    
   - measure: effective_new_business_policy_count
     view_label: 'Policy Counts'
     label: "Effective New Business Policy Count"
     type: count_distinct
     sql: ${policyref} 
     filters:
-     policy.effectivedtinmonth: 'Yes' 
+     effectivedtinmonth: 'Yes' 
      policy.newrenewalcd: 'New'
      inforcemonthend: 'Yes' 
+  
+  - measure: effective_new_premium
+    type: sum
+    sql: ${ttdwrittenpremiumamt}
+    filters:
+     policy.newrenewalcd: 'New'   
+     effectivedtinmonth: 'Yes'  
   
   - measure: effective_policy_count
     view_label: 'Policy Counts'
@@ -221,7 +236,7 @@
     type: count_distinct
     sql: ${policyref} 
     filters:
-     policy.effectivedtinmonth: 'Yes'  
+     effectivedtinmonth: 'Yes'  
      inforcemonthend: 'Yes'   
      
   - measure: effective_renewal_policy_count
@@ -229,9 +244,16 @@
     type: count_distinct
     sql: ${policyref} 
     filters:
-     policy.effectivedtinmonth: 'Yes' 
+     effectivedtinmonth: 'Yes' 
      policy.newrenewalcd: 'Renewal'
-     inforcemonthend: 'Yes'  
+     inforcemonthend: 'Yes'
+  
+  - measure: effective_renewal_premium
+    type: sum
+    sql: ${ttdwrittenpremiumamt}
+    filters:
+     policy.newrenewalcd: 'Renewal'   
+     effectivedtinmonth: 'Yes'  
      
   - measure: endorsement_issued_count
     view_label: 'Policy Counts'
@@ -247,7 +269,13 @@
     type: count_distinct
     sql: ${policyref} 
     filters:
-     policy.expirationdtinmonth: 'Yes'  
+     expirationdtinmonth: 'Yes'  
+     
+  - measure: expiring_premium_in_month
+    type: sum
+    sql: ${ttdwrittenpremiumamt}
+    filters:
+     expirationdtinmonth: 'Yes'
   
   - measure: inforce_new_policy_count
     view_label: 'Policy Counts'
@@ -308,6 +336,12 @@
     label: "Policy Retention"
     type: number
     sql: ((1.0*(${effective_renewal_policy_count}))/Nullif(${expired_policy_count},0))
+    value_format: '0.00%'
+    
+  - measure: premium_retention
+    label: "Premium Retention"
+    type: number
+    sql: (${effective_renewal_premium}/NullIf(${expiring_premium_in_month},0))
     value_format: '0.00%'
      
   - measure: reinstate_effective_count

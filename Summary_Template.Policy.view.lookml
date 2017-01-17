@@ -46,9 +46,9 @@
     hidden: true
     sql: ${TABLE}.mtdwrittenpremiumfeeamt
     
-  - dimension: reportpd
-    sql: ${TABLE}.reportpd
-    hidden: true  
+#   - dimension: reportpd
+#     sql: ${TABLE}.reportpd
+#     hidden: true  
     
   - dimension: ttdearnedpremiumamt
     type: number
@@ -135,32 +135,16 @@
     label: "Deductible 2"
     sql: ${TABLE}.deductible2
     
-  - dimension: policy.effectivedtinmonth
-    label: "Effective Date in Month"
-    type: string
-    sql: | 
-        Case When (Cast(Datepart(Year,${TABLE}.effectivedt) As varchar) + Right('00'+ Cast(Datepart(Month,${TABLE}.effectivedt) As varChar), 2)) = ${reportpd} Then 'Yes'
-             Else 'No'
-             End     
-    
   - dimension_group: policy.effectivedt
     label: "Effective"
     type: time
-    timeframes: [date, week, month]
+    timeframes: [date, week, month, raw]
     sql: ${TABLE}.effectivedt
   
-  - dimension: policy.expirationdtinmonth
-    label: "Expiration Date in Month"
-    type: string
-    sql: | 
-        Case When (Cast(Datepart(Year,${TABLE}.expirationdt) As varchar) + Right('00'+ Cast(Datepart(Month,${TABLE}.expirationdt) As varChar), 2)) = ${reportpd} Then 'Yes'
-             Else 'No'
-             End  
-    
   - dimension_group: policy.expirationdt
     label: "Expiration"
     type: time
-    timeframes: [date, week, month]
+    timeframes: [date, week, month, raw]
     sql: ${TABLE}.expirationdt
   
   - dimension: policy.feecd
@@ -277,26 +261,6 @@
     type: sum
     sql: ${ytdearnedpremiumamt}
     
-  - measure: policy.effective_new_premium
-    type: sum
-    sql: ${ttdwrittenpremiumamt}
-    filters:
-     policy.newrenewalcd: 'New'   
-     policy.effectivedtinmonth: 'Yes'  
-     
-  - measure: policy.effective_renewal_premium
-    type: sum
-    sql: ${ttdwrittenpremiumamt}
-    filters:
-     policy.newrenewalcd: 'Renewal'   
-     policy.effectivedtinmonth: 'Yes'  
-     
-  - measure: policy.expiring_premium_in_month
-    type: sum
-    sql: ${ttdwrittenpremiumamt}
-    filters:
-     policy.expirationdtinmonth: 'Yes'
-    
   - measure: policy.inforce_amt
     label: "Inforce Premium"
     value_format: "#,##0.00"
@@ -326,12 +290,6 @@
     value_format: "#,##0.00"
     type: sum
     sql: ${monthunearnedamt} 
-    
-  - measure: policy.premium_retention
-    label: "Premium Retention"
-    type: number
-    sql: (${policy.effective_renewal_premium}/NullIf(${policy.expiring_premium_in_month},0))
-    value_format: '0.00%'
     
   - measure: policy.unearned_amt
     label: "Unearned Premium"

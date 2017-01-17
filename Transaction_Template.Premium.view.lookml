@@ -309,6 +309,20 @@
     type: count
     drill_fields: [id, rateareaname, productname, conversionfilename]
     
+  - measure: inforcechangeamt_avg
+    label: "Average Inforce Change Amount"
+    description: "This measure represents the average inforce change amount"
+    value_format: "#,##0.00"
+    type: avg
+    sql: ${inforcechangeamt}
+ 
+  - measure: inforcechangeamt_sum
+    label: "Total Inforce Change Amount"
+    description: "This measure represents the total inforce change amount"
+    value_format: "#,##0.00"
+    type: sum
+    sql: ${inforcechangeamt}
+    
   - measure: writtencommission
     label: "Written Commission"
     value_format: "#,##0.00"

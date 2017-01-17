@@ -6,7 +6,7 @@
   - dimension_group: date.accountingdt
     label: "Accounting"
     type: time
-    timeframes: [date,month, year]
+    timeframes: [date,month, year, raw]
     sql: ${TABLE}.accountingdt
     
   - dimension: date.report_period
