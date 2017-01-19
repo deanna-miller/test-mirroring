@@ -2,7 +2,7 @@
 - label: "IRE"
 - hidden: true
 
-- scoping: true           # for backward compatibility
+
 - include: "*.IRE.view.lookml"
 - include: "*.IRE.dashboard.lookml"  # include all dashboards in this project
 

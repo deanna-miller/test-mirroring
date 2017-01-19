@@ -292,7 +292,7 @@
     view_label: 'Report Period Dates'
     type: time
     convert_tz: false
-    timeframes: [month, year]
+    timeframes: [month, year, raw]
     sql: ${TABLE}.updatedt    
 
   - dimension: reservecd

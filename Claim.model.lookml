@@ -1,6 +1,6 @@
 - connection: warehouse
 
-- scoping: true           # for backward compatibility
+
 - include: "*.Claim.view.lookml"       # include claim views in this project
 - include: "*.Base.view.lookml"       # include base views in this project
 - include: "Adjuster.view.lookml"  
