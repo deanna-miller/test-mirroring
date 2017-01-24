@@ -167,13 +167,17 @@
   ######################################
 
   - measure: average_new_premium
+    view_label: "Policy Premium"
     label: "Average New Premium"
     type: number
+    value_format: "#,##0.00" 
     sql: ((1.0*(${policy.effective_new_premium}))/Nullif(${effective_new_business_policy_count},0))
 
   - measure: average_renewal_premium
+    view_label: "Policy Premium"
     label: "Average Renewal Premium"
     type: number
+    value_format: "#,##0.00"
     sql: ((1.0*(${policy.effective_renewal_premium}))/Nullif(${effective_renewal_policy_count},0))
 
   - measure: cancellation_effective_count
@@ -218,6 +222,7 @@
 
   - measure: effective_renewal_policy_count
     view_label: 'Policy Counts'
+    label: "Effective Renewal Policy Count"
     type: count_distinct
     sql: ${policyref} 
     filters:
@@ -236,6 +241,7 @@
 
   - measure: expired_policy_count
     view_label: 'Policy Counts'
+    label: "Expired Policy Count"
     type: count_distinct
     sql: ${policyref} 
     filters:
@@ -243,6 +249,7 @@
 
   - measure: inforce_new_policy_count
     view_label: 'Policy Counts'
+    label: 'Inforce New Policy Count'
     type: count_distinct
     sql: ${policyref} 
     filters:
@@ -251,6 +258,7 @@
 
   - measure: inforce_policy_count
     view_label: 'Policy Counts'
+    label: 'Inforce Policy Count'
     type: count_distinct
     sql: ${policyref} 
     filters:
@@ -258,6 +266,7 @@
 
   - measure: inforce_renewal_policy_count
     view_label: 'Policy Counts'
+    label: 'Inforce Renewal Policy Count'
     type: count_distinct
     sql: ${policyref} 
     filters:
@@ -266,6 +275,7 @@
 
   - measure: issued_new_policy_count
     view_label: 'Policy Counts'
+    label: 'Issued New Policy Count'
     type: count_distinct
     sql: ${policyref} 
     filters:

@@ -294,6 +294,7 @@
 
   - measure: policy.effective_renewal_premium
     type: sum
+    value_format: "#,##0.00"
     sql: ${ttdwrittenpremiumamt}
     filters:
      policy.newrenewalcd: 'Renewal'   
@@ -301,6 +302,7 @@
      
   - measure: policy.expiring_premium_in_month
     type: sum
+    value_format: "#,##0.00"
     sql: ${ttdwrittenpremiumamt}
     filters:
      policy.expirationdtinmonth: 'Yes'
@@ -313,12 +315,14 @@
     
   - measure: policy.inforce_amt_new
     type: sum
+    value_format: "#,##0.00"
     sql: ${inforceamt}
     filters:
      policy.newrenewalcd: 'New'
     
   - measure: policy.inforce_amt_renewal
     type: sum
+    value_format: "#,##0.00"
     sql: ${inforceamt}
     filters:
      policy.newrenewalcd: 'Renewal' 
