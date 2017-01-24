@@ -49,6 +49,14 @@
 #   - dimension: reportpd
 #     sql: ${TABLE}.reportpd
 #     hidden: true  
+
+  - dimension_group: reportperiod
+    label: "Policy Report Period"
+    type: time
+    convert_tz: false
+    hidden: true
+    timeframes: [month, year, raw]
+    sql: ${TABLE}.reportperiod
     
   - dimension: ttdearnedpremiumamt
     type: number
@@ -135,11 +143,27 @@
     label: "Deductible 2"
     sql: ${TABLE}.deductible2
     
+  - dimension: policy.effectivedtinmonth
+    label: "Effective Date in Month"
+    type: string
+    sql: | 
+        Case When ${policy.effectivedt_month} = ${reportperiod_month} Then 'Yes'
+             Else 'No'
+             End   
+             
   - dimension_group: policy.effectivedt
     label: "Effective"
     type: time
     timeframes: [date, week, month, raw]
     sql: ${TABLE}.effectivedt
+
+  - dimension: policy.expirationdtinmonth
+    label: "Expiration Date in Month"
+    type: string
+    sql: | 
+        Case When ${policy.expirationdt_month} = ${reportperiod_month} Then 'Yes'
+             Else 'No'
+             End   
   
   - dimension_group: policy.expirationdt
     label: "Expiration"
@@ -260,6 +284,26 @@
     value_format: "#,##0.00"
     type: sum
     sql: ${ytdearnedpremiumamt}
+    
+  - measure: policy.effective_new_premium
+    type: sum
+    sql: ${ttdwrittenpremiumamt}
+    filters:
+     policy.newrenewalcd: 'New'   
+     policy.effectivedtinmonth: 'Yes'
+
+  - measure: policy.effective_renewal_premium
+    type: sum
+    sql: ${ttdwrittenpremiumamt}
+    filters:
+     policy.newrenewalcd: 'Renewal'   
+     policy.effectivedtinmonth: 'Yes'
+     
+  - measure: policy.expiring_premium_in_month
+    type: sum
+    sql: ${ttdwrittenpremiumamt}
+    filters:
+     policy.expirationdtinmonth: 'Yes'
     
   - measure: policy.inforce_amt
     label: "Inforce Premium"
