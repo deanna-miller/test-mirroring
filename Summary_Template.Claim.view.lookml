@@ -506,14 +506,6 @@
     type: sum
     sql: ${ytdincurredamt}
     
-  - measure: claim.incurred_loss_reserves_ytd
-    label: "Incurred Loss YTD + Reserves" 
-    value_format: "#,##0.00"
-    type: sum
-    sql: ${openingreserve} + ${ytdpaidamt}
-    filters:
-      claim.reservecd: "Indemnity"
-    
   - measure: claim.incurred_net_recovery_amt_itd
     label: "Incurred Net Recovery ITD"
     value_format: "#,##0.00"
