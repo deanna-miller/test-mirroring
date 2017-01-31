@@ -15,30 +15,30 @@
              pss.ttdwrittenpremiumamt,
              pss.ttdwrittencommissionamt,
              pss.ttdearnedpremiumamt,
-             prss.cededunearnedamt,
-             prss.cededinforceamt,
-             prss.cededlastinforceamt,
-             prss.cededmtdwrittenpremiumamt,
-             prss.cededmtdwrittencommissionamt,
-             prss.cededmtdearnedpremiumamt,
-             prss.cededytdwrittenpremiumamt,
-             prss.cededytdwrittencommissionamt,
-             prss.cededytdearnedpremiumamt,
-             prss.cededttdwrittenpremiumamt,
-             prss.cededttdwrittencommissionamt,
-             prss.cededttdearnedpremiumamt,
-             pss.unearnedamt - prss.cededunearnedamt as netunearnedamt,
-             pss.inforceamt - prss.cededinforceamt as netinforceamt,
-             pss.lastinforceamt - prss.cededlastinforceamt as netlastinforceamt,
-             pss.mtdwrittenpremiumamt - prss.cededmtdwrittenpremiumamt as netmtdwrittenpremiumamt,
-             pss.mtdwrittencommissionamt - prss.cededmtdwrittencommissionamt as netmtdwrittencommissionamt,
-             pss.mtdearnedpremiumamt - prss.cededmtdearnedpremiumamt as netmtdearnedpremiumamt,
-             pss.ytdwrittenpremiumamt - prss.cededytdwrittenpremiumamt as netytdwrittenpremiumamt,
-             pss.ytdwrittencommissionamt - prss.cededytdwrittencommissionamt as netytdwrittencommissionamt ,
-             pss.ytdearnedpremiumamt - prss.cededytdearnedpremiumamt as netytdearnedpremiumamt,
-             pss.ttdwrittenpremiumamt - prss.cededttdwrittenpremiumamt as netttdwrittenpremiumamt,
-             pss.ttdwrittencommissionamt - prss.cededttdwrittencommissionamt as netttdwrittencommissionamt ,
-             pss.ttdearnedpremiumamt - prss.cededttdearnedpremiumamt as netttdearnedpremiumamt
+             coalesce(prss.cededunearnedamt,0) As cededunearnedamt,
+             coalesce(prss.cededinforceamt,0) As cededinforceamt,
+             coalesce(prss.cededlastinforceamt,0) As cededlastinforceamt,
+             coalesce(prss.cededmtdwrittenpremiumamt,0) As cededmtdwrittenpremiumamt,
+             coalesce(prss.cededmtdwrittencommissionamt,0) cededmtdwrittencommissionamt,
+             coalesce(prss.cededmtdearnedpremiumamt,0) As cededmtdearnedpremiumamt,
+             coalesce(prss.cededytdwrittenpremiumamt,0) As cededytdwrittenpremiumamt,
+             coalesce(prss.cededytdwrittencommissionamt,0) As cededytdwrittencommissionamt,
+             coalesce(prss.cededytdearnedpremiumamt,0) As cededytdearnedpremiumamt,
+             coalesce(prss.cededttdwrittenpremiumamt,0) As cededttdwrittenpremiumamt,
+             coalesce(prss.cededttdwrittencommissionamt,0) As cededttdwrittencommissionamt,
+             coalesce(prss.cededttdearnedpremiumamt,0) As cededttdearnedpremiumamt,
+             pss.unearnedamt - coalesce(prss.cededunearnedamt,0) as netunearnedamt,
+             pss.inforceamt -  coalesce(prss.cededinforceamt,0) as netinforceamt,
+             pss.lastinforceamt - coalesce(prss.cededlastinforceamt,0) as netlastinforceamt,
+             pss.mtdwrittenpremiumamt - coalesce(prss.cededmtdwrittenpremiumamt,0) as netmtdwrittenpremiumamt,
+             pss.mtdwrittencommissionamt - coalesce(prss.cededmtdwrittencommissionamt,0) as netmtdwrittencommissionamt,
+             pss.mtdearnedpremiumamt - coalesce(prss.cededmtdearnedpremiumamt,0) as netmtdearnedpremiumamt,
+             pss.ytdwrittenpremiumamt - coalesce(prss.cededytdwrittenpremiumamt,0) as netytdwrittenpremiumamt,
+             pss.ytdwrittencommissionamt - coalesce(prss.cededytdwrittencommissionamt,0) as netytdwrittencommissionamt ,
+             pss.ytdearnedpremiumamt - coalesce(prss.cededytdearnedpremiumamt,0) as netytdearnedpremiumamt,
+             pss.ttdwrittenpremiumamt - coalesce(prss.cededttdwrittenpremiumamt,0) as netttdwrittenpremiumamt,
+             pss.ttdwrittencommissionamt - coalesce(prss.cededttdwrittencommissionamt,0) as netttdwrittencommissionamt ,
+             pss.ttdearnedpremiumamt - coalesce(prss.cededttdearnedpremiumamt,0) as netttdearnedpremiumamt
       From
       (
       SELECT reportperiod, policyref, 
@@ -80,9 +80,9 @@
       On pss.reportperiod = prss.reportperiod and pss.policyref = prss.policyref
       Left Join
       (SELECT distinct reportperiod, updatedt, policyref, policynumber, policyversion, effectivedt, expirationdt,
-             policyyear, newrenewalcd, annualstatementlinecd,  providercd, statecd, productversionidref, carriergroupcd, 
-             carriercd, productname, policytypecd, policygroupcd, customerref
-        FROM dw.policyreinsurancesummarystats
+             policyyear, newrenewalcd, producercd, statecd, productversionidref, carriergroupcd, 
+             carriercd, customerref
+        FROM dw.policysummarystats
       ) pss2
       On pss.reportperiod = pss2.reportperiod and pss.policyref = pss2.policyref
 
@@ -141,13 +141,6 @@
     type: string
     sql: ${TABLE}.newrenewalcd
     
-  - dimension: policygroupcd
-    label: 'Policy Group'
-    view_label: Policy Classification
-    description:
-    type: string
-    sql: ${TABLE}.policygroupcd
-
   - dimension: policynumber
     label: 'Policy Number'
     view_label: Policy Coverage Terms
@@ -163,13 +156,6 @@
     type: number
     sql: ${TABLE}.policyref
     
-  - dimension: policytypecd
-    label: 'Policy Type'
-    view_label: Policy Classification
-    description:
-    type: string
-    sql: ${TABLE}.policytypecd
-
   - dimension: policyversion
     label: 'Policy Version'
     view_label: Policy Coverage Terms
@@ -184,13 +170,6 @@
     type: string
     sql: ${TABLE}.policyyear
     
-  - dimension: productname
-    label: 'Product Name'
-    view_label: Policy Coverage Terms
-    description:
-    type: string
-    sql: ${TABLE}.productname
-  
   - dimension: productversionidref
     label: 'Product Version ID'
     view_label: Policy Classification
@@ -198,12 +177,12 @@
     type: string
     sql: ${TABLE}.productversionidref
 
-  - dimension: providercd
+  - dimension: producercd
     label: 'Producer Code'
     view_label: Policy Contacts
     description:
     type: string
-    sql: ${TABLE}.providercd
+    sql: ${TABLE}.producercd
     
   - dimension: reportperiod
     hidden: true

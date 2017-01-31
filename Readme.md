@@ -17,5 +17,6 @@ Click the "Edit" button above to make changes.
 * 1.1.6 -- Make Policy Summary to Status changes of dim/meas due to move of reportpd to derived query.  Add 2 inforce measures to Transaction_Template.Premium
 * 1.1.7 -- Change report period dimension to include raw. Replace experience joins to use report period raw instead of reportpd. Add the report_period dimension to experience summary. Remove scoping errors since upgrade.
 * 1.1.8 -- Updated fields in the Policy Summary Template and in the Policy Status to include value_format: "#,##0.00" and also to add labels and view labels.
+* 1.1.9 -- Updated PolicyLevelSummary Template to use coalesce on ceded amounts in Select stmt. Changed last query table from policyreinsurancesummarystats to policysummarystats. Removed annualstatementlinecd,productname,policytypecd,policygroupcd, and changed providercd to producercd.
 
 
