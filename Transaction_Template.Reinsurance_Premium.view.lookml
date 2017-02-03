@@ -85,10 +85,6 @@
     label: "New or Renewal"
     sql: ${TABLE}.newrenewalcd
 
-  - dimension: policyformcd
-    label: "Policy Form"
-    sql: ${TABLE}.policyformcd
-
   - dimension: policygroupcd
     label: "Policy Group"
     sql: ${TABLE}.policygroupcd

@@ -66,10 +66,6 @@
     label: "Combine Payment Indicator"
     sql: ${TABLE}.combinepaymentind
   
-  - dimension: insuredname
-    label: "Insured Name"
-    sql: ${TABLE}.insuredname
-
   - dimension: itemamt
     hidden: true
     type: number
@@ -121,10 +117,6 @@
     hidden: true
     sql: ${TABLE}.printertemplateidref
     
-  - dimension: productcd
-    label: "Product Code"
-    sql: ${TABLE}.productcd
-
   - dimension: providercd
     label: "Provider Code"
     sql: ${TABLE}.providercd
@@ -169,10 +161,6 @@
     label: "Stat Code"
     sql: ${TABLE}.statcd
   
-  - dimension: statecd
-    label: "State Code"
-    sql: ${TABLE}.statecd
-
   - dimension: statsequence
     hidden: true
     type: number

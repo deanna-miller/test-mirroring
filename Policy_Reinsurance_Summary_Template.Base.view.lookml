@@ -173,13 +173,6 @@
     type: string
     sql: ${TABLE}.reinsurancegroupid
 
-  - dimension: reinsurancegroupname
-    label: 'Reinsurance Group Name'
-    view_label: Reinsurance Terms
-    description:
-    type: string
-    sql: ${TABLE}.reinsurancegroupname
-
   - dimension: reinsuranceitemname
     label: 'Reinsurance Item Name'
     view_label: Reinsurance Terms

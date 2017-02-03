@@ -46,10 +46,6 @@
     hidden: true
     sql: ${TABLE}.mtdwrittenpremiumfeeamt
     
-#   - dimension: reportpd
-#     sql: ${TABLE}.reportpd
-#     hidden: true  
-
   - dimension_group: reportperiod
     label: "Policy Report Period"
     type: time

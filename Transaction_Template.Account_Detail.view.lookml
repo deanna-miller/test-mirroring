@@ -137,10 +137,6 @@
     label: "Commission Type Code"
     sql: ${TABLE}.commissiontypecd
 
-  - dimension: companycd
-    label: "Company Code"
-    sql: ${TABLE}.companycd
-
   - dimension: conversionfilename
     hidden: true
     sql: ${TABLE}.conversionfilename

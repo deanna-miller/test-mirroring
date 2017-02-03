@@ -48,15 +48,6 @@
     type: number
     value_format_name: id
     sql: ${TABLE}.systemid
-
-
-  - dimension: attachmentpoint
-    hidden: false
-    view_label:  Treaty Detail
-    label: 'Attachment Point'
-    description:
-    type: string
-    sql: ${TABLE}.startlimit 
   
   - dimension: annualstatementlinecd
     view_label: Policy Coverage Terms
@@ -125,14 +116,6 @@
     type: string
     sql: ${TABLE}.claimstatuscd
 
-  - dimension: classificationcd
-    hidden: false
-    view_label:  Tranaction Details
-    label: 'Classification Code' 
-    description:
-    type: string
-    sql: ${TABLE}.classificationcd
-
   - dimension: coveragetriggercd
     hidden: true
     view_label:  
@@ -189,13 +172,6 @@
     type: string
     sql: ${TABLE}.lossyear
 
-  - dimension: paymenttypecd
-    view_label:  Transaction Detail
-    label: 'Payment Type Code'
-    description:
-    type: string
-    sql: ${TABLE}.paymenttypecd
-
   - dimension: policygroupcd
     view_label:  Policy Classification
     label:  'Policy Group'
@@ -244,13 +220,6 @@
     description:
     type: string
     sql: ${TABLE}.policyyear
-
-  - dimension: productlinecd
-    view_label:  Policy Classification
-    label: 'Product Line Code' 
-    description:
-    type: string
-    sql: ${TABLE}.productlinecd
 
   - dimension: productname
     view_label:  Policy Classification

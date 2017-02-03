@@ -604,23 +604,10 @@
   - dimension: billmethod
     label: "Bill Method"
     sql: ${TABLE}.billmethod
-# 
-#   - dimension: organization.carriercd
-#     label: "Carrier"
-#     sql: ${TABLE}.carriercd
-# 
-#   - dimension: organization.carriergroupcd
-#     label: "Carrier Group"
-#     sql: ${TABLE}.carriergroupcd
-# 
+
   - dimension: commissiontypecd
     label: "Commission Type"
     sql: ${TABLE}.commissiontypecd
-
-#   - dimension: customerref
-#     label: "Customer Reference"
-#     type: int
-#     sql: ${TABLE}.customerref
     
   - dimension: currentamtduedt
     hidden: true
@@ -725,26 +712,14 @@
     label: "Provider"
     sql: ${TABLE}.providercd
 
-#   - dimension: reportperiod
-#     label: "Report Period"
-#     sql: ${TABLE}.reportperiod
-
-#   - dimension: statecd
-#     label: "State"
-#     sql: ${TABLE}.statecd
-
   - dimension: statementtypecd
     label: "Statement Type"
     sql: ${TABLE}.statementtypecd
 
-#   - dimension: statuscd
-#     label: "Status"
-#     sql: ${TABLE}.statuscd
-
-#   - dimension: systemid
-#     hidden: true
-#     type: int
-#     sql: ${TABLE}.systemid
+  - dimension: systemid
+    hidden: true
+    type: int
+    sql: ${TABLE}.systemid
 
 #   - dimension_group: updatedt
 #     label: "Updated"

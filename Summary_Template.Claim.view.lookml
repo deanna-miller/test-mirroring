@@ -119,10 +119,6 @@
     #Dimensions which are attributes/no measures, should all contain a label#
     #########################################################################
     
-  - dimension: claim.adjusterprovidercd
-    label: "Adjuster Provider"
-    sql: ${TABLE}.adjusterprovidercd
-  
   - dimension: claim.aggregatelimit
     label: "Aggregate Limit"
     sql: ${TABLE}.aggregatelimit

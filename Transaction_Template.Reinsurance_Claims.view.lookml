@@ -106,10 +106,6 @@
     type: number
     sql: ${TABLE}.paidamt
 
-  - dimension: policyformcd
-    label: "Policy Form Code"
-    sql: ${TABLE}.policyformcd
-
   - dimension: policygroupcd
     label: "Policy Group Code"
     sql: ${TABLE}.policygroupcd

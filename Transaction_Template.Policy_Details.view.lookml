@@ -89,10 +89,6 @@
     label: "Carrier Group Code"
     sql: ${TABLE}.carriergroupcd
 
-  - dimension: city
-    label: "City"
-    sql: ${TABLE}.city
-
   - dimension: classcd
     label: "Class Code"
     sql: ${TABLE}.classcd
@@ -151,10 +147,6 @@
   - dimension: conversiontemplateidref
     hidden: true
     sql: ${TABLE}.conversiontemplateidref
-
-  - dimension: county
-    label: "County"
-    sql: ${TABLE}.county
 
   - dimension: coveragecd
     label: "Coverage Code"
@@ -461,10 +453,6 @@
     hidden: true
     type: number
     sql: ${TABLE}.pointscharged
-
-  - dimension: policyformcode
-    label: "Policy Form"
-    sql: ${TABLE}.policyformcode
 
   - dimension: policygroupcd
     hidden: true

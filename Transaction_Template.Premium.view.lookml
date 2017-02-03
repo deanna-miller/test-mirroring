@@ -60,9 +60,9 @@
     label: "Commission Key"
     sql: ${TABLE}.commissionkey
 
-  - dimension: companycd
-    label: "Company Code"
-    sql: ${TABLE}.companycd
+#   - dimension: companycd
+#     label: "Company Code"
+#     sql: ${TABLE}.companycd
 
   - dimension: conversionfilename
     hidden: true
@@ -252,9 +252,9 @@
     label: "Status Code"
     sql: ${TABLE}.statuscd
 
-  - dimension: sublinecd
-    label: "Subline Code"
-    sql: ${TABLE}.sublinecd
+#   - dimension: sublinecd
+#     label: "Subline Code"
+#     sql: ${TABLE}.sublinecd
 
   - dimension: systemid
     hidden: true

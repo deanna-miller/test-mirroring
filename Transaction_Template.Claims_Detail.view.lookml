@@ -323,10 +323,6 @@
     label: "Policy Deductible"
     sql: ${TABLE}.policydeductible
 
-  - dimension: policyformcd
-    label: "Policy Form Code"
-    sql: ${TABLE}.policyformcd
-
   - dimension: policygroupcd
     label: "Policy Group Code"
     sql: ${TABLE}.policygroupcd
