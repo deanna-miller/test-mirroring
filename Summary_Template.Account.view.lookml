@@ -718,7 +718,7 @@
 
   - dimension: systemid
     hidden: true
-    type: int
+    type: number
     sql: ${TABLE}.systemid
 
 #   - dimension_group: updatedt
