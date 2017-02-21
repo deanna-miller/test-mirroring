@@ -19,5 +19,6 @@ Click the "Edit" button above to make changes.
 * 1.1.8 -- Updated fields in the Policy Summary Template and in the Policy Status to include value_format: "#,##0.00" and also to add labels and view labels.
 * 1.1.9 -- Updated PolicyLevelSummary Template to use coalesce on ceded amounts in Select stmt. Changed last query table from policyreinsurancesummarystats to policysummarystats. Removed annualstatementlinecd,productname,policytypecd,policygroupcd, and changed providercd to producercd.
 * 1.1.10 -- Remove LookML fields not in iic-qa database. BI-979 has word document with removed fields. Change systemid to use number instead of int.
+* 1.1.11 -- Added report period month to the Policies Rewewing in 90 Days report, also renamed the inforcechange field name
 
 

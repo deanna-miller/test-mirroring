@@ -309,14 +309,14 @@
     type: count
     drill_fields: [id, rateareaname, productname, conversionfilename]
     
-  - measure: inforcechangeamt_avg
+  - measure: inforcechange_avg
     label: "Average Inforce Change Amount"
     description: "This measure represents the average inforce change amount"
     value_format: "#,##0.00"
     type: avg
     sql: ${inforcechangeamt}
  
-  - measure: inforcechangeamt_sum
+  - measure: inforcechange
     label: "Total Inforce Change Amount"
     description: "This measure represents the total inforce change amount"
     value_format: "#,##0.00"
