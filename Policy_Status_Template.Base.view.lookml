@@ -20,7 +20,7 @@
         stats.reinstateeffective
         From (Select reportperiod,policyref
              From  dw.policysummarystats
-             Where statuscd = 'Active'
+             
         Group by reportperiod,policyref
         ) pss1 
         Left Join
@@ -40,7 +40,7 @@
         (
               Select policyref, min(reportperiod) as reportperiod, 'Yes' as issuedinmonth
               from  dw.policysummarystats
-              where statuscd = 'Active'
+              
               group by policyref
         ) pss3
         On pss1.reportperiod = pss3.reportperiod and pss1.policyref = pss3.policyref
