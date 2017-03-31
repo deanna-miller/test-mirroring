@@ -3,6 +3,6 @@
   fields:
 
   - dimension: id
-    primary_key: true
+    primary_key: false
     hidden: true
     sql: ${TABLE}.id
